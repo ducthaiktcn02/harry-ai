@@ -1,0 +1,59 @@
+  ĐẠT  Có nút ✨ Trợ lý trên máy tính
+1) 'chiều thứ 6 họp khách 3h' -> sự kiện đúng
+  ĐẠT  Hiện khung xem trước SỰ KIỆN
+  ĐẠT  Tiêu đề 'Họp khách', ngày 2026-11-27 (thứ 6 sắp tới)
+  ĐẠT  Giờ 15:00 – 16:00 (3h chiều, mặc định 60 phút), loại Công việc, nhắc 15 phút
+  ĐẠT  CHƯA lưu gì trước khi bấm Đồng ý
+  ĐẠT  Gemini được cho biết ngày hiện tại 2026-11-26 + thứ trong tuần + múi giờ VN
+  ĐẠT  Chỉ 1 lần gọi Gemini cho câu này, model nhẹ, ép JSON
+  ĐẠT  Khoá Gemini chỉ nằm trong header gọi Gemini, KHÔNG có trong trang/kết quả
+  ĐẠT  Đồng ý -> lưu 1 sự kiện đúng cột: tiêu đề, giờ, loại, nhắc, không lặp
+  ĐẠT  Hộp thoại đóng, lịch hiện sự kiện mới
+2) 'ý tưởng: làm kênh review đồ bếp' -> vào Kho ý tưởng
+  ĐẠT  Hiện khung xem trước Ý TƯỞNG (ưu tiên Cao, nhãn video, bếp — bỏ dấu #)
+  ĐẠT  Đồng ý -> lưu ý tưởng: Chưa làm, ưu tiên cao, nhãn [video, bếp]
+  ĐẠT  Chuyển sang trang Kho ý tưởng và thấy thẻ mới
+3) Câu vô nghĩa -> không tạo gì
+  ĐẠT  Báo 'chưa hiểu' bằng tiếng Việt, không có khung xem trước
+  ĐẠT  Không lưu gì
+4) Gemini lỗi / hết lượt -> báo thân thiện, không sập
+  ĐẠT  Hết lượt (429): thông báo tiếng Việt
+  ĐẠT  Gemini 500: 'đang bận, thử lại'
+  ĐẠT  Mất mạng tới Gemini: báo thân thiện
+  ĐẠT  Gemini trả rác không phải JSON: báo thân thiện
+  ĐẠT  Gemini không có đáp án: báo thân thiện
+  ĐẠT  Khoá Gemini sai: nhắc kiểm tra GEMINI_API_KEY (không in khoá)
+  ĐẠT  Sau mọi lỗi vẫn không lưu gì thêm
+  ĐẠT  Hết lỗi thì dùng lại được ngay (hiện xem trước)
+5) Sửa trong khung xem trước rồi Đồng ý
+  ĐẠT  AI hiểu: mai (2026-11-27) 07:00–08:30 (90 phút), loại Video
+  ĐẠT  Lưu đúng bản ĐÃ SỬA (tên, ngày+1, 08:30–10:00, Cá nhân, nhắc 60, ghi chú)
+6) Huỷ -> không lưu gì
+  ĐẠT  Bấm Huỷ: đóng hộp thoại, số sự kiện không đổi
+  ĐẠT  Bấm ra ngoài khung: đóng, không lưu ý tưởng
+  ĐẠT  Xoá trống tiêu đề rồi Đồng ý: không lưu, báo nhập tiêu đề
+  ĐẠT  Lưu vào Supabase lỗi: báo lỗi, giữ khung để thử lại, không mất dữ liệu gõ
+7) Kiểm tra bảo vệ + giới hạn (gọi thẳng function)
+  ĐẠT  Câu > 500 ký tự: bị từ chối 400, KHÔNG gọi Gemini
+  ĐẠT  Câu đúng 500 ký tự: được nhận (gọi Gemini)
+  ĐẠT  Câu rỗng: 400, không gọi Gemini
+  ĐẠT  Không có token đăng nhập: 401, không gọi Gemini
+  ĐẠT  Người không phải chủ app: 403, không gọi Gemini
+  ĐẠT  Chưa cài GEMINI_API_KEY: báo hướng dẫn (500), không sập
+8) Làm sạch đầu ra của Gemini (không tin AI)
+  ĐẠT  Ngày/giờ/nhắc vô lý -> về ngày hôm nay, cả ngày, không nhắc, loại việc lạ bị bỏ
+  ĐẠT  Sự kiện cả ngày: không giờ, không nhắc mặc định
+  ĐẠT  Giờ kết thúc <= bắt đầu -> tự sửa thành +60 phút (10:00–11:00)
+  ĐẠT  Họp kéo qua nửa đêm -> chặn ở 23:59, giữ nhắc 30 phút
+  ĐẠT  Loại việc hợp lệ trong danh sách được giữ
+  ĐẠT  Loại việc không có trong danh sách bị bỏ
+  ĐẠT  Gemini được nhắc: nội dung câu chỉ là dữ liệu (chống chèn lệnh)
+  ĐẠT  Không có lỗi JS: []
+9) Điện thoại (390x800, cảm ứng)
+  ĐẠT  Nút ✨ nằm trên nút + và không đè lên nhau
+  ĐẠT  Khung xem trước vừa màn hình điện thoại (không tràn ngang)
+  ĐẠT  Đồng ý trên điện thoại lưu được
+  ĐẠT  Bấm câu gợi ý (chip) hoạt động
+  ĐẠT  Huỷ trên điện thoại: không lưu ý tưởng
+  ĐẠT  Không có lỗi JS (điện thoại): []
+TẤT CẢ ĐẠT

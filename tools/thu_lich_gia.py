@@ -14,7 +14,7 @@ EVS = [
 CATS = [dict(id='cv',ten='Công việc',mau='#1a73e8',thu_tu=1),dict(id='vd',ten='Quay/làm video',mau='#d50000',thu_tu=2),dict(id='cn',ten='Cá nhân/sức khoẻ',mau='#0b8043',thu_tu=3),dict(id='gd',ten='Gia đình',mau='#f4511e',thu_tu=4),dict(id='ht',ten='Học tập',mau='#8e24aa',thu_tu=5)]
 FAKE = """
 window.supabase={createClient:()=>{
- const q=(t)=>{const o={select:()=>o,order:()=>o,is:()=>o,eq:()=>o,insert:()=>o,update:()=>o,then:(f)=>f({data:t=='app_owner'?[{user_id:'u1'}]:(t=='su_kien'?%s:%s),error:null})};return o};
+ const q=(t)=>{const o={select:()=>o,order:()=>o,is:()=>o,eq:()=>o,insert:()=>o,update:()=>o,delete:()=>o,lt:()=>o,not:()=>o,then:(f)=>f({data:t=='app_owner'?[{user_id:'u1'}]:(t=='su_kien'?%s:%s),error:null})};return o};
  const ch={on:()=>ch,subscribe:()=>ch};
  return {from:q,channel:()=>ch,auth:{getSession:async()=>({data:{session:{user:{id:'u1',email:'thu@gia'}}}}),onAuthStateChange:()=>{},signOut:async()=>{},signInWithOAuth:()=>{}}}}};
 """ % (json.dumps(EVS), json.dumps(CATS))

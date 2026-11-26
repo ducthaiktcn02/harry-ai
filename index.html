@@ -116,6 +116,11 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
 .dong-rac .nd{flex:1;min-width:0}
 .dong-rac .nd b{font-weight:500;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fab{display:none}
+.fab-tl{position:fixed;right:24px;bottom:24px;width:52px;height:52px;border-radius:16px;border:none;background:#c2e7ff;font-size:24px;box-shadow:0 2px 6px rgba(0,0,0,.3);z-index:20}
+.tl-goi{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tl-goi button{border:1px solid #dadce0;border-radius:14px;padding:4px 10px;font-size:12px;background:#fff}
+.tl-xem{margin-top:12px;background:#f8f9fa;border-radius:8px;padding:12px}
+.tl-loi{color:#d93025;font-size:13px;margin-top:10px}
 #duoi{display:none}
 /* Kho ý tưởng */
 #p-y .pad{max-width:1100px}
@@ -163,6 +168,7 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
  #dh{justify-content:center}
  #tieude{font-size:15px;margin:0;white-space:nowrap;text-align:center}
  #btnCai,header .spacer{display:none}
+ .fab-tl{right:16px;bottom:calc(142px + env(safe-area-inset-bottom))}
  .fab{display:block;position:fixed;right:16px;bottom:calc(76px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:16px;border:none;background:#c2e7ff;font-size:28px;color:#1a73e8;box-shadow:0 2px 6px rgba(0,0,0,.3);z-index:20}
  .btn-out{padding:7px 8px}
  .icon-btn{width:34px}
@@ -250,6 +256,7 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
   </div>
   <nav id="duoi"><a data-p="lich" class="on"><div>📅</div>Lịch</a><a data-p="y"><div>💡</div>Ý tưởng</a><a data-p="cai"><div>⚙</div>Cài đặt</a></nav>
   <button class="fab" id="fab" aria-label="Tạo mới">+</button>
+  <button class="fab-tl" id="fabTl" aria-label="Trợ lý" title="Trợ lý">✨</button>
 </div>
 
 <div class="overlay" id="ov"><div class="dialog" id="dlg"></div></div>
@@ -976,6 +983,101 @@ $('tbThu').onclick = async () => {
     else toast('Chưa gửi được: ' + ((j.loi && j.loi[0]) || 'không có thiết bị nào đăng ký'));
   } catch (e) { toast('Gửi thử lỗi: ' + (e.message || e)); }
 };
+
+/* ---------- Trợ lý gõ câu tự nhiên (2.7) ---------- */
+const NHAC_TL = [['', 'Không nhắc'], ['0', 'Đúng giờ'], ['15', 'Trước 15 phút'], ['60', 'Trước 1 giờ']];
+function moTroLy(cauSan) {
+  $('dlg').innerHTML = `
+    <h3>✨ Trợ lý</h3>
+    <div class="f"><input class="lon" id="tlCau" maxlength="500" placeholder="Gõ câu tự nhiên, vd: chiều thứ 6 họp khách 3h" style="font-size:16px" value="${esc(cauSan || '')}"></div>
+    <div class="tl-goi"><button data-c="chiều thứ 6 họp khách 3h">chiều thứ 6 họp khách 3h</button><button data-c="ý tưởng: làm kênh review đồ bếp">ý tưởng: làm kênh review đồ bếp</button><button data-c="mai 7h sáng quay video son">mai 7h sáng quay video son</button></div>
+    <div class="tl-loi" id="tlLoi" hidden></div>
+    <div id="tlXem"></div>
+    <div class="hanh-dong"><div class="spacer"></div><button class="btn-chu" id="tlDong">Đóng</button><button class="btn-xanh" id="tlGui">Hiểu giúp</button></div>`;
+  $('tlDong').onclick = dongHop;
+  $('tlGui').onclick = guiTroLy;
+  $('tlCau').onkeydown = (e) => { if (e.key === 'Enter') guiTroLy(); };
+  $('dlg').querySelectorAll('.tl-goi button').forEach((b) => b.onclick = () => { $('tlCau').value = b.dataset.c; guiTroLy(); });
+  $('ov').classList.add('on');
+  setTimeout(() => $('tlCau') && $('tlCau').focus(), 50);
+}
+async function guiTroLy() {
+  if ($('tlOk') && !$('tlGui')) { const o = $('tlOk'); o.id = 'tlGui'; o.textContent = 'Hiểu giúp'; o.onclick = guiTroLy; }
+  if (!$('tlGui') || $('tlGui').disabled) return;
+  const cau = $('tlCau').value.trim();
+  const loi = (t) => { $('tlLoi').textContent = t; $('tlLoi').hidden = false; $('tlXem').innerHTML = ''; };
+  if (!cau) return loi('Hãy gõ một câu trước nhé');
+  if (cau.length > 500) return loi('Câu dài quá (tối đa 500 ký tự), hãy gõ ngắn lại nhé');
+  $('tlLoi').hidden = true; $('tlXem').innerHTML = ''; $('tlGui').disabled = true; $('tlGui').textContent = 'Đang hiểu…';
+  const xong = () => { const b = $('tlGui'); if (b) { b.disabled = false; b.textContent = 'Hiểu giúp'; } };
+  const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 25000);
+  try {
+    const { data } = await sb.auth.getSession();
+    const tk = data && data.session && data.session.access_token;
+    if (!tk) { xong(); return loi('Hãy đăng nhập lại rồi thử nhé'); }
+    const res = await fetch(C.SUPABASE_URL + '/functions/v1/tro-ly', { method: 'POST', signal: ctl.signal,
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + tk, apikey: C.SUPABASE_PUBLISHABLE_KEY },
+      body: JSON.stringify({ cau, loai_viec: CATS.map((c) => ({ id: c.id, ten: c.ten })) }) });
+    const j = await res.json().catch(() => ({}));
+    xong();
+    if (!res.ok) return loi(j.loi || (res.status === 404 ? 'Chưa cài trợ lý (chưa deploy function tro-ly)' : 'Trợ lý lỗi (' + res.status + '), thử lại sau nhé'));
+    if (j.loai !== 'su_kien' && j.loai !== 'y_tuong') return loi('Mình chưa hiểu câu này. Thử nói rõ hơn, vd "mai 9h họp nhóm" hoặc "ý tưởng: ...".');
+    xemTruocTl(j);
+  } catch (e) {
+    xong(); loi(e && e.name === 'AbortError' ? 'Trợ lý trả lời chậm quá, thử lại nhé' : 'Không kết nối được trợ lý. Kiểm tra mạng rồi thử lại nhé');
+  } finally { clearTimeout(tm); }
+}
+function xemTruocTl(j) {
+  const v = $('tlXem');
+  if (j.loai === 'y_tuong') {
+    v.innerHTML = `<div class="tl-xem"><div class="muted" style="margin-bottom:8px">Mình hiểu là — <b>💡 Ý tưởng mới</b> (sửa được trước khi lưu):</div>
+      <div class="f"><label>Tiêu đề</label><input id="pTen" value="${esc(j.tieu_de)}"></div>
+      <div class="f"><label>Ghi chú</label><textarea id="pGhi" rows="2">${esc(j.ghi_chu)}</textarea></div>
+      <div class="hang"><div class="f"><label>Ưu tiên</label><select id="pUu">${Object.entries(UT).map(([k, t]) => `<option value="${k}" ${k === j.uu_tien ? 'selected' : ''}>${t}</option>`).join('')}</select></div>
+      <div class="f"><label>Nhãn (cách nhau dấu phẩy)</label><input id="pNhan" value="${esc((j.nhan || []).join(', '))}"></div></div></div>`;
+  } else {
+    const nh = j.nhac_phut == null ? '' : String(j.nhac_phut);
+    const ops = NHAC_TL.concat(nh !== '' && !NHAC_TL.some((x) => x[0] === nh) ? [[nh, 'Trước ' + nh + ' phút']] : []);
+    v.innerHTML = `<div class="tl-xem"><div class="muted" style="margin-bottom:8px">Mình hiểu là — <b>📅 Sự kiện mới</b> (sửa được trước khi lưu):</div>
+      <div class="f"><label>Tiêu đề</label><input id="pTen" value="${esc(j.tieu_de)}"></div>
+      <div class="hang"><div class="f"><label>Ngày</label><input type="date" id="pNgay" value="${esc(j.ngay)}"></div>
+      <div class="f"><label>&nbsp;</label><label style="font-size:14px;color:#202124"><input type="checkbox" id="pCaNgay" ${j.ca_ngay ? 'checked' : ''}> Cả ngày</label></div></div>
+      <div class="hang" id="pGio"><div class="f"><label>Bắt đầu</label><input type="time" id="pG1" value="${esc(j.gio_bat_dau || '09:00')}"></div>
+      <div class="f"><label>Kết thúc</label><input type="time" id="pG2" value="${esc(j.gio_ket_thuc || '10:00')}"></div></div>
+      <div class="hang"><div class="f"><label>Loại việc</label><select id="pLoai">${CATS.map((c) => `<option value="${esc(c.id)}" ${c.id === (j.loai_viec || (CATS[0] && CATS[0].id)) ? 'selected' : ''}>${esc(c.ten)}</option>`).join('')}</select></div>
+      <div class="f"><label>Nhắc qua Telegram</label><select id="pNhac">${ops.map(([k, t]) => `<option value="${k}" ${k === nh ? 'selected' : ''}>${t}</option>`).join('')}</select></div></div>
+      <div class="f"><label>Ghi chú</label><textarea id="pGhi" rows="2">${esc(j.ghi_chu)}</textarea></div></div>`;
+    const doi = () => { $('pGio').hidden = $('pCaNgay').checked; }; $('pCaNgay').onchange = doi; doi();
+  }
+  $('tlDong').textContent = 'Huỷ'; $('tlDong').id = 'tlHuy'; $('tlHuy').onclick = dongHop;
+  $('tlGui').textContent = 'Đồng ý'; $('tlGui').id = 'tlOk'; $('tlOk').onclick = () => luuTroLy(j.loai);
+}
+async function luuTroLy(loai) {
+  const ten = $('pTen').value.trim();
+  if (!ten) return toast('Nhập tiêu đề trước nhé');
+  $('tlOk').disabled = true;
+  let r;
+  if (loai === 'y_tuong') {
+    const row = { tieu_de: ten, ghi_chu: $('pGhi').value.trim() || null, trang_thai: 'chua_lam', uu_tien: $('pUu').value,
+      nhan: [...new Set($('pNhan').value.split(',').map((t) => t.trim().replace(/^#/, '')).filter(Boolean))], han: null, sua_luc: new Date().toISOString(), thu_tu: dauThuTu() };
+    r = await sb.from('y_tuong').insert(row);
+  } else {
+    const cn = $('pCaNgay').checked; let s, e;
+    if (cn) { s = parseLocal($('pNgay').value); e = addDays(s, 1); }
+    else { s = parseLocal($('pNgay').value, $('pG1').value); e = parseLocal($('pNgay').value, $('pG2').value); }
+    if (isNaN(s) || isNaN(e)) { $('tlOk').disabled = false; return toast('Ngày/giờ chưa đúng'); }
+    if (e <= s) e = new Date(s.getTime() + 15 * 60000);
+    const v = $('pNhac').value;
+    const row = { tieu_de: ten, ghi_chu: $('pGhi').value.trim() || null, bat_dau: s.toISOString(), ket_thuc: e.toISOString(), ca_ngay: cn, loai: $('pLoai').value,
+      sua_luc: new Date().toISOString(), lap: 'none', lap_den: null, nhac_phut: v === '' ? null : parseInt(v, 10) };
+    r = await sb.from('su_kien').insert(row);
+    if (!r.error) cur = s;
+  }
+  if (r.error) { $('tlOk').disabled = false; return toast('Lưu lỗi: ' + r.error.message); }
+  dongHop(); toast(loai === 'y_tuong' ? 'Đã thêm ý tưởng' : 'Đã thêm sự kiện');
+  if (loai === 'y_tuong') { await taiYTuong(); hienTrang('y'); } else { await taiSuKien(); hienTrang('lich'); }
+}
+$('fabTl').onclick = () => moTroLy();
 
 setInterval(() => { if (user && view !== 'month' && $('p-lich').classList.contains('on') && !$('ov').classList.contains('on')) { const el = $('lich'), t = el.scrollTop; veLich(); el.scrollTop = t; } }, 60000);
 capNhat();
