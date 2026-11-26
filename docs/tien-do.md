@@ -5,7 +5,7 @@
 - Kho: https://github.com/ducthaiktcn02/harry-ai (công khai) · Trang: https://ducthaiktcn02.github.io/harry-ai/ (Pages từ nhánh `main`, thư mục gốc).
 - Máy đã cài `gh` (winget) và đăng nhập tài khoản `ducthaiktcn02`; đường dẫn `C:\Program Files\GitHub CLI\gh.exe` (trong Bash có thể chưa có trong PATH → dùng đường dẫn đầy đủ). git đã đặt tên/email noreply chỉ riêng kho này.
 - Bằng chứng: `docs/bang-chung/2.1/trang-dien-thoai.png` (chụp khổ điện thoại, trang online) + kiểm tra manifest/service worker OK. Script: `tools/chup_bang_chung.py` (chạy `py -3.12 ...` KHÔNG dùng `-I`; dùng `channel="chrome"` vì Playwright chưa tải Chromium riêng).
-- Chưa kiểm chứng: "Thêm vào màn hình chính" trên điện thoại thật → nhờ người dùng thử.
+- Chưa kiểm chứng: "Thêm vào màn hình chính" trên iPhone thật (Safari) → nhờ người dùng thử. Đã thêm thẻ meta Apple + icon 180.
 - Demo gồm: màn đăng nhập Google, Lịch ngày/tuần/tháng (bấm ô trống tạo, kéo thả đổi giờ, sự kiện lặp ↻, xoá lặp hỏi 3 lựa chọn), Kho ý tưởng (bảng 3 cột kéo thả + danh sách, lọc ưu tiên/nhãn, cảnh báo "để lâu"), Bản tin sáng mẫu, Thùng rác 30 ngày, Cài đặt (màu loại việc), nút ✨ Trợ lý (xem trước → Đồng ý). Điện thoại: thanh menu dưới.
 - Vòng góp ý 1 (người dùng đồng ý): thêm (A) khung xem trước của trợ lý sửa được trước khi Đồng ý; (B) nút "Lưu thành ý tưởng" ở mỗi tin bản tin. Đã sửa demo + roadmap (2.7, 2.9). Người dùng nói **"chốt"**.
 
@@ -23,7 +23,7 @@
 - Kho ý tưởng: tiêu đề, ghi chú, trạng thái 3 mức, ưu tiên 3 mức, nhãn, hạn (tuỳ chọn); bảng kéo thả 3 cột + danh sách; "để lâu" = Chưa làm > 14 ngày, nhắc tối đa 3/sáng.
 - Trợ lý gõ câu tự nhiên → tạo sự kiện/ý tưởng (Gemini).
 - Mất mạng: xem được dữ liệu đã tải, thêm/sửa cần mạng.
-- Điện thoại Android; giao diện nền sáng kiểu Google Calendar; PWA.
+- Điện thoại iPhone (iOS, đổi từ Android ngày 2026-11-26 — PWA phải mở bằng Safari; khi làm 2.2 phải thử đăng nhập Google trong app đã cài vì iOS hay lỗi; nhắc việc dùng Telegram nên không cần push iOS); giao diện nền sáng kiểu Google Calendar; PWA.
 - Để sau: đồng bộ Google Calendar; quản lý video affiliate.
 - Thứ tự làm: Lịch → Kho ý tưởng → Bản tin sáng → (sau) công việc affiliate.
 

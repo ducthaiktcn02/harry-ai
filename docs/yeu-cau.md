@@ -3,7 +3,7 @@
 ## 1. Tổng quan
 - Tên: **Harry AI** — trợ lý AI cá nhân.
 - Người dùng: **chỉ chủ app**; đăng nhập bằng **tài khoản Google**.
-- Thiết bị: **điện thoại Android** + máy tính; dữ liệu tự đồng bộ.
+- Thiết bị: **điện thoại iPhone** + máy tính; dữ liệu tự đồng bộ.
 - Máy tính không bật 24/24 → app đặt trên mạng (GitHub + Supabase).
 - Giao diện: tiếng Việt, **nền sáng, kiểu Google Calendar**. Cài được lên màn hình chính (PWA).
 - Chi phí: **0 đồng/tháng**.

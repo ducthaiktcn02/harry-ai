@@ -36,7 +36,7 @@ def png(size):
 
 out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "icons")
 os.makedirs(out, exist_ok=True)
-for n in (192, 512):
+for n in (180, 192, 512):
     with open(os.path.join(out, f"icon-{n}.png"), "wb") as f:
         f.write(png(n))
 print("ok")

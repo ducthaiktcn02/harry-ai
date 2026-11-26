@@ -1,6 +1,6 @@
 // Service worker tối thiểu (2.1): lưu khung app để mở nhanh/ngoại tuyến.
-const CACHE = 'harry-ai-v1';
-const FILES = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
+const CACHE = 'harry-ai-v2';
+const FILES = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)));

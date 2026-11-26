@@ -1,6 +1,6 @@
 # Harry AI — trợ lý AI cá nhân
 
-App web cho **một người dùng** (chủ app), dùng trên điện thoại Android và máy tính, dữ liệu tự đồng bộ. Giao diện **100% tiếng Việt**, kiểu Google Calendar (nền sáng).
+App web cho **một người dùng** (chủ app), dùng trên điện thoại iPhone (iOS) và máy tính, dữ liệu tự đồng bộ. Giao diện **100% tiếng Việt**, kiểu Google Calendar (nền sáng).
 
 Chi tiết yêu cầu: `docs/yeu-cau.md` · Tiến độ/bàn giao: `docs/tien-do.md` · Lộ trình: `docs/roadmap.md` (tạo ở Bước D).
 
