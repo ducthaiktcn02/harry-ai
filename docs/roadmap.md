@@ -31,7 +31,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 - Xong khi: các thao tác trên chạy đúng, lặp hiện đúng các ngày.
 - Bằng chứng: ảnh/quay màn hình từng thao tác.
 
-### 2.5 Nhắc việc qua Telegram
+### 2.5 Nhắc việc qua Telegram — ✅ XONG 2026-11-26 (tin đến đúng giờ)
 - Làm: chọn nhắc trước 15 phút / 1 giờ / tuỳ chỉnh; Supabase hẹn giờ mỗi phút kiểm tra và gửi Telegram.
 - Xong khi: tạo sự kiện thử, tin nhắn Telegram đến **lệch ≤ ~1 phút**.
 - Bằng chứng: ảnh tin Telegram kèm giờ nhận + log.
