@@ -16,23 +16,72 @@
 *{box-sizing:border-box;margin:0}
 body{font-family:Roboto,"Segoe UI",Arial,sans-serif;background:#f8f9fa;color:#202124;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
 .logo{font-size:32px;font-weight:500;color:#1a73e8;margin-bottom:8px}
-p{color:#5f6368;font-size:15px;margin-top:6px}
-#trangthai{margin-top:20px;font-size:13px;color:#188038}
+p{color:#5f6368;font-size:15px;margin-top:8px}
+button{margin-top:20px;background:#1a73e8;color:#fff;border:0;border-radius:24px;padding:12px 28px;font-size:15px;cursor:pointer}
+button.phu{background:#fff;color:#1a73e8;border:1px solid #dadce0}
+#thongbao{margin-top:16px;font-size:14px;color:#188038}
+#thongbao.loi{color:#d93025}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>
 <main>
   <div class="logo">Harry AI</div>
   <p>Trợ lý cá nhân của bạn</p>
-  <p>Khung ứng dụng đã sẵn sàng. Các tính năng sẽ được thêm dần.</p>
-  <p id="trangthai"></p>
+  <div id="vao" hidden>
+    <button id="btnVao">Đăng nhập bằng Google</button>
+  </div>
+  <div id="ra" hidden>
+    <p id="chao"></p>
+    <button class="phu" id="btnRa">Đăng xuất</button>
+  </div>
+  <p id="thongbao">Đang kiểm tra đăng nhập…</p>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(function () {
-    document.getElementById('trangthai').textContent = '✓ Sẵn sàng cài lên màn hình chính';
-  });
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+const C = window.HARRY_CONFIG;
+const sb = supabase.createClient(C.SUPABASE_URL, C.SUPABASE_PUBLISHABLE_KEY);
+const $ = (id) => document.getElementById(id);
+function tb(t, loi) { $('thongbao').textContent = t; $('thongbao').className = loi ? 'loi' : ''; }
+
+async function kiemTraChu(user) {
+  // Đã là chủ? Chưa ai làm chủ? -> nhận. Có chủ khác? -> từ chối.
+  const r = await sb.from('app_owner').select('user_id');
+  if (r.error) throw r.error;
+  if (r.data.length) return true;
+  const ins = await sb.from('app_owner').insert({ user_id: user.id });
+  return !ins.error;
 }
+
+async function capNhat() {
+  const { data } = await sb.auth.getSession();
+  const user = data.session && data.session.user;
+  if (!user) { $('vao').hidden = false; $('ra').hidden = true; tb(''); return; }
+  $('vao').hidden = true;
+  try {
+    if (await kiemTraChu(user)) {
+      $('ra').hidden = false;
+      $('chao').textContent = 'Xin chào, ' + (user.user_metadata.full_name || user.email);
+      tb('✓ Đăng nhập thành công — bạn là chủ app');
+    } else {
+      $('ra').hidden = false; $('chao').textContent = '';
+      tb('Tài khoản này không phải chủ app nên không xem được dữ liệu.', true);
+    }
+  } catch (e) {
+    $('ra').hidden = false;
+    tb('Lỗi: ' + (e.message || e) + ' (đã chạy file SQL chưa?)', true);
+  }
+}
+
+$('btnVao').onclick = () => sb.auth.signInWithOAuth({
+  provider: 'google',
+  options: { redirectTo: location.origin + location.pathname }
+});
+$('btnRa').onclick = async () => { await sb.auth.signOut(); capNhat(); };
+sb.auth.onAuthStateChange(() => capNhat());
+capNhat();
 </script>
 </body>
 </html>
