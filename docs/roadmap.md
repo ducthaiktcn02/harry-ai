@@ -46,7 +46,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 - Xong khi: thêm/kéo thả/sửa/xoá chạy, đồng bộ 2 thiết bị.
 - Bằng chứng: ảnh bảng 3 cột + danh sách.
 
-### 2.7 Trợ lý gõ câu tự nhiên
+### 2.7 Trợ lý gõ câu tự nhiên — ✅ XONG 2026-11-26 (người dùng thử thật, chốt)
 - Làm: ô gõ câu → Gemini (model nhẹ) hiểu → hiện bản xem trước "sẽ tạo…" **sửa được ngay** (tiêu đề, ngày, giờ, loại, nhắc / ưu tiên) → bấm Đồng ý mới lưu.
 - Xong khi: "chiều thứ 6 họp khách 3h" tạo đúng sự kiện; "ý tưởng: làm kênh review đồ bếp" vào kho ý tưởng.
 - Bằng chứng: ảnh trước/sau + 5 câu thử.
