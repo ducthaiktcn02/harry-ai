@@ -36,7 +36,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 - Xong khi: tạo sự kiện thử, tin nhắn Telegram đến **lệch ≤ ~1 phút**.
 - Bằng chứng: ảnh tin Telegram kèm giờ nhận + log.
 
-### 2.5b Thông báo đẩy (Web Push) trên iPhone — code xong + nghiệm thu giả ĐẠT 2026-11-26, chờ người dùng làm `docs/huong-dan-push.md` rồi thử thật
+### 2.5b Thông báo đẩy (Web Push) trên iPhone — ✅ XONG 2026-11-26 (thông báo đến iPhone thật, người dùng chốt)
 - Làm: hộp "Thông báo trên điện thoại" ở Cài đặt (Bật/Tắt/Gửi thử); bảng `push_dang_ky`; service worker nhận `push`; Edge Function `nhac-viec` gửi thêm Web Push (Telegram giữ làm dự phòng, cả hai cùng gửi).
 - Xong khi: bấm "Gửi thử" trên iPhone (app đã Thêm vào MH chính, iOS 16.4+) thấy thông báo; nhắc thật đến cả Telegram lẫn iPhone.
 - Bằng chứng: `docs/bang-chung/2.5b/` (log giả + ảnh hộp Cài đặt); ảnh iPhone thật khi người dùng thử.
