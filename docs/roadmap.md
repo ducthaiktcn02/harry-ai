@@ -21,7 +21,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 - Xong khi: đăng nhập Google được trên máy tính + điện thoại; tài khoản Google khác bị chặn.
 - Bằng chứng: ảnh đăng nhập thành công + ảnh/log tài khoản lạ bị từ chối.
 
-### 2.3 Lịch — xem + thêm/sửa/xoá — 🟡 code xong 2026-11-26, chờ nghiệm thu 2 thiết bị
+### 2.3 Lịch — xem + thêm/sửa/xoá — ✅ XONG 2026-11-26 (nghiệm thu máy tính + iPhone)
 - Làm: lịch ngày/tuần/tháng kiểu Google Calendar; thêm/sửa/xoá sự kiện; 5 loại màu mặc định (sửa được); lưu Supabase.
 - Xong khi: tạo sự kiện trên máy tính → điện thoại thấy ngay (đồng bộ tức thì).
 - Bằng chứng: ảnh 2 màn hình cùng sự kiện.
