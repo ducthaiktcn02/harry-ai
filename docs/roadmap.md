@@ -11,7 +11,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 
 ## Giai đoạn 2 — Code
 
-### 2.1 Khung app + đưa lên mạng
+### 2.1 Khung app + đưa lên mạng — ✅ code xong 2026-11-26, chờ người dùng thử trên điện thoại
 - Làm: tạo kho GitHub (công khai), trang PWA trống tiếng Việt, đăng lên GitHub Pages, cài được lên màn hình chính Android.
 - Xong khi: mở link trên điện thoại thấy trang "Harry AI", bấm "Thêm vào màn hình chính" được.
 - Bằng chứng: link trang + ảnh chụp điện thoại.

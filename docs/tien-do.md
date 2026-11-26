@@ -1,9 +1,11 @@
 # Tiến độ — Harry AI
 
 ## Đang ở
-**Giai đoạn 1 XONG — người dùng đã CHỐT kế hoạch + demo (2026-11-26).** Tiếp theo: **Giai đoạn 2.1 (Khung app + đưa lên GitHub Pages)** theo `docs/roadmap.md`. `demo/index.html` là mẫu giao diện chuẩn để bám theo khi code (màu, bố cục, chữ).
-- Lưu ý: demo chưa được chạy thử tự động (lệnh Playwright bị chặn quyền) — khi code, test bằng Playwright cần người dùng cho phép lệnh `py -3.12 ...`.
-- 2.1 cần: người dùng có tài khoản GitHub chưa? (hỏi đầu phiên; nếu chưa → hướng dẫn tạo). Kiểm tra `gh` CLI đã đăng nhập chưa.
+**Giai đoạn 2.1 code XONG, chờ người dùng thử trên điện thoại + chốt (2026-11-26).** Sau khi chốt → **2.2 Supabase + đăng nhập Google**. `demo/index.html` là mẫu giao diện chuẩn để bám theo khi code (màu, bố cục, chữ).
+- Kho: https://github.com/ducthaiktcn02/harry-ai (công khai) · Trang: https://ducthaiktcn02.github.io/harry-ai/ (Pages từ nhánh `main`, thư mục gốc).
+- Máy đã cài `gh` (winget) và đăng nhập tài khoản `ducthaiktcn02`; đường dẫn `C:\Program Files\GitHub CLI\gh.exe` (trong Bash có thể chưa có trong PATH → dùng đường dẫn đầy đủ). git đã đặt tên/email noreply chỉ riêng kho này.
+- Bằng chứng: `docs/bang-chung/2.1/trang-dien-thoai.png` (chụp khổ điện thoại, trang online) + kiểm tra manifest/service worker OK. Script: `tools/chup_bang_chung.py` (chạy `py -3.12 ...` KHÔNG dùng `-I`; dùng `channel="chrome"` vì Playwright chưa tải Chromium riêng).
+- Chưa kiểm chứng: "Thêm vào màn hình chính" trên điện thoại thật → nhờ người dùng thử.
 - Demo gồm: màn đăng nhập Google, Lịch ngày/tuần/tháng (bấm ô trống tạo, kéo thả đổi giờ, sự kiện lặp ↻, xoá lặp hỏi 3 lựa chọn), Kho ý tưởng (bảng 3 cột kéo thả + danh sách, lọc ưu tiên/nhãn, cảnh báo "để lâu"), Bản tin sáng mẫu, Thùng rác 30 ngày, Cài đặt (màu loại việc), nút ✨ Trợ lý (xem trước → Đồng ý). Điện thoại: thanh menu dưới.
 - Vòng góp ý 1 (người dùng đồng ý): thêm (A) khung xem trước của trợ lý sửa được trước khi Đồng ý; (B) nút "Lưu thành ý tưởng" ở mỗi tin bản tin. Đã sửa demo + roadmap (2.7, 2.9). Người dùng nói **"chốt"**.
 
@@ -32,7 +34,7 @@
 - Người dùng chưa có tài khoản Supabase? (hỏi khi bắt đầu code; hướng dẫn tạo).
 
 ## Bước tiếp theo
-Phiên mới (chế độ Code): **Giai đoạn 2.1** — tạo kho GitHub công khai, trang PWA tiếng Việt (manifest + service worker + icon), đăng GitHub Pages; nghiệm thu: mở link trên điện thoại, "Thêm vào màn hình chính" được; nộp link + ảnh. Chỉ làm 2.1, xong hỏi chốt rồi mới sang 2.2.
+Người dùng mở link trên điện thoại, thử "Thêm vào màn hình chính", báo kết quả → chốt 2.1. Rồi phiên mới: **2.2 Supabase + đăng nhập Google** (hướng dẫn người dùng tạo tài khoản Supabase + bật Google đăng nhập; RLS chỉ chủ app). Mỗi lần sửa code → `git add/commit/push` là trang tự cập nhật.
 
 ## File đọc đầu tiên
 `CLAUDE.md` → `docs/tien-do.md` → `docs/roadmap.md` → `demo/index.html` (mẫu giao diện) → `docs/yeu-cau.md` khi cần chi tiết.
