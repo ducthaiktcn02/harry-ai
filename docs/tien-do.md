@@ -1,7 +1,7 @@
 # Tiến độ — Harry AI
 
 ## Đang ở
-**Giai đoạn 2.1 XONG và đã nghiệm thu trên iPhone thật (2026-11-26): thêm vào màn hình chính được, mở toàn màn hình.** Tiếp theo: **2.2 Supabase + đăng nhập Google**. `demo/index.html` là mẫu giao diện chuẩn để bám theo khi code (màu, bố cục, chữ).
+**Giai đoạn 2.2 XONG và đã nghiệm thu (2026-11-26): đăng nhập Google chạy trên máy tính + iPhone (app đã cài), người lạ bị chặn.** Tiếp theo: **2.3 Lịch — xem + thêm/sửa/xoá**. `demo/index.html` là mẫu giao diện chuẩn để bám theo khi code (màu, bố cục, chữ).
 - Kho: https://github.com/ducthaiktcn02/harry-ai (công khai) · Trang: https://ducthaiktcn02.github.io/harry-ai/ (Pages từ nhánh `main`, thư mục gốc).
 - Máy đã cài `gh` (winget) và đăng nhập tài khoản `ducthaiktcn02`; đường dẫn `C:\Program Files\GitHub CLI\gh.exe` (trong Bash có thể chưa có trong PATH → dùng đường dẫn đầy đủ). git đã đặt tên/email noreply chỉ riêng kho này.
 - Bằng chứng: `docs/bang-chung/2.1/trang-dien-thoai.png` (chụp khổ điện thoại, trang online) + kiểm tra manifest/service worker OK. Script: `tools/chup_bang_chung.py` (chạy `py -3.12 ...` KHÔNG dùng `-I`; dùng `channel="chrome"` vì Playwright chưa tải Chromium riêng).
@@ -9,7 +9,7 @@
 - Demo gồm: màn đăng nhập Google, Lịch ngày/tuần/tháng (bấm ô trống tạo, kéo thả đổi giờ, sự kiện lặp ↻, xoá lặp hỏi 3 lựa chọn), Kho ý tưởng (bảng 3 cột kéo thả + danh sách, lọc ưu tiên/nhãn, cảnh báo "để lâu"), Bản tin sáng mẫu, Thùng rác 30 ngày, Cài đặt (màu loại việc), nút ✨ Trợ lý (xem trước → Đồng ý). Điện thoại: thanh menu dưới.
 - Vòng góp ý 1 (người dùng đồng ý): thêm (A) khung xem trước của trợ lý sửa được trước khi Đồng ý; (B) nút "Lưu thành ý tưởng" ở mỗi tin bản tin. Đã sửa demo + roadmap (2.7, 2.9). Người dùng nói **"chốt"**.
 
-**2.2 gần xong (2026-11-26):** Supabase + Google OAuth chạy; đăng nhập OK trên máy tính (chủ app = tài khoản đầu tiên đăng nhập, lưu ở bảng `app_owner`; SQL ở `sql/2.2-chu-app.sql`, hàm `la_chu_app()` dùng cho RLS các bảng sau). Bằng chứng người lạ bị chặn: `docs/bang-chung/2.2/nguoi-la-bi-chan.txt` (HTTP 401). Config công khai ở `config.js`. **Còn:** thử đăng nhập trong app đã cài trên iPhone (iOS hay lỗi OAuth ở chế độ toàn màn hình) → xong thì tick 2.2 + chuyển 2.3 (Lịch). Lưu ý: Google ở chế độ Testing, chỉ Gmail trong Test users đăng nhập được (token có thể hết hạn sau 7 ngày — nếu vậy đăng nhập lại).
+**2.2 đã làm:** Supabase `https://nrvueainkiweuvsoivgp.supabase.co` + Google OAuth (Client ID trong Google Cloud project `harry-ai`, chế độ Testing, Gmail chủ app trong Test users; token có thể hết hạn ~7 ngày → đăng nhập lại). Chủ app = tài khoản đầu tiên đăng nhập, lưu ở bảng `app_owner`; SQL `sql/2.2-chu-app.sql` (đã chạy, gồm GRANT cho `authenticated`). **Mọi bảng dữ liệu sau này: bật RLS, policy dùng `public.la_chu_app()`, và nhớ GRANT cho `authenticated`** (Supabase mới không tự cấp). Config công khai ở `config.js` (sw.js cache v3). Bằng chứng: `docs/bang-chung/2.2/nguoi-la-bi-chan.txt`. Trang đăng nhập hiện ở `index.html` (supabase-js qua CDN).
 
 ## Vừa xong
 - Bước A: thu yêu cầu. Bước B: tạo `CLAUDE.md`, `docs/yeu-cau.md`, `.env.example`, `.gitignore` (thư mục `.claude/rules` bị chặn quyền ghi → quy tắc bảo mật nằm trong `CLAUDE.md`).
@@ -36,7 +36,7 @@
 - Người dùng chưa có tài khoản Supabase? (hỏi khi bắt đầu code; hướng dẫn tạo).
 
 ## Bước tiếp theo
-Phiên mới: **2.2 Supabase + đăng nhập Google** — hướng dẫn người dùng tạo tài khoản Supabase (miễn phí) + bật đăng nhập Google; RLS chỉ chủ app; thử đăng nhập trong app đã cài trên iPhone (iOS hay lỗi OAuth ở chế độ toàn màn hình). Mỗi lần sửa code → git add/commit/push, trang tự cập nhật.
+Phiên mới: **2.3 Lịch — xem + thêm/sửa/xoá** theo `docs/roadmap.md` và `demo/index.html`: bảng sự kiện + RLS (`la_chu_app()` + GRANT), lịch ngày/tuần/tháng, 5 loại màu, đồng bộ tức thì (Supabase Realtime). Bằng chứng: ảnh 2 màn hình cùng sự kiện. Mỗi lần sửa code → git add/commit/push.
 
 ## File đọc đầu tiên
 `CLAUDE.md` → `docs/tien-do.md` → `docs/roadmap.md` → `demo/index.html` (mẫu giao diện) → `docs/yeu-cau.md` khi cần chi tiết.

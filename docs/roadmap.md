@@ -16,7 +16,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 - Xong khi: mở link trên điện thoại thấy trang "Harry AI", bấm "Thêm vào màn hình chính" được.
 - Bằng chứng: link trang + ảnh chụp điện thoại.
 
-### 2.2 Supabase + đăng nhập Google
+### 2.2 Supabase + đăng nhập Google — ✅ XONG 2026-11-26 (máy tính + iPhone)
 - Làm: hướng dẫn người dùng tạo tài khoản Supabase (miễn phí), bật đăng nhập Google, tạo bảng dữ liệu + **quy tắc chỉ chủ app đọc/ghi** (RLS).
 - Xong khi: đăng nhập Google được trên máy tính + điện thoại; tài khoản Google khác bị chặn.
 - Bằng chứng: ảnh đăng nhập thành công + ảnh/log tài khoản lạ bị từ chối.
