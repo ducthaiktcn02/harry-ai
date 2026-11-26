@@ -536,8 +536,18 @@ async function xoaLap(ev, pham) {
   const b = ev.base, occ = ev.occ.getTime();
   if (pham === 'fut' && occ === new Date(b.bat_dau).getTime()) pham = 'all';
   if (pham === 'all') return sb.from('su_kien').update({ xoa_luc: new Date().toISOString() }).eq('id', b.id);
-  if (pham === 'one') return sb.from('su_kien').update({ lap_ngoai: isoNgoai(b, occ) }).eq('id', b.id);
-  return sb.from('su_kien').update({ lap_den: ymd(addDays(sod(ev.occ), -1)) }).eq('id', b.id);
+  // Bản sao bỏ vào thùng rác để khôi phục được
+  const bs = { tieu_de: b.tieu_de, ghi_chu: b.ghi_chu, ca_ngay: b.ca_ngay, loai: b.loai, bat_dau: ev.s.toISOString(), ket_thuc: ev.e.toISOString(), xoa_luc: new Date().toISOString() };
+  let r1;
+  if (pham === 'one') {
+    r1 = await sb.from('su_kien').update({ lap_ngoai: isoNgoai(b, occ) }).eq('id', b.id);
+    bs.lap = 'none';
+  } else {
+    r1 = await sb.from('su_kien').update({ lap_den: ymd(addDays(sod(ev.occ), -1)) }).eq('id', b.id);
+    bs.lap = b.lap; bs.lap_den = b.lap_den; bs.lap_ngoai = (b.lap_ngoai || []).filter((x) => new Date(x).getTime() > occ);
+  }
+  if (r1.error) return r1;
+  return sb.from('su_kien').insert(bs);
 }
 
 /* ---------- Kéo thả đổi giờ/ngày (chuột: kéo luôn; cảm ứng: nhấn giữ rồi kéo) ---------- */

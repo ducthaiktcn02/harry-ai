@@ -91,6 +91,7 @@ with sync_playwright() as p:
     pg.click("#bXoa"); pg.wait_for_timeout(200)
     pg.check("input[name=pham][value=fut]"); pg.click("#pOk"); pg.wait_for_timeout(400)
     check("Còn 2 lần Uống thuốc (T2, T3)", pg.locator(".ev:has-text('Uống thuốc')").count() == 2)
+    check("Phần đã xoá nằm trong thùng rác (xoa_luc)", any(r['tieu_de'] == 'Uống thuốc' and r['xoa_luc'] for r in dbrows(pg)))
     pg.screenshot(path=os.path.join(OUT, "05-sau-khi-xoa-tu-T4.png"))
 
     print("5) Xoá sự kiện thường -> thùng rác -> khôi phục")
@@ -100,8 +101,8 @@ with sync_playwright() as p:
     pg.click("#btnCai"); pg.click("#btnRac"); pg.wait_for_timeout(300)
     check("Có trong thùng rác", pg.locator(".dong-rac:has-text('Họp khách')").count() == 1)
     pg.screenshot(path=os.path.join(OUT, "06-thung-rac.png"))
-    pg.click("[data-kp]"); pg.wait_for_timeout(300)
-    check("Khôi phục: thùng rác trống", pg.locator(".dong-rac").count() == 0)
+    pg.click(".dong-rac:has-text('Họp khách') [data-kp]"); pg.wait_for_timeout(300)
+    check('Khôi phục: Họp khách rời thùng rác, Uống thuốc còn', pg.locator(".dong-rac:has-text('Họp khách')").count() == 0 and pg.locator(".dong-rac:has-text('Uống thuốc')").count() == 1)
     pg.click(".nav a[data-p=lich]"); pg.wait_for_timeout(300)
     check("Họp khách trở lại lịch", pg.locator(".ev:has-text('Họp khách')").count() == 1)
 
