@@ -37,7 +37,7 @@ header{height:56px;border-bottom:1px solid #dadce0;display:flex;align-items:cent
 .brand b{color:#1a73e8;font-weight:500}
 .btn-out{border:1px solid #dadce0;background:#fff;border-radius:4px;padding:7px 12px;font-size:14px}
 .btn-out:hover{background:#f1f3f4}
-#tieude{font-size:18px;margin-left:6px;white-space:nowrap}
+#tieude{font-size:18px;margin:0 4px;white-space:nowrap}
 select{border:1px solid #dadce0;border-radius:4px;padding:7px 8px;font-size:14px;background:#fff;font-family:inherit}
 .body{flex:1;display:flex;min-height:0}
 aside{width:220px;padding:12px;border-right:1px solid #f1f3f4;overflow:auto;flex-shrink:0}
@@ -152,7 +152,8 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
  #p-y .pad{padding:12px 10px}
  .y-bar h2{width:100%;font-size:19px}
  .brand{display:none}
- #tieude{font-size:15px}
+ #tieude{font-size:15px;margin-left:0;min-width:0;overflow:hidden;text-overflow:ellipsis;text-align:center}
+ #btnCai{display:none}
  .fab{display:block;position:fixed;right:16px;bottom:calc(76px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:16px;border:none;background:#c2e7ff;font-size:28px;color:#1a73e8;box-shadow:0 2px 6px rgba(0,0,0,.3);z-index:20}
  .btn-out{padding:7px 8px}
  .icon-btn{width:34px}
@@ -180,8 +181,8 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
     <div class="brand"><b>Harry</b> AI</div>
     <button class="btn-out" id="btnNay">Hôm nay</button>
     <button class="icon-btn" id="btnTruoc" aria-label="Trước">‹</button>
-    <button class="icon-btn" id="btnSau" aria-label="Sau">›</button>
     <div id="tieude"></div>
+    <button class="icon-btn" id="btnSau" aria-label="Sau">›</button>
     <div class="spacer"></div>
     <select id="chonKieu">
       <option value="day">Ngày</option>
