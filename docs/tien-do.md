@@ -9,7 +9,7 @@
 - Demo gồm: màn đăng nhập Google, Lịch ngày/tuần/tháng (bấm ô trống tạo, kéo thả đổi giờ, sự kiện lặp ↻, xoá lặp hỏi 3 lựa chọn), Kho ý tưởng (bảng 3 cột kéo thả + danh sách, lọc ưu tiên/nhãn, cảnh báo "để lâu"), Bản tin sáng mẫu, Thùng rác 30 ngày, Cài đặt (màu loại việc), nút ✨ Trợ lý (xem trước → Đồng ý). Điện thoại: thanh menu dưới.
 - Vòng góp ý 1 (người dùng đồng ý): thêm (A) khung xem trước của trợ lý sửa được trước khi Đồng ý; (B) nút "Lưu thành ý tưởng" ở mỗi tin bản tin. Đã sửa demo + roadmap (2.7, 2.9). Người dùng nói **"chốt"**.
 
-**2.2 đang làm (2026-11-26):** người dùng đã tạo dự án Supabase (vùng auto). Project URL `https://nrvueainkiweuvsoivgp.supabase.co` + khoá publishable đã lưu ở `config.js` (công khai, được phép). Việc kế: người dùng bật Google OAuth (Google Cloud → Client ID/Secret dán vào Supabase → Authentication → Providers → Google; Secret không gửi chat) → rồi mình code màn đăng nhập + bảng + RLS.
+**2.2 gần xong (2026-11-26):** Supabase + Google OAuth chạy; đăng nhập OK trên máy tính (chủ app = tài khoản đầu tiên đăng nhập, lưu ở bảng `app_owner`; SQL ở `sql/2.2-chu-app.sql`, hàm `la_chu_app()` dùng cho RLS các bảng sau). Bằng chứng người lạ bị chặn: `docs/bang-chung/2.2/nguoi-la-bi-chan.txt` (HTTP 401). Config công khai ở `config.js`. **Còn:** thử đăng nhập trong app đã cài trên iPhone (iOS hay lỗi OAuth ở chế độ toàn màn hình) → xong thì tick 2.2 + chuyển 2.3 (Lịch). Lưu ý: Google ở chế độ Testing, chỉ Gmail trong Test users đăng nhập được (token có thể hết hạn sau 7 ngày — nếu vậy đăng nhập lại).
 
 ## Vừa xong
 - Bước A: thu yêu cầu. Bước B: tạo `CLAUDE.md`, `docs/yeu-cau.md`, `.env.example`, `.gitignore` (thư mục `.claude/rules` bị chặn quyền ghi → quy tắc bảo mật nằm trong `CLAUDE.md`).

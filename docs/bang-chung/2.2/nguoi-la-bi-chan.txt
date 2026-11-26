@@ -1,0 +1,6 @@
+== 1) Nguoi la (chua dang nhap) DOC bang app_owner ==
+{"code":"42501","details":null,"hint":"Grant the required privileges to the current role with: GRANT SELECT ON public.app_owner TO anon;","message":"permission denied for table app_owner"}
+HTTP 401
+== 2) Nguoi la (chua dang nhap) GHI bang app_owner ==
+{"code":"42501","details":null,"hint":"Grant the required privileges to the current role with: GRANT INSERT ON public.app_owner TO anon;","message":"permission denied for table app_owner"}
+HTTP 401
