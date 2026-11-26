@@ -1,7 +1,7 @@
 # Tiến độ — Harry AI
 
 ## Đang ở
-**Giai đoạn 2.6 (Kho ý tưởng) đã code + nghiệm thu bằng Supabase giả (ĐẠT); CHỜ người dùng chạy `sql/2.6-y-tuong.sql` rồi thử thật trên 2 thiết bị.** Trước đó: 2.5 xong. Tiếp theo sau khi chốt 2.6: **2.7 Trợ lý gõ câu tự nhiên**. `demo/index.html` là mẫu giao diện chuẩn.
+**Giai đoạn 2.6 (Kho ý tưởng) và 2.5b (thông báo đẩy iPhone) XONG, người dùng đã thử thật và chốt (2026-11-26).** Tiếp theo: **2.7 Trợ lý gõ câu tự nhiên** (Gemini). `demo/index.html` là mẫu giao diện chuẩn.
 - Kho: https://github.com/ducthaiktcn02/harry-ai (công khai) · Trang: https://ducthaiktcn02.github.io/harry-ai/ (Pages từ nhánh `main`, thư mục gốc).
 - Máy đã cài `gh` (winget) và đăng nhập tài khoản `ducthaiktcn02`; đường dẫn `C:\Program Files\GitHub CLI\gh.exe` (trong Bash có thể chưa có trong PATH → dùng đường dẫn đầy đủ). git đã đặt tên/email noreply chỉ riêng kho này.
 - Bằng chứng: `docs/bang-chung/2.1/trang-dien-thoai.png` (chụp khổ điện thoại, trang online) + kiểm tra manifest/service worker OK. Script: `tools/chup_bang_chung.py` (chạy `py -3.12 ...` KHÔNG dùng `-I`; dùng `channel="chrome"` vì Playwright chưa tải Chromium riêng).
@@ -40,7 +40,7 @@
 - Người dùng chưa có tài khoản Supabase? (hỏi khi bắt đầu code; hướng dẫn tạo).
 
 ## Bước tiếp theo
-Người dùng chạy `sql/2.6-y-tuong.sql` (link raw GitHub), thử Kho ý tưởng trên máy tính + iPhone (cổng 3). Chốt → **2.7 Trợ lý** theo `docs/roadmap.md`.
+**2.7 Trợ lý gõ câu tự nhiên** theo `docs/roadmap.md` (ô gõ câu → Gemini model nhẹ → bản xem trước sửa được → Đồng ý mới lưu; khoá `GEMINI_API_KEY` phải để ở Supabase Secrets cho Edge Function, KHÔNG để trong code công khai). Mẫu giao diện: nút ✨ Trợ lý trong `demo/index.html`. Mỗi file SQL/function người dùng dán qua link raw GitHub. Ghi vào 'Agent cố vấn đã quyết' mọi lựa chọn kỹ thuật.
 
 ## File đọc đầu tiên
 `CLAUDE.md` → `docs/tien-do.md` → `docs/roadmap.md` → `demo/index.html` (mẫu giao diện) → `docs/yeu-cau.md` khi cần chi tiết.

@@ -41,7 +41,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 - Xong khi: bấm "Gửi thử" trên iPhone (app đã Thêm vào MH chính, iOS 16.4+) thấy thông báo; nhắc thật đến cả Telegram lẫn iPhone.
 - Bằng chứng: `docs/bang-chung/2.5b/` (log giả + ảnh hộp Cài đặt); ảnh iPhone thật khi người dùng thử.
 
-### 2.6 Kho ý tưởng — code xong + nghiệm thu giả ĐẠT 2026-11-26, chờ thử thật 2 thiết bị
+### 2.6 Kho ý tưởng — ✅ XONG 2026-11-26 (người dùng thử thật 2 thiết bị, chốt)
 - Làm: thêm ý tưởng (tiêu đề, ghi chú, trạng thái, ưu tiên, nhãn, hạn); bảng kéo thả 3 cột + dạng danh sách; lọc theo nhãn/ưu tiên; thùng rác.
 - Xong khi: thêm/kéo thả/sửa/xoá chạy, đồng bộ 2 thiết bị.
 - Bằng chứng: ảnh bảng 3 cột + danh sách.
