@@ -9,23 +9,18 @@ Không cần thêm secret mới (đã có `CRON_KEY`, `GEMINI_API_KEY`, `TELEGRA
 2. Supabase → **SQL Editor** → **New query** → dán → bấm **Run**. Thấy "Success" là xong (chạy lại nhiều lần vẫn an toàn).
 
 ## Bước 2. Tạo function `ban-tin-lay` (lấy tin từ các báo — việc còn dang dở của 2.8)
-Function gồm 3 file nhỏ, dán từng file một:
+Chỉ cần **1 file duy nhất** (đã gộp sẵn, không thêm file phụ):
 1. Supabase → **Edge Functions** → **Deploy a new function** (Via Editor) → đặt tên đúng là `ban-tin-lay`.
-2. Trình soạn thảo có sẵn file `index.ts`. Mở link, Ctrl+A, Ctrl+C, dán đè vào `index.ts`: https://raw.githubusercontent.com/ducthaiktcn02/harry-ai/main/supabase/functions/ban-tin-lay/index.ts
-3. Bấm dấu **+** (thêm file), đặt tên `nguon.ts`, dán nội dung từ: https://raw.githubusercontent.com/ducthaiktcn02/harry-ai/main/supabase/functions/ban-tin-lay/nguon.ts
-4. Thêm tiếp file `loi.ts`, dán nội dung từ: https://raw.githubusercontent.com/ducthaiktcn02/harry-ai/main/supabase/functions/ban-tin-lay/loi.ts
-5. Bấm **Deploy**.
-6. Vào function `ban-tin-lay` → **Details/Settings** → **TẮT "Verify JWT"**.
+2. Mở link, chọn hết (Ctrl+A), sao chép (Ctrl+C): https://raw.githubusercontent.com/ducthaiktcn02/harry-ai/main/supabase/dan-mot-file/ban-tin-lay.ts
+3. Dán đè toàn bộ file `index.ts` trong trình soạn thảo (xoá sạch code mẫu trước), bấm **Deploy**.
+4. Vào function `ban-tin-lay` → **Details/Settings** → **TẮT "Verify JWT"**.
 
 ## Bước 3. Tạo function `ban-tin-gui` (dịch/tóm tắt + lưu + gửi Telegram)
-Function này gồm **2 file** và tự gọi `ban-tin-lay` qua mạng nên **không cần** liên kết gì giữa hai function.
+Cũng **1 file duy nhất**; function tự gọi `ban-tin-lay` qua mạng nên không cần liên kết gì giữa hai function.
 1. Supabase → **Edge Functions** → **Deploy a new function** (Via Editor) → đặt tên đúng là `ban-tin-gui`.
-2. Dán đè file `index.ts` bằng nội dung từ: https://raw.githubusercontent.com/ducthaiktcn02/harry-ai/main/supabase/functions/ban-tin-gui/index.ts
-3. Bấm dấu **+**, đặt tên `loi.ts`, dán nội dung từ: https://raw.githubusercontent.com/ducthaiktcn02/harry-ai/main/supabase/functions/ban-tin-gui/loi.ts
-4. Bấm **Deploy**.
-5. Vào function `ban-tin-gui` → **Details/Settings** → **TẮT "Verify JWT"**.
-
-> Nếu trình soạn thảo trên web không cho thêm file thứ hai, nhắn mình — mình sẽ gộp 2 file thành 1 cho bạn dán.
+2. Mở link, Ctrl+A, Ctrl+C: https://raw.githubusercontent.com/ducthaiktcn02/harry-ai/main/supabase/dan-mot-file/ban-tin-gui.ts
+3. Dán đè toàn bộ `index.ts`, bấm **Deploy**.
+4. Vào function `ban-tin-gui` → **Details/Settings** → **TẮT "Verify JWT"**.
 
 ## Bước 4. Thử bằng nút trong app (chưa gửi Telegram)
 1. Đợi ~2 phút sau khi mình đẩy code, mở app (iPhone: mở từ biểu tượng ngoài màn hình chính; máy tính: Ctrl+Shift+R).

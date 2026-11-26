@@ -20,3 +20,7 @@ Nguyên nhân: Supabase mới không tự cấp quyền cho vai `service_role` t
 - Lần chạy Gemini thật: model chỉ chọn tin tiếng Việt, bỏ báo nước ngoài → thêm yêu cầu "trộn báo trong/ngoài nước, Thế giới ≥ 1 tin tiếng Anh" vào prompt (chưa kiểm lại với Gemini thật).
 - Lỗi nhẹ chưa sửa: nếu `ban_tin` có bản tin tạo bằng nút lúc rất sớm (vd 0:10) thì 8:00 vẫn gửi bản cũ đó; chưa giới hạn tần suất bấm "Tạo lại".
 
+
+## 2.9 — Deploy lỗi "Module not found .../source/nguon.ts" (2026-11-26)
+- Nguyên nhân: trình soạn thảo web Supabase không giữ file thứ hai (nguon.ts/loi.ts) nên import `./nguon.ts` không thấy.
+- Cách sửa: `tools/gop_mot_file.py` gộp thành 1 file ở `supabase/dan-mot-file/` (deno check ĐẠT); hướng dẫn 2.9 dùng 2 file này. Sửa code function → chạy lại script gộp.
