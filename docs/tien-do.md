@@ -1,7 +1,7 @@
 # Tiến độ — Harry AI
 
 ## Đang ở
-**Giai đoạn 2.3 XONG và đã nghiệm thu (2026-11-26): Lịch ngày/tuần/tháng, thêm/sửa/xoá, đồng bộ máy tính ↔ iPhone (người dùng xác nhận "ok").** Tiếp theo: **2.4 Lịch — kéo thả, lặp lại, thùng rác** (cột `xoa_luc` đã có sẵn trong `su_kien`; xoá hiện là xoá mềm, chưa có màn thùng rác). `demo/index.html` là mẫu giao diện chuẩn để bám theo khi code (màu, bố cục, chữ).
+**Giai đoạn 2.4 đã code + thử bằng dữ liệu giả xong (2026-11-26); CHỜ người dùng chạy SQL `sql/2.4-lap-thung-rac.sql` trong Supabase rồi thử thật (máy tính + iPhone) để nghiệm thu.** Sau khi nghiệm thu → **2.5 Nhắc việc qua Telegram**. `demo/index.html` là mẫu giao diện chuẩn.
 - Kho: https://github.com/ducthaiktcn02/harry-ai (công khai) · Trang: https://ducthaiktcn02.github.io/harry-ai/ (Pages từ nhánh `main`, thư mục gốc).
 - Máy đã cài `gh` (winget) và đăng nhập tài khoản `ducthaiktcn02`; đường dẫn `C:\Program Files\GitHub CLI\gh.exe` (trong Bash có thể chưa có trong PATH → dùng đường dẫn đầy đủ). git đã đặt tên/email noreply chỉ riêng kho này.
 - Bằng chứng: `docs/bang-chung/2.1/trang-dien-thoai.png` (chụp khổ điện thoại, trang online) + kiểm tra manifest/service worker OK. Script: `tools/chup_bang_chung.py` (chạy `py -3.12 ...` KHÔNG dùng `-I`; dùng `channel="chrome"` vì Playwright chưa tải Chromium riêng).
@@ -12,7 +12,7 @@
 **2.2 đã làm:** Supabase `https://nrvueainkiweuvsoivgp.supabase.co` + Google OAuth (Client ID trong Google Cloud project `harry-ai`, chế độ Testing, Gmail chủ app trong Test users; token có thể hết hạn ~7 ngày → đăng nhập lại). Chủ app = tài khoản đầu tiên đăng nhập, lưu ở bảng `app_owner`; SQL `sql/2.2-chu-app.sql` (đã chạy, gồm GRANT cho `authenticated`). **Mọi bảng dữ liệu sau này: bật RLS, policy dùng `public.la_chu_app()`, và nhớ GRANT cho `authenticated`** (Supabase mới không tự cấp). Config công khai ở `config.js` (sw.js cache v3). Bằng chứng: `docs/bang-chung/2.2/nguoi-la-bi-chan.txt`. Trang đăng nhập hiện ở `index.html` (supabase-js qua CDN).
 
 ## Vừa xong
-- **2.3 (XONG, đã nghiệm thu; SQL đã chạy):** `index.html` giờ là app Lịch (ngày/tuần/tháng, tạo/sửa/xoá mềm, loại việc sửa tên+màu ở ⚙, realtime). SQL `sql/2.3-lich.sql` (bảng `su_kien`, `loai_viec`) **người dùng phải dán chạy trong Supabase SQL Editor**. Đã thử giao diện bằng dữ liệu giả: `tools/thu_lich_gia.py`, ảnh ở `docs/bang-chung/2.3/`. Còn thiếu: ảnh 2 thiết bị cùng sự kiện (cần người dùng thử thật). sw.js cache v4.
+- **2.4 (code xong, chưa nghiệm thu thật):** kéo thả đổi giờ/ngày trong lịch tuần/ngày (chuột kéo luôn; iPhone nhấn giữ ~0,35s rồi kéo; lưới 15 phút); sự kiện lặp ngày/tuần/tháng + "lặp đến hết ngày" (tuỳ chọn), hiện ký hiệu ↻; sửa/xoá/kéo sự kiện lặp hỏi 3 lựa chọn (chỉ này / này và sau / tất cả); thùng rác 30 ngày (khôi phục, xoá hẳn, tự dọn khi mở app; mở từ menu trái hoặc ⚙ Cài đặt). Cách lưu lặp: cột `lap`, `lap_den`, `lap_ngoai` (các lần bị bỏ) trên `su_kien`; "chỉ lần này" = thêm ngoại lệ + tạo sự kiện lẻ mới; "này và sau" = cắt `lap_den` + tạo chuỗi mới. Chưa làm: kéo thả ở lịch tháng, kéo đổi độ dài (có thể thêm nếu người dùng muốn). Bằng chứng: `docs/bang-chung/2.4/` + `tools/thu_lap_gia.py` (Supabase giả nhớ trong bộ nhớ, 17 kiểm tra đều ĐẠT). sw.js cache v5.
 - Bước A: thu yêu cầu. Bước B: tạo `CLAUDE.md`, `docs/yeu-cau.md`, `.env.example`, `.gitignore` (thư mục `.claude/rules` bị chặn quyền ghi → quy tắc bảo mật nằm trong `CLAUDE.md`).
 - Bước C: 2 vòng phỏng vấn + câu hỏi về lượt Gemini; người dùng nói **"chốt"**.
 
@@ -37,8 +37,8 @@
 - Người dùng chưa có tài khoản Supabase? (hỏi khi bắt đầu code; hướng dẫn tạo).
 
 ## Bước tiếp theo
-Phiên mới: **2.4 Lịch — kéo thả đổi giờ, sự kiện lặp ngày/tuần/tháng (sửa/xoá lặp hỏi 3 lựa chọn), thùng rác 30 ngày** theo `docs/roadmap.md` + `demo/index.html`. Cần thêm SQL `sql/2.4-*.sql` (cột lặp, bảng ngoại lệ…) để người dùng chạy.
-Phiên mới: **2.3 Lịch — xem + thêm/sửa/xoá** theo `docs/roadmap.md` và `demo/index.html`: bảng sự kiện + RLS (`la_chu_app()` + GRANT), lịch ngày/tuần/tháng, 5 loại màu, đồng bộ tức thì (Supabase Realtime). Bằng chứng: ảnh 2 màn hình cùng sự kiện. Mỗi lần sửa code → git add/commit/push.
+1. Người dùng dán `sql/2.4-lap-thung-rac.sql` vào Supabase SQL Editor → Run; mở app (xoá cache/đóng mở lại), thử: kéo sự kiện, tạo sự kiện lặp, xoá lặp (3 lựa chọn), thùng rác khôi phục, trên cả máy tính và iPhone. Có lỗi → ghi `docs/loi-da-gap.md`, sửa.
+2. Khi nghiệm thu "ok": tick 2.4 trong roadmap, rồi làm **2.5 Nhắc việc qua Telegram** (pg_cron mỗi phút + Edge Function; cần thêm cột nhắc trước vào `su_kien`; lưu ý sự kiện lặp phải được bung ra khi kiểm tra nhắc).
 
 ## File đọc đầu tiên
 `CLAUDE.md` → `docs/tien-do.md` → `docs/roadmap.md` → `demo/index.html` (mẫu giao diện) → `docs/yeu-cau.md` khi cần chi tiết.

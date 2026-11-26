@@ -104,6 +104,13 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
 .btn-chu:hover{background:#f1f3f4}
 .btn-do{color:#d93025}
 #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;background:#323232;color:#fff;padding:12px 18px;border-radius:4px;display:none;z-index:40;max-width:90vw}
+.ev.keo{opacity:.85;z-index:9;box-shadow:0 4px 12px rgba(0,0,0,.4);cursor:grabbing}
+.ev{touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.chon-pham label{display:block;padding:9px 4px;font-size:15px;cursor:pointer}
+.chon-pham input{margin-right:8px}
+.dong-rac{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f1f3f4}
+.dong-rac .nd{flex:1;min-width:0}
+.dong-rac .nd b{font-weight:500;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fab{display:none}
 @media(max-width:760px){
  aside{display:none}
@@ -151,6 +158,7 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
       <button class="btn-tao" id="btnTao"><span>+</span> Tạo</button>
       <nav class="nav">
         <a data-p="lich" class="on">📅 Lịch</a>
+        <a data-p="rac">🗑 Thùng rác</a>
         <a data-p="cai">⚙ Cài đặt</a>
       </nav>
       <div class="side-h">Loại việc</div>
@@ -158,9 +166,15 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
     </aside>
     <main>
       <section class="page on" id="p-lich"><div id="lich" class="cal-wrap" style="display:flex;flex-direction:column"></div></section>
+      <section class="page" id="p-rac"><div class="pad">
+        <h2>Thùng rác</h2>
+        <div class="muted" style="margin-bottom:8px">Sự kiện đã xoá được giữ 30 ngày, sau đó tự xoá hẳn.</div>
+        <div id="dsRac"></div>
+      </div></section>
       <section class="page" id="p-cai"><div class="pad">
         <h2>Cài đặt</h2>
         <div class="hop"><h3>Loại việc (tên + màu)</h3><div id="sua-loai"></div></div>
+        <div class="hop"><h3>Thùng rác</h3><button class="btn-out" id="btnRac">🗑 Mở thùng rác</button></div>
         <div class="hop"><h3>Tài khoản</h3>
           <div class="muted" id="email" style="margin-bottom:10px"></div>
           <button class="btn-out" id="btnRa">Đăng xuất</button></div>
@@ -197,7 +211,7 @@ const parseLocal = (dateStr, timeStr) => new Date(dateStr + 'T' + (timeStr || '0
 /* ---------- Trạng thái ---------- */
 let view = localStorage.getItem('kieu') || (innerWidth < 760 ? 'day' : 'week');
 let cur = new Date();
-let EV = [], CATS = [];
+let EV = [], RAW = [], CATS = [];
 let user = null;
 const cat = (id) => CATS.find((c) => c.id === id) || CATS[0] || { ten: '?', mau: '#1a73e8' };
 
@@ -244,12 +258,13 @@ sb.auth.onAuthStateChange((ev) => { if (ev !== 'TOKEN_REFRESHED') setTimeout(cap
 /* ---------- Dữ liệu ---------- */
 let daDangKy = false;
 async function batDau() {
+  await donRac();
   await Promise.all([taiLoai(), taiSuKien()]);
   veTatCa();
   if (!daDangKy) {
     daDangKy = true;
     sb.channel('lich-dong-bo')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'su_kien' }, async () => { await taiSuKien(); veLich(); })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'su_kien' }, async () => { await taiSuKien(); veLich(); if ($('p-rac').classList.contains('on')) veRac(); })
       .on('postgres_changes', { event: '*', schema: 'public', table: 'loai_viec' }, async () => { await taiLoai(); veTatCa(); })
       .subscribe();
     document.addEventListener('visibilitychange', async () => { if (!document.hidden && user) { await taiSuKien(); veLich(); } });
@@ -263,7 +278,32 @@ async function taiLoai() {
 async function taiSuKien() {
   const r = await sb.from('su_kien').select('*').is('xoa_luc', null).order('bat_dau');
   if (r.error) return toast('Lỗi tải lịch: ' + r.error.message);
-  EV = r.data.map((e) => ({ ...e, s: new Date(e.bat_dau), e: new Date(e.ket_thuc) }));
+  RAW = r.data;
+}
+const LAP_TEN = { none: 'Không lặp', day: 'Hằng ngày', week: 'Hằng tuần', month: 'Hằng tháng' };
+/* Bung sự kiện lặp thành từng lần trong khoảng [from, to) */
+function bung(from, to) {
+  const out = [];
+  RAW.forEach((r) => {
+    const s = new Date(r.bat_dau), e = new Date(r.ket_thuc), dur = e - s;
+    const mk = (os) => ({ ...r, s: os, e: new Date(os.getTime() + dur), occ: os, base: r, key: r.lap === 'none' ? r.id : r.id + '@' + os.getTime() });
+    if (r.lap === 'none' || !r.lap) { if (s < to && e > from) out.push(mk(s)); return; }
+    const ngoai = (r.lap_ngoai || []).map((x) => new Date(x).getTime());
+    const den = r.lap_den || null;
+    let k = 0;
+    if (r.lap === 'month') k = Math.max(0, (from.getFullYear() - s.getFullYear()) * 12 + from.getMonth() - s.getMonth() - 2);
+    else k = Math.max(0, Math.floor((from - dur - s) / (86400000 * (r.lap === 'week' ? 7 : 1))) - 1);
+    for (let n = 0; n < 4000; n++, k++) {
+      const os = new Date(s);
+      if (r.lap === 'month') { os.setMonth(s.getMonth() + k); if (os.getDate() !== s.getDate()) continue; }
+      else os.setDate(s.getDate() + k * (r.lap === 'week' ? 7 : 1));
+      if (os >= to) break;
+      if (den && ymd(os) > den) break;
+      if (os.getTime() + dur <= from || ngoai.includes(os.getTime())) continue;
+      out.push(mk(os));
+    }
+  });
+  return out;
 }
 
 /* ---------- Vẽ lịch ---------- */
@@ -271,6 +311,7 @@ function veTatCa() { veLoai(); veLich(); veCai(); }
 function veLoai() {
   $('dsLoai').innerHTML = CATS.map((c) => `<div class="cat"><span class="dot" style="background:${esc(c.mau)}"></span>${esc(c.ten)}</div>`).join('');
 }
+const dauLap = (e) => (e.lap && e.lap !== 'none' ? '↻ ' : '');
 const evTrongNgay = (d) => {
   const a = sod(d), b = addDays(a, 1);
   return EV.filter((e) => e.s < b && e.e > a);
@@ -279,6 +320,10 @@ const evTrongNgay = (d) => {
 function veLich() {
   if (!user) return;
   $('chonKieu').value = view;
+  {
+    const a = view === 'month' ? monday(new Date(cur.getFullYear(), cur.getMonth(), 1)) : view === 'day' ? sod(cur) : monday(cur);
+    EV = bung(a, addDays(a, view === 'month' ? 42 : view === 'day' ? 1 : 7));
+  }
   if (view === 'month') return veThang();
   const days = view === 'day' ? [sod(cur)] : Array.from({ length: 7 }, (_, i) => addDays(monday(cur), i));
   const t0 = days[0], t1 = days[days.length - 1];
@@ -292,7 +337,7 @@ function veLich() {
   const cn = days.map((d) => evTrongNgay(d).filter((e) => e.ca_ngay));
   if (cn.some((a) => a.length)) {
     h += '<div class="ca-ngay-row" style="position:static"><div class="gut"></div>' + cn.map((a) =>
-      `<div class="ca-ngay-cell">${a.map((e) => `<div class="ev-ngay" data-id="${e.id}" style="background:${esc(cat(e.loai).mau)}">${esc(e.tieu_de)}</div>`).join('')}</div>`).join('') + '</div>';
+      `<div class="ca-ngay-cell">${a.map((e) => `<div class="ev-ngay" data-id="${e.key}" style="background:${esc(cat(e.loai).mau)}">${dauLap(e)}${esc(e.tieu_de)}</div>`).join('')}</div>`).join('') + '</div>';
   }
   h += '<div class="thon"><div class="gut gio">' + Array.from({ length: 24 }, (_, i) => `<div>${i ? pad(i) + ':00' : ''}</div>`).join('') + '</div>';
   days.forEach((d, i) => {
@@ -303,13 +348,14 @@ function veLich() {
   el.className = 'cal-wrap'; el.style.display = 'block';
   el.innerHTML = h;
   el.scrollTop = veLich.lanDau ? giu : (veLich.lanDau = true, Math.max(0, (Math.min(today.getHours(), 18) - 1) * H));
+  el.querySelectorAll('.ev').forEach((n) => keoTha(n, EV.find((x) => x.key === n.dataset.id)));
   el.querySelectorAll('.cot').forEach((c) => c.onclick = (ev) => {
-    if (ev.target.closest('.ev')) return;
+    if (ev.target.closest('.ev') || Date.now() - vuaKeo < 500) return;
     const y = ev.clientY - c.getBoundingClientRect().top;
     const phut = Math.floor((y / H) * 2) * 30;
     moHopThoai(null, { ngay: c.dataset.ngay, gio: pad(Math.floor(phut / 60)) + ':' + pad(phut % 60) });
   });
-  el.querySelectorAll('[data-id]').forEach((n) => n.onclick = (ev) => { ev.stopPropagation(); moHopThoai(EV.find((x) => x.id === n.dataset.id)); });
+  el.querySelectorAll('[data-id]').forEach((n) => n.onclick = (ev) => { ev.stopPropagation(); if (Date.now() - vuaKeo < 500) return; moHopThoai(EV.find((x) => x.key === n.dataset.id)); });
 }
 
 function khoiSuKien(d) {
@@ -337,7 +383,7 @@ function khoiSuKien(d) {
   if (cluster.length) flush();
   return done.map((it) => {
     const w = 100 / it.n;
-    return `<div class="ev" data-id="${it.e.id}" style="top:${it.top}px;height:${it.hgt}px;left:calc(${it.lane * w}% + 1px);width:calc(${w}% - 4px);background:${esc(cat(it.e.loai).mau)}">${esc(it.e.tieu_de)}<small>${hm(it.e.s)} – ${hm(it.e.e)}</small></div>`;
+    return `<div class="ev" data-id="${it.e.key}" style="top:${it.top}px;height:${it.hgt}px;left:calc(${it.lane * w}% + 1px);width:calc(${w}% - 4px);background:${esc(cat(it.e.loai).mau)}">${dauLap(it.e)}${esc(it.e.tieu_de)}<small>${hm(it.e.s)} – ${hm(it.e.e)}</small></div>`;
   }).join('');
 }
 
@@ -352,14 +398,14 @@ function veThang() {
     const evs = evTrongNgay(d).sort((a, b) => a.s - b.s);
     const max = innerWidth < 760 ? 2 : 3;
     h += `<div class="o ${d.getMonth() !== cur.getMonth() ? 'khac' : ''} ${sameDay(d, today) ? 'nay' : ''}" data-ngay="${ymd(d)}"><div class="d"><span>${d.getDate()}</span></div>` +
-      evs.slice(0, max).map((e) => `<div class="ev-ngay" data-id="${e.id}" style="background:${esc(cat(e.loai).mau)}">${e.ca_ngay ? '' : hm(e.s) + ' '}${esc(e.tieu_de)}</div>`).join('') +
+      evs.slice(0, max).map((e) => `<div class="ev-ngay" data-id="${e.key}" style="background:${esc(cat(e.loai).mau)}">${e.ca_ngay ? '' : hm(e.s) + ' '}${dauLap(e)}${esc(e.tieu_de)}</div>`).join('') +
       (evs.length > max ? `<div class="them">+${evs.length - max} nữa</div>` : '') + '</div>';
   }
   h += '</div>';
   const el = $('lich'); el.className = 'cal-wrap'; el.style.display = 'flex'; el.innerHTML = h;
   el.querySelectorAll('.o').forEach((o) => o.onclick = (ev) => {
     const n = ev.target.closest('[data-id]');
-    if (n) return moHopThoai(EV.find((x) => x.id === n.dataset.id));
+    if (n) return moHopThoai(EV.find((x) => x.key === n.dataset.id));
     moHopThoai(null, { ngay: o.dataset.ngay, gio: '09:00' });
   });
 }
@@ -379,6 +425,7 @@ function hienTrang(p) {
   document.querySelectorAll('.nav a').forEach((a) => a.classList.toggle('on', a.dataset.p === p));
   $('btnNay').parentNode.querySelectorAll('#btnNay,#btnTruoc,#btnSau,#chonKieu,#tieude').forEach((x) => x.style.visibility = p === 'lich' ? 'visible' : 'hidden');
   if (p === 'lich') veLich();
+  if (p === 'rac') veRac();
 }
 document.querySelectorAll('.nav a').forEach((a) => a.onclick = () => hienTrang(a.dataset.p));
 $('btnCai').onclick = () => hienTrang($('p-cai').classList.contains('on') ? 'lich' : 'cai');
@@ -389,23 +436,27 @@ function dongHop() { $('ov').classList.remove('on'); }
 $('ov').onclick = (e) => { if (e.target === $('ov')) dongHop(); };
 function moHopThoai(ev, mac) {
   const moi = !ev;
-  let s, e, canNgay = false, loai = CATS[0] ? CATS[0].id : 'cv';
+  let s, e, canNgay = false, loai = CATS[0] ? CATS[0].id : 'cv', lap = 'none', lapDen = '';
   if (moi) { s = parseLocal(mac.ngay, mac.gio); e = new Date(s.getTime() + 3600000); }
-  else { s = ev.s; e = ev.e; canNgay = ev.ca_ngay; loai = ev.loai; }
+  else { s = ev.s; e = ev.e; canNgay = ev.ca_ngay; loai = ev.loai; lap = ev.lap || 'none'; lapDen = ev.lap_den || ''; }
   $('dlg').innerHTML = `
-    <h3>${moi ? 'Sự kiện mới' : 'Sửa sự kiện'}</h3>
+    <h3>${moi ? 'Sự kiện mới' : 'Sửa sự kiện'}${lap !== 'none' ? ' lặp' : ''}</h3>
     <div class="f"><input class="lon" id="fTen" placeholder="Thêm tiêu đề" value="${esc(ev ? ev.tieu_de : '')}"></div>
     <div class="f"><label><input type="checkbox" id="fCaNgay" ${canNgay ? 'checked' : ''}>Cả ngày</label></div>
     <div class="hang"><div class="f"><label>Ngày bắt đầu</label><input type="date" id="fN1" value="${ymd(s)}"></div>
       <div class="f" id="g1"><label>Giờ bắt đầu</label><input type="time" id="fG1" value="${hm(s)}"></div></div>
     <div class="hang"><div class="f"><label>Ngày kết thúc</label><input type="date" id="fN2" value="${ymd(canNgay ? new Date(e.getTime() - 1) : e)}"></div>
       <div class="f" id="g2"><label>Giờ kết thúc</label><input type="time" id="fG2" value="${hm(e)}"></div></div>
+    <div class="hang"><div class="f"><label>Lặp lại</label><select id="fLap">${Object.keys(LAP_TEN).map((k) => `<option value="${k}" ${k === lap ? 'selected' : ''}>${LAP_TEN[k]}</option>`).join('')}</select></div>
+      <div class="f" id="gDen"><label>Lặp đến hết ngày (tuỳ chọn)</label><input type="date" id="fDen" value="${lapDen}"></div></div>
     <div class="f"><label>Loại việc</label><select id="fLoai">${CATS.map((c) => `<option value="${esc(c.id)}" ${c.id === loai ? 'selected' : ''}>${esc(c.ten)}</option>`).join('')}</select></div>
     <div class="f"><label>Ghi chú</label><textarea id="fGhi" rows="3">${esc(ev ? ev.ghi_chu : '')}</textarea></div>
     <div class="hanh-dong">${moi ? '' : '<button class="btn-chu btn-do" id="bXoa">Xoá</button>'}<div class="spacer"></div>
       <button class="btn-chu" id="bHuy">Huỷ</button><button class="btn-xanh" id="bLuu">Lưu</button></div>`;
   const doiCaNgay = () => { const v = $('fCaNgay').checked; $('g1').hidden = $('g2').hidden = v; };
   $('fCaNgay').onchange = doiCaNgay; doiCaNgay();
+  const doiLap = () => { $('gDen').hidden = $('fLap').value === 'none'; };
+  $('fLap').onchange = doiLap; doiLap();
   $('fN1').onchange = () => { if ($('fN2').value < $('fN1').value) $('fN2').value = $('fN1').value; };
   $('bHuy').onclick = dongHop;
   $('bLuu').onclick = () => luu(ev);
@@ -423,19 +474,159 @@ async function luu(ev) {
   if (isNaN(s) || isNaN(e)) return toast('Ngày/giờ chưa đúng');
   if (e <= s) { if (cn) return toast('Ngày kết thúc phải sau ngày bắt đầu'); e = new Date(s.getTime() + 15 * 60000); }
   const row = { tieu_de: ten, ghi_chu: $('fGhi').value.trim() || null, bat_dau: s.toISOString(), ket_thuc: e.toISOString(), ca_ngay: cn, loai: $('fLoai').value, sua_luc: new Date().toISOString() };
-  $('bLuu').disabled = true;
-  const r = ev ? await sb.from('su_kien').update(row).eq('id', ev.id) : await sb.from('su_kien').insert(row);
-  $('bLuu').disabled = false;
+  row.lap = $('fLap').value; row.lap_den = row.lap === 'none' ? null : ($('fDen').value || null);
+  if (row.lap_den && row.lap_den < ymd(s)) return toast('Ngày kết thúc lặp phải sau ngày bắt đầu');
+  let r;
+  if (ev && ev.base.lap !== 'none') {
+    const pham = await hoiPham('Sửa sự kiện lặp', 'Lưu'); if (!pham) return dongHop();
+    r = await apDung(ev, row, pham);
+  } else {
+    $('bLuu').disabled = true;
+    r = ev ? await sb.from('su_kien').update(row).eq('id', ev.id) : await sb.from('su_kien').insert(row);
+  }
   if (r.error) return toast('Lưu lỗi: ' + r.error.message);
   dongHop(); toast(ev ? 'Đã lưu thay đổi' : 'Đã thêm sự kiện');
   await taiSuKien(); veLich();
 }
 async function xoa(ev) {
-  if (!confirm('Xoá sự kiện "' + ev.tieu_de + '"?')) return;
-  const r = await sb.from('su_kien').update({ xoa_luc: new Date().toISOString() }).eq('id', ev.id);
+  let r;
+  if (ev.base.lap !== 'none') {
+    const pham = await hoiPham('Xoá sự kiện lặp', 'Xoá'); if (!pham) return dongHop();
+    r = await xoaLap(ev, pham);
+  } else {
+    if (!confirm('Xoá sự kiện "' + ev.tieu_de + '"? (vào thùng rác 30 ngày)')) return;
+    r = await sb.from('su_kien').update({ xoa_luc: new Date().toISOString() }).eq('id', ev.id);
+  }
   if (r.error) return toast('Xoá lỗi: ' + r.error.message);
   dongHop(); toast('Đã xoá sự kiện'); await taiSuKien(); veLich();
 }
+
+/* ---------- Sự kiện lặp: hỏi 3 lựa chọn + áp dụng ---------- */
+function hoiPham(tieu, nut) {
+  return new Promise((ok) => {
+    $('dlg').innerHTML = `<h3>${tieu}</h3><div class="chon-pham">
+      <label><input type="radio" name="pham" value="one" checked>Chỉ sự kiện này</label>
+      <label><input type="radio" name="pham" value="fut">Sự kiện này và các sự kiện sau</label>
+      <label><input type="radio" name="pham" value="all">Tất cả sự kiện</label></div>
+      <div class="hanh-dong"><div class="spacer"></div><button class="btn-chu" id="pHuy">Huỷ</button><button class="btn-xanh" id="pOk">${nut}</button></div>`;
+    $('ov').classList.add('on');
+    $('pHuy').onclick = () => ok(null);
+    $('pOk').onclick = () => ok(document.querySelector('input[name=pham]:checked').value);
+  });
+}
+const isoNgoai = (b, t) => [...(b.lap_ngoai || []), new Date(t).toISOString()];
+async function apDung(ev, f, pham) {
+  const b = ev.base, occ = ev.occ.getTime(), bs = new Date(b.bat_dau).getTime();
+  if (pham === 'fut' && occ === bs) pham = 'all';
+  const ns = new Date(f.bat_dau), ne = new Date(f.ket_thuc);
+  if (pham === 'all') {
+    const delta = ns.getTime() - occ;
+    const g = { ...f, bat_dau: new Date(bs + delta).toISOString(), ket_thuc: new Date(bs + delta + (ne - ns)).toISOString() };
+    if (delta) g.lap_ngoai = (b.lap_ngoai || []).map((x) => new Date(new Date(x).getTime() + delta).toISOString());
+    return sb.from('su_kien').update(g).eq('id', b.id);
+  }
+  const moi = { tieu_de: b.tieu_de, ghi_chu: b.ghi_chu, ca_ngay: b.ca_ngay, loai: b.loai, lap: b.lap, lap_den: b.lap_den, ...f };
+  let r1;
+  if (pham === 'one') { moi.lap = 'none'; moi.lap_den = null; r1 = await sb.from('su_kien').update({ lap_ngoai: isoNgoai(b, occ) }).eq('id', b.id); }
+  else r1 = await sb.from('su_kien').update({ lap_den: ymd(addDays(sod(ev.occ), -1)) }).eq('id', b.id);
+  if (r1.error) return r1;
+  return sb.from('su_kien').insert(moi);
+}
+async function xoaLap(ev, pham) {
+  const b = ev.base, occ = ev.occ.getTime();
+  if (pham === 'fut' && occ === new Date(b.bat_dau).getTime()) pham = 'all';
+  if (pham === 'all') return sb.from('su_kien').update({ xoa_luc: new Date().toISOString() }).eq('id', b.id);
+  if (pham === 'one') return sb.from('su_kien').update({ lap_ngoai: isoNgoai(b, occ) }).eq('id', b.id);
+  return sb.from('su_kien').update({ lap_den: ymd(addDays(sod(ev.occ), -1)) }).eq('id', b.id);
+}
+
+/* ---------- Kéo thả đổi giờ/ngày (chuột: kéo luôn; cảm ứng: nhấn giữ rồi kéo) ---------- */
+let vuaKeo = 0;
+function keoTha(el, ev) {
+  if (!ev) return;
+  let g = null;
+  const xy = (e) => { const t = (e.touches && e.touches[0]) || (e.changedTouches && e.changedTouches[0]) || e; return [t.clientX, t.clientY]; };
+  const go = () => {
+    document.removeEventListener('touchmove', di); document.removeEventListener('mousemove', di);
+    document.removeEventListener('touchend', tha); document.removeEventListener('mouseup', tha); document.removeEventListener('touchcancel', huy);
+  };
+  const don = () => { clearTimeout(g.timer); go(); el.classList.remove('keo'); el.style.transform = ''; };
+  const bat = (e, cam) => {
+    if (!cam && e.button > 0) return;
+    const [x, y] = xy(e);
+    g = { x0: x, y0: y, on: false, cam };
+    if (cam) g.timer = setTimeout(() => { g.on = true; el.classList.add('keo'); if (navigator.vibrate) navigator.vibrate(12); }, 350);
+    document.addEventListener(cam ? 'touchmove' : 'mousemove', di, { passive: false });
+    document.addEventListener(cam ? 'touchend' : 'mouseup', tha);
+    if (cam) document.addEventListener('touchcancel', huy);
+  };
+  const di = (e) => {
+    if (!g) return;
+    const [x, y] = xy(e), dx = x - g.x0, dy = y - g.y0;
+    if (!g.on) {
+      if (Math.hypot(dx, dy) <= (g.cam ? 8 : 5)) return;
+      if (g.cam) { clearTimeout(g.timer); go(); g = null; return; } // đang cuộn trang
+      g.on = true; el.classList.add('keo');
+    }
+    e.preventDefault();
+    el.style.transform = `translate(${dx}px,${dy}px)`;
+  };
+  const huy = () => { if (g) { don(); g = null; } };
+  const tha = async (e) => {
+    if (!g) return;
+    const was = g.on, [x, y] = xy(e), dy = y - g.y0;
+    don(); g = null;
+    if (!was) return;
+    if (e.cancelable) e.preventDefault();
+    vuaKeo = Date.now();
+    const cols = [...document.querySelectorAll('.cot')];
+    if (!cols.length) return;
+    let col = cols.find((c) => { const r = c.getBoundingClientRect(); return x >= r.left && x < r.right; });
+    if (!col) col = x < cols[0].getBoundingClientRect().left ? cols[0] : cols[cols.length - 1];
+    const phutCu = ev.s.getHours() * 60 + ev.s.getMinutes();
+    const phutMoi = Math.max(0, Math.min(1425, Math.round((phutCu + (dy / H) * 60) / 15) * 15));
+    const ns = parseLocal(col.dataset.ngay, pad(Math.floor(phutMoi / 60)) + ':' + pad(phutMoi % 60));
+    const ne = new Date(ns.getTime() + (ev.e - ev.s));
+    if (ns.getTime() === ev.s.getTime()) return;
+    const f = { bat_dau: ns.toISOString(), ket_thuc: ne.toISOString(), sua_luc: new Date().toISOString() };
+    let r;
+    if (ev.base.lap !== 'none') {
+      const pham = await hoiPham('Di chuyển sự kiện lặp', 'Di chuyển');
+      dongHop(); if (!pham) return veLich();
+      r = await apDung(ev, f, pham);
+    } else r = await sb.from('su_kien').update(f).eq('id', ev.id);
+    if (r.error) toast('Lỗi: ' + r.error.message); else toast('Đã chuyển sang ' + hm(ns) + ' ' + THU[ns.getDay()] + ' ' + ns.getDate() + '/' + (ns.getMonth() + 1));
+    await taiSuKien(); veLich();
+  };
+  el.addEventListener('mousedown', (e) => bat(e, false));
+  el.addEventListener('touchstart', (e) => bat(e, true), { passive: true });
+}
+
+/* ---------- Thùng rác ---------- */
+async function veRac() {
+  const r = await sb.from('su_kien').select('*').not('xoa_luc', 'is', null).order('xoa_luc', { ascending: false });
+  if (r.error) { $('dsRac').textContent = 'Lỗi: ' + r.error.message; return; }
+  if (!r.data.length) { $('dsRac').innerHTML = '<div class="muted">Thùng rác trống.</div>'; return; }
+  $('dsRac').innerHTML = r.data.map((e) => {
+    const con = Math.max(0, 30 - Math.floor((Date.now() - new Date(e.xoa_luc)) / 86400000));
+    const s = new Date(e.bat_dau);
+    return `<div class="dong-rac"><span class="dot" style="background:${esc(cat(e.loai).mau)}"></span><div class="nd"><b>${e.lap !== 'none' ? '↻ ' : ''}${esc(e.tieu_de)}</b><span class="muted">${THU[s.getDay()]} ${s.getDate()}/${s.getMonth() + 1}/${s.getFullYear()}${e.ca_ngay ? '' : ' ' + hm(s)} · còn ${con} ngày</span></div>
+      <button class="btn-chu" data-kp="${e.id}">Khôi phục</button><button class="btn-chu btn-do" data-xh="${e.id}">Xoá hẳn</button></div>`;
+  }).join('');
+  $('dsRac').querySelectorAll('[data-kp]').forEach((b) => b.onclick = async () => {
+    const x = await sb.from('su_kien').update({ xoa_luc: null }).eq('id', b.dataset.kp);
+    if (x.error) return toast('Lỗi: ' + x.error.message);
+    toast('Đã khôi phục'); await taiSuKien(); veRac();
+  });
+  $('dsRac').querySelectorAll('[data-xh]').forEach((b) => b.onclick = async () => {
+    if (!confirm('Xoá hẳn? Không khôi phục lại được.')) return;
+    const x = await sb.from('su_kien').delete().eq('id', b.dataset.xh);
+    if (x.error) return toast('Lỗi: ' + x.error.message);
+    toast('Đã xoá hẳn'); veRac();
+  });
+}
+async function donRac() { await sb.from('su_kien').delete().lt('xoa_luc', new Date(Date.now() - 30 * 86400000).toISOString()); }
+$('btnRac').onclick = () => hienTrang('rac');
 
 /* ---------- Cài đặt loại việc ---------- */
 function veCai() {

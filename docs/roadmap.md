@@ -26,7 +26,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 - Xong khi: tạo sự kiện trên máy tính → điện thoại thấy ngay (đồng bộ tức thì).
 - Bằng chứng: ảnh 2 màn hình cùng sự kiện.
 
-### 2.4 Lịch — kéo thả, lặp lại, thùng rác
+### 2.4 Lịch — kéo thả, lặp lại, thùng rác — 🟡 code xong 2026-11-26, chờ nghiệm thu thật (cần chạy sql/2.4)
 - Làm: kéo thả đổi giờ; sự kiện lặp ngày/tuần/tháng; sửa/xoá lặp hỏi 3 lựa chọn; thùng rác 30 ngày (khôi phục được).
 - Xong khi: các thao tác trên chạy đúng, lặp hiện đúng các ngày.
 - Bằng chứng: ảnh/quay màn hình từng thao tác.
