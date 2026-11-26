@@ -113,11 +113,47 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
 .dong-rac .nd{flex:1;min-width:0}
 .dong-rac .nd b{font-weight:500;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fab{display:none}
+#duoi{display:none}
+/* Kho ý tưởng */
+#p-y .pad{max-width:1100px}
+.y-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.y-bar h2{margin:0 8px 0 0}
+.seg{display:flex}
+.seg button{border:1px solid #dadce0;background:#fff;padding:7px 14px;font-size:13px}
+.seg button:first-child{border-radius:4px 0 0 4px}.seg button:last-child{border-radius:0 4px 4px 0;border-left:none}
+.seg button.on{background:#e8f0fe;color:#1967d2}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.lane{background:#f1f3f4;border-radius:8px;padding:10px;min-height:300px}
+.lane.drop{background:#e8f0fe;outline:2px dashed #1a73e8}
+.lane h3{font-size:14px;font-weight:500;margin:4px 4px 10px;display:flex;justify-content:space-between}
+.card{background:#fff;border-radius:6px;padding:10px 12px;margin-bottom:8px;box-shadow:0 1px 2px rgba(60,64,67,.3);cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;overflow-wrap:anywhere}
+.card.keo{opacity:.85;position:relative;z-index:9;box-shadow:0 4px 12px rgba(0,0,0,.4);cursor:grabbing}
+.card .t{font-weight:500;margin-bottom:4px}
+.card .n{color:#5f6368;font-size:12px;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.tag{font-size:11px;background:#e8eaed;border-radius:10px;padding:2px 8px}
+.pri-cao{background:#fce8e6;color:#c5221f}.pri-vua{background:#fef7e0;color:#b06000}.pri-thap{background:#e6f4ea;color:#137333}
+.old{font-size:11px;color:#c5221f}
+.bang-ds{width:100%;border-collapse:collapse}
+.bang-ds th{text-align:left;font-size:12px;color:#5f6368;font-weight:500;padding:8px;border-bottom:1px solid #dadce0}
+.bang-ds td{padding:10px 8px;border-bottom:1px solid #f1f3f4;vertical-align:top}
+.bang-ds tr.dong{cursor:pointer}.bang-ds tr.dong:hover{background:#f8f9fa}
 @media(max-width:760px){
  aside{display:none}
+ #duoi{display:flex;flex-shrink:0;border-top:1px solid #dadce0;background:#fff;padding-bottom:env(safe-area-inset-bottom)}
+ #duoi a{flex:1;text-align:center;padding:7px 0;font-size:11px;color:#5f6368;cursor:pointer}
+ #duoi a div{font-size:20px;line-height:24px}
+ #duoi a.on{color:#1967d2;font-weight:500}
+ .board{gap:6px}.lane{padding:6px;min-height:240px}
+ .lane h3{font-size:12px;margin:2px 2px 8px}
+ .card{padding:7px 8px}.card .t{font-size:13px}.card .n{font-size:11px}
+ .tag,.old{font-size:10px}
+ .hide-m{display:none}
+ #p-y .pad{padding:12px 10px}
+ .y-bar h2{width:100%;font-size:19px}
  .brand{display:none}
  #tieude{font-size:15px}
- .fab{display:block;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:16px;border:none;background:#c2e7ff;font-size:28px;color:#1a73e8;box-shadow:0 2px 6px rgba(0,0,0,.3);z-index:20}
+ .fab{display:block;position:fixed;right:16px;bottom:calc(76px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:16px;border:none;background:#c2e7ff;font-size:28px;color:#1a73e8;box-shadow:0 2px 6px rgba(0,0,0,.3);z-index:20}
  .btn-out{padding:7px 8px}
  .icon-btn{width:34px}
  .ngay-h .so{font-size:16px;width:30px;height:30px;line-height:30px}
@@ -159,6 +195,7 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
       <button class="btn-tao" id="btnTao"><span>+</span> Tạo</button>
       <nav class="nav">
         <a data-p="lich" class="on">📅 Lịch</a>
+        <a data-p="y">💡 Kho ý tưởng</a>
         <a data-p="rac">🗑 Thùng rác</a>
         <a data-p="cai">⚙ Cài đặt</a>
       </nav>
@@ -167,9 +204,20 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
     </aside>
     <main>
       <section class="page on" id="p-lich"><div id="lich" class="cal-wrap" style="display:flex;flex-direction:column"></div></section>
+      <section class="page" id="p-y"><div class="pad">
+        <div class="y-bar">
+          <h2>Kho ý tưởng</h2>
+          <div class="seg"><button class="on" id="bBang">Bảng</button><button id="bDs">Danh sách</button></div>
+          <select id="fUu"><option value="">Mọi ưu tiên</option><option value="cao">Cao</option><option value="vua">Vừa</option><option value="thap">Thấp</option></select>
+          <select id="fNhan" style="max-width:100%"><option value="">Mọi nhãn</option></select>
+          <div class="spacer"></div>
+          <button class="btn-xanh" id="bYMoi">+ Ý tưởng</button>
+        </div>
+        <div id="yView"></div>
+      </div></section>
       <section class="page" id="p-rac"><div class="pad">
         <h2>Thùng rác</h2>
-        <div class="muted" style="margin-bottom:8px">Sự kiện đã xoá được giữ 30 ngày, sau đó tự xoá hẳn.</div>
+        <div class="muted" style="margin-bottom:8px">Sự kiện và ý tưởng đã xoá được giữ 30 ngày, sau đó tự xoá hẳn.</div>
         <div id="dsRac"></div>
       </div></section>
       <section class="page" id="p-cai"><div class="pad">
@@ -182,7 +230,8 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
       </div></section>
     </main>
   </div>
-  <button class="fab" id="fab" aria-label="Tạo sự kiện">+</button>
+  <nav id="duoi"><a data-p="lich" class="on"><div>📅</div>Lịch</a><a data-p="y"><div>💡</div>Ý tưởng</a><a data-p="cai"><div>⚙</div>Cài đặt</a></nav>
+  <button class="fab" id="fab" aria-label="Tạo mới">+</button>
 </div>
 
 <div class="overlay" id="ov"><div class="dialog" id="dlg"></div></div>
@@ -191,7 +240,7 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 <script>
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
 const C = window.HARRY_CONFIG;
 const sb = supabase.createClient(C.SUPABASE_URL, C.SUPABASE_PUBLISHABLE_KEY);
 const $ = (id) => document.getElementById(id);
@@ -212,7 +261,7 @@ const parseLocal = (dateStr, timeStr) => new Date(dateStr + 'T' + (timeStr || '0
 /* ---------- Trạng thái ---------- */
 let view = localStorage.getItem('kieu') || (innerWidth < 760 ? 'day' : 'week');
 let cur = new Date();
-let EV = [], RAW = [], CATS = [];
+let EV = [], RAW = [], CATS = [], YT = [];
 let user = null;
 const cat = (id) => CATS.find((c) => c.id === id) || CATS[0] || { ten: '?', mau: '#1a73e8' };
 
@@ -260,21 +309,27 @@ sb.auth.onAuthStateChange((ev) => { if (ev !== 'TOKEN_REFRESHED') setTimeout(cap
 let daDangKy = false;
 async function batDau() {
   await donRac();
-  await Promise.all([taiLoai(), taiSuKien()]);
-  veTatCa();
+  await Promise.all([taiLoai(), taiSuKien(), taiYTuong()]);
+  veTatCa(); veY();
   if (!daDangKy) {
     daDangKy = true;
     sb.channel('lich-dong-bo')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'su_kien' }, async () => { await taiSuKien(); veLich(); if ($('p-rac').classList.contains('on')) veRac(); })
       .on('postgres_changes', { event: '*', schema: 'public', table: 'loai_viec' }, async () => { await taiLoai(); veTatCa(); })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'y_tuong' }, async () => { await taiYTuong(); veY(); if ($('p-rac').classList.contains('on')) veRac(); })
       .subscribe();
-    document.addEventListener('visibilitychange', async () => { if (!document.hidden && user) { await taiSuKien(); veLich(); } });
+    document.addEventListener('visibilitychange', async () => { if (!document.hidden && user) { await Promise.all([taiSuKien(), taiYTuong()]); veLich(); veY(); } });
   }
 }
 async function taiLoai() {
   const r = await sb.from('loai_viec').select('*').order('thu_tu');
   if (r.error) return toast('Lỗi tải loại việc: ' + r.error.message);
   CATS = r.data;
+}
+async function taiYTuong() {
+  const r = await sb.from('y_tuong').select('*').is('xoa_luc', null).order('thu_tu');
+  if (r.error) return toast('Lỗi tải ý tưởng: ' + r.error.message + ' (đã chạy file SQL 2.6 chưa?)');
+  YT = r.data;
 }
 async function taiSuKien() {
   const r = await sb.from('su_kien').select('*').is('xoa_luc', null).order('bat_dau');
@@ -423,14 +478,15 @@ $('btnNay').onclick = () => { cur = new Date(); veLich(); };
 $('chonKieu').onchange = (e) => { view = e.target.value; localStorage.setItem('kieu', view); veLich.lanDau = false; veLich(); };
 function hienTrang(p) {
   document.querySelectorAll('.page').forEach((x) => x.classList.toggle('on', x.id === 'p-' + p));
-  document.querySelectorAll('.nav a').forEach((a) => a.classList.toggle('on', a.dataset.p === p));
+  document.querySelectorAll('.nav a,#duoi a').forEach((a) => a.classList.toggle('on', a.dataset.p === p));
   $('btnNay').parentNode.querySelectorAll('#btnNay,#btnTruoc,#btnSau,#chonKieu,#tieude').forEach((x) => x.style.visibility = p === 'lich' ? 'visible' : 'hidden');
   if (p === 'lich') veLich();
   if (p === 'rac') veRac();
+  if (p === 'y') veY();
 }
-document.querySelectorAll('.nav a').forEach((a) => a.onclick = () => hienTrang(a.dataset.p));
+document.querySelectorAll('.nav a,#duoi a').forEach((a) => a.onclick = () => hienTrang(a.dataset.p));
 $('btnCai').onclick = () => hienTrang($('p-cai').classList.contains('on') ? 'lich' : 'cai');
-$('btnTao').onclick = $('fab').onclick = () => moHopThoai(null, { ngay: ymd(cur), gio: pad(Math.min(new Date().getHours() + 1, 23)) + ':00' });
+$('btnTao').onclick = $('fab').onclick = () => $('p-y').classList.contains('on') ? moYTuong(null) : moHopThoai(null, { ngay: ymd(cur), gio: pad(Math.min(new Date().getHours() + 1, 23)) + ':00' });
 
 /* ---------- Hộp thoại sự kiện ---------- */
 function dongHop() { $('ov').classList.remove('on'); }
@@ -618,30 +674,181 @@ function keoTha(el, ev) {
   el.addEventListener('touchstart', (e) => bat(e, true), { passive: true });
 }
 
-/* ---------- Thùng rác ---------- */
+/* ---------- Kho ý tưởng ---------- */
+const TT = { chua_lam: 'Chưa làm', dang_lam: 'Đang làm', xong: 'Đã xong' };
+const UT = { cao: 'Cao', vua: 'Vừa', thap: 'Thấp' };
+let yKieu = localStorage.getItem('y-kieu') || 'bang';
+const tuoiY = (y) => Math.floor((Date.now() - new Date(y.sua_luc)) / 86400000);
+const deLau = (y) => y.trang_thai === 'chua_lam' && tuoiY(y) > 14;
+const hanTxt = (y) => y.han ? `<span class="tag" style="${y.han < ymd(new Date()) && y.trang_thai !== 'xong' ? 'background:#fce8e6;color:#c5221f' : ''}">⏰ ${y.han.split('-').reverse().slice(0, 2).join('/')}</span>` : '';
+const lauTxt = (y) => deLau(y) ? `<span class="old">⚠ để lâu ${tuoiY(y)} ngày</span>` : '';
+
+function veY() {
+  if (!user) return;
+  const nhanAll = [...new Set(YT.flatMap((y) => y.nhan || []))].sort();
+  const fn = $('fNhan'); let nv = fn.value; if (nv && !nhanAll.includes(nv)) nv = '';
+  fn.innerHTML = '<option value="">Mọi nhãn</option>' + nhanAll.map((t) => `<option ${t === nv ? 'selected' : ''}>${esc(t)}</option>`).join('');
+  fn.value = nv;
+  $('bBang').classList.toggle('on', yKieu === 'bang'); $('bDs').classList.toggle('on', yKieu === 'ds');
+  const fu = $('fUu').value;
+  const ds = YT.filter((y) => (!fu || y.uu_tien === fu) && (!nv || (y.nhan || []).includes(nv)));
+  const v = $('yView');
+  if (yKieu === 'bang') {
+    v.innerHTML = '<div class="board">' + Object.entries(TT).map(([k, ten]) => {
+      const it = ds.filter((y) => y.trang_thai === k);
+      return `<div class="lane" data-s="${k}"><h3>${ten}<span class="muted">${it.length}</span></h3>` + it.map((y) =>
+        `<div class="card" data-yid="${y.id}"><div class="t">${esc(y.tieu_de)}</div>${y.ghi_chu ? `<div class="n">${esc(y.ghi_chu)}</div>` : ''}<div class="tags"><span class="tag pri-${esc(y.uu_tien)}">${UT[y.uu_tien] || ''}</span>${(y.nhan || []).map((t) => `<span class="tag">#${esc(t)}</span>`).join('')}${hanTxt(y)}${lauTxt(y)}</div></div>`).join('') + '</div>';
+    }).join('') + '</div>';
+    v.querySelectorAll('.card').forEach((c) => keoY(c, YT.find((y) => y.id === c.dataset.yid)));
+  } else {
+    v.innerHTML = '<table class="bang-ds"><tr><th>Tiêu đề</th><th>Trạng thái</th><th>Ưu tiên</th><th class="hide-m">Nhãn</th><th class="hide-m">Hạn</th></tr>' + (ds.length ? ds.map((y) =>
+      `<tr class="dong" data-yid="${y.id}"><td><b>${esc(y.tieu_de)}</b> ${lauTxt(y)}</td><td>${TT[y.trang_thai]}</td><td><span class="tag pri-${esc(y.uu_tien)}">${UT[y.uu_tien] || ''}</span></td><td class="hide-m">${(y.nhan || []).map((t) => '#' + esc(t)).join(' ')}</td><td class="hide-m">${hanTxt(y)}</td></tr>`).join('') : '<tr><td colspan="5" class="muted">Chưa có ý tưởng nào khớp.</td></tr>') + '</table>';
+    v.querySelectorAll('tr.dong').forEach((r) => r.onclick = () => moYTuong(YT.find((y) => y.id === r.dataset.yid)));
+  }
+}
+$('bBang').onclick = () => { yKieu = 'bang'; localStorage.setItem('y-kieu', yKieu); veY(); };
+$('bDs').onclick = () => { yKieu = 'ds'; localStorage.setItem('y-kieu', yKieu); veY(); };
+$('fUu').onchange = $('fNhan').onchange = veY;
+$('bYMoi').onclick = () => moYTuong(null);
+
+function moYTuong(y) {
+  const moi = !y; const o = y || { tieu_de: '', ghi_chu: '', trang_thai: 'chua_lam', uu_tien: 'vua', nhan: [], han: '' };
+  $('dlg').innerHTML = `
+    <h3>${moi ? 'Ý tưởng mới' : 'Sửa ý tưởng'}</h3>
+    <div class="f"><input class="lon" id="yTen" placeholder="Tiêu đề ý tưởng" value="${esc(o.tieu_de)}"></div>
+    <div class="f"><label>Ghi chú</label><textarea id="yGhi" rows="3">${esc(o.ghi_chu)}</textarea></div>
+    <div class="hang"><div class="f"><label>Trạng thái</label><select id="yTT">${Object.entries(TT).map(([k, t]) => `<option value="${k}" ${k === o.trang_thai ? 'selected' : ''}>${t}</option>`).join('')}</select></div>
+      <div class="f"><label>Ưu tiên</label><select id="yUu">${Object.entries(UT).map(([k, t]) => `<option value="${k}" ${k === o.uu_tien ? 'selected' : ''}>${t}</option>`).join('')}</select></div></div>
+    <div class="hang"><div class="f"><label>Nhãn (cách nhau dấu phẩy)</label><input id="yNhan" value="${esc((o.nhan || []).join(', '))}"></div>
+      <div class="f"><label>Hạn dự kiến (không bắt buộc)</label><input type="date" id="yHan" value="${esc(o.han || '')}"></div></div>
+    ${o.nguon || o.link ? `<div class="muted" style="margin-bottom:8px">Nguồn: ${esc(o.nguon || '')} ${o.link && /^https?:\/\//.test(o.link) ? `<a href="${esc(o.link)}" target="_blank" rel="noopener">Mở link ↗</a>` : ''}</div>` : ''}
+    <div class="hanh-dong">${moi ? '' : '<button class="btn-chu btn-do" id="yXoa">Xoá</button>'}<div class="spacer"></div>
+      <button class="btn-chu" id="yHuy">Huỷ</button><button class="btn-xanh" id="yLuu">Lưu</button></div>`;
+  $('yHuy').onclick = dongHop;
+  $('yLuu').onclick = () => luuY(y);
+  if (!moi) $('yXoa').onclick = () => xoaY(y);
+  $('ov').classList.add('on');
+  if (moi) $('yTen').focus();
+}
+const dauThuTu = () => (YT.length ? Math.min(...YT.map((y) => y.thu_tu || 0)) : 0) - 1;
+async function luuY(y) {
+  const ten = $('yTen').value.trim();
+  if (!ten) return toast('Nhập tiêu đề trước nhé');
+  const row = {
+    tieu_de: ten, ghi_chu: $('yGhi').value.trim() || null, trang_thai: $('yTT').value, uu_tien: $('yUu').value,
+    nhan: [...new Set($('yNhan').value.split(',').map((t) => t.trim().replace(/^#/, '')).filter(Boolean))],
+    han: $('yHan').value || null, sua_luc: new Date().toISOString(),
+  };
+  $('yLuu').disabled = true;
+  let r;
+  if (y) { if (y.trang_thai !== row.trang_thai) row.thu_tu = dauThuTu(); r = await sb.from('y_tuong').update(row).eq('id', y.id); }
+  else { row.thu_tu = dauThuTu(); r = await sb.from('y_tuong').insert(row); }
+  if (r.error) { $('yLuu').disabled = false; return toast('Lưu lỗi: ' + r.error.message); }
+  dongHop(); toast(y ? 'Đã lưu ý tưởng' : 'Đã thêm ý tưởng');
+  await taiYTuong(); veY();
+}
+async function xoaY(y) {
+  if (!confirm('Xoá ý tưởng "' + y.tieu_de + '"? (vào thùng rác 30 ngày)')) return;
+  const r = await sb.from('y_tuong').update({ xoa_luc: new Date().toISOString() }).eq('id', y.id);
+  if (r.error) return toast('Xoá lỗi: ' + r.error.message);
+  dongHop(); toast('Đã chuyển vào thùng rác'); await taiYTuong(); veY();
+}
+
+/* Kéo thẻ sang cột khác để đổi trạng thái (chuột: kéo luôn; cảm ứng: nhấn giữ ~0,35s rồi kéo) */
+function keoY(el, y) {
+  if (!y) return;
+  let g = null;
+  const xy = (e) => { const t = (e.touches && e.touches[0]) || (e.changedTouches && e.changedTouches[0]) || e; return [t.clientX, t.clientY]; };
+  const laneTai = (x, yy) => [...document.querySelectorAll('#yView .lane')].find((l) => { const r = l.getBoundingClientRect(); return x >= r.left && x < r.right && yy >= r.top && yy < r.bottom; });
+  const toLane = (l) => document.querySelectorAll('#yView .lane').forEach((n) => n.classList.toggle('drop', n === l));
+  const go = () => {
+    document.removeEventListener('touchmove', di); document.removeEventListener('mousemove', di);
+    document.removeEventListener('touchend', tha); document.removeEventListener('mouseup', tha); document.removeEventListener('touchcancel', huy);
+  };
+  const don = () => { clearTimeout(g.timer); go(); el.classList.remove('keo'); el.style.transform = ''; toLane(null); };
+  const bat = (e, cam) => {
+    if (!cam && e.button > 0) return;
+    const [x, yy] = xy(e);
+    g = { x0: x, y0: yy, on: false, cam };
+    if (cam) g.timer = setTimeout(() => { g.on = true; el.classList.add('keo'); if (navigator.vibrate) navigator.vibrate(12); }, 350);
+    document.addEventListener(cam ? 'touchmove' : 'mousemove', di, { passive: false });
+    document.addEventListener(cam ? 'touchend' : 'mouseup', tha);
+    if (cam) document.addEventListener('touchcancel', huy);
+  };
+  const di = (e) => {
+    if (!g) return;
+    const [x, yy] = xy(e), dx = x - g.x0, dy = yy - g.y0;
+    if (!g.on) {
+      if (Math.hypot(dx, dy) <= (g.cam ? 8 : 5)) return;
+      if (g.cam) { clearTimeout(g.timer); go(); g = null; return; } // đang cuộn trang
+      g.on = true; el.classList.add('keo');
+    }
+    e.preventDefault();
+    el.style.transform = `translate(${dx}px,${dy}px)`;
+    toLane(laneTai(x, yy));
+  };
+  const huy = () => { if (g) { don(); g = null; } };
+  const tha = async (e) => {
+    if (!g) return;
+    const was = g.on, [x, yy] = xy(e);
+    don(); g = null;
+    if (!was) return;
+    if (e.cancelable) e.preventDefault();
+    vuaKeo = Date.now();
+    const l = laneTai(x, yy);
+    if (!l || l.dataset.s === y.trang_thai) return;
+    const f = { trang_thai: l.dataset.s, thu_tu: dauThuTu(), sua_luc: new Date().toISOString() };
+    Object.assign(y, f); veY(); // hiện ngay, rồi lưu
+    const r = await sb.from('y_tuong').update(f).eq('id', y.id);
+    if (r.error) toast('Lỗi: ' + r.error.message); else toast('"' + y.tieu_de + '" → ' + TT[f.trang_thai]);
+    await taiYTuong(); veY();
+  };
+  el.addEventListener('mousedown', (e) => bat(e, false));
+  el.addEventListener('touchstart', (e) => bat(e, true), { passive: true });
+  el.onclick = () => { if (Date.now() - vuaKeo < 500) return; moYTuong(y); };
+}
+
+/* ---------- Thùng rác (sự kiện + ý tưởng) ---------- */
 async function veRac() {
-  const r = await sb.from('su_kien').select('*').not('xoa_luc', 'is', null).order('xoa_luc', { ascending: false });
-  if (r.error) { $('dsRac').textContent = 'Lỗi: ' + r.error.message; return; }
-  if (!r.data.length) { $('dsRac').innerHTML = '<div class="muted">Thùng rác trống.</div>'; return; }
-  $('dsRac').innerHTML = r.data.map((e) => {
+  const [a, b] = await Promise.all([
+    sb.from('su_kien').select('*').not('xoa_luc', 'is', null),
+    sb.from('y_tuong').select('*').not('xoa_luc', 'is', null),
+  ]);
+  if (a.error || b.error) { $('dsRac').textContent = 'Lỗi: ' + (a.error || b.error).message; return; }
+  const all = [...a.data.map((e) => ({ ...e, bang: 'su_kien' })), ...b.data.map((e) => ({ ...e, bang: 'y_tuong' }))]
+    .sort((x, y) => new Date(y.xoa_luc) - new Date(x.xoa_luc));
+  if (!all.length) { $('dsRac').innerHTML = '<div class="muted">Thùng rác trống.</div>'; return; }
+  $('dsRac').innerHTML = all.map((e) => {
     const con = Math.max(0, 30 - Math.floor((Date.now() - new Date(e.xoa_luc)) / 86400000));
-    const s = new Date(e.bat_dau);
-    return `<div class="dong-rac"><span class="dot" style="background:${esc(cat(e.loai).mau)}"></span><div class="nd"><b>${e.lap !== 'none' ? '↻ ' : ''}${esc(e.tieu_de)}</b><span class="muted">${THU[s.getDay()]} ${s.getDate()}/${s.getMonth() + 1}/${s.getFullYear()}${e.ca_ngay ? '' : ' ' + hm(s)} · còn ${con} ngày</span></div>
-      <button class="btn-chu" data-kp="${e.id}">Khôi phục</button><button class="btn-chu btn-do" data-xh="${e.id}">Xoá hẳn</button></div>`;
+    let dau, ten, mo;
+    if (e.bang === 'y_tuong') {
+      dau = '<span class="dot" style="background:#f9ab00"></span>'; ten = '💡 ' + esc(e.tieu_de);
+      mo = `Ý tưởng · ${TT[e.trang_thai] || ''} · ${UT[e.uu_tien] || ''}`;
+    } else {
+      const s = new Date(e.bat_dau);
+      dau = `<span class="dot" style="background:${esc(cat(e.loai).mau)}"></span>`; ten = (e.lap !== 'none' ? '↻ ' : '') + esc(e.tieu_de);
+      mo = `Sự kiện · ${THU[s.getDay()]} ${s.getDate()}/${s.getMonth() + 1}/${s.getFullYear()}${e.ca_ngay ? '' : ' ' + hm(s)}`;
+    }
+    return `<div class="dong-rac">${dau}<div class="nd"><b>${ten}</b><span class="muted">${mo} · còn ${con} ngày</span></div>
+      <button class="btn-chu" data-kp="${e.id}" data-b="${e.bang}">Khôi phục</button><button class="btn-chu btn-do" data-xh="${e.id}" data-b="${e.bang}">Xoá hẳn</button></div>`;
   }).join('');
   $('dsRac').querySelectorAll('[data-kp]').forEach((b) => b.onclick = async () => {
-    const x = await sb.from('su_kien').update({ xoa_luc: null }).eq('id', b.dataset.kp);
+    const x = await sb.from(b.dataset.b).update({ xoa_luc: null }).eq('id', b.dataset.kp);
     if (x.error) return toast('Lỗi: ' + x.error.message);
-    toast('Đã khôi phục'); await taiSuKien(); veRac();
+    toast('Đã khôi phục'); await Promise.all([taiSuKien(), taiYTuong()]); veY(); veRac();
   });
   $('dsRac').querySelectorAll('[data-xh]').forEach((b) => b.onclick = async () => {
     if (!confirm('Xoá hẳn? Không khôi phục lại được.')) return;
-    const x = await sb.from('su_kien').delete().eq('id', b.dataset.xh);
+    const x = await sb.from(b.dataset.b).delete().eq('id', b.dataset.xh);
     if (x.error) return toast('Lỗi: ' + x.error.message);
     toast('Đã xoá hẳn'); veRac();
   });
 }
-async function donRac() { await sb.from('su_kien').delete().lt('xoa_luc', new Date(Date.now() - 30 * 86400000).toISOString()); }
+async function donRac() {
+  const m = new Date(Date.now() - 30 * 86400000).toISOString();
+  await sb.from('su_kien').delete().lt('xoa_luc', m);
+  await sb.from('y_tuong').delete().lt('xoa_luc', m);
+}
 $('btnRac').onclick = () => hienTrang('rac');
 
 /* ---------- Cài đặt loại việc ---------- */

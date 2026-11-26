@@ -1,7 +1,7 @@
 # Tiến độ — Harry AI
 
 ## Đang ở
-**Giai đoạn 2.5 XONG và đã nghiệm thu (2026-11-26): nhắc việc Telegram đến đúng giờ, người dùng chốt.** Tiếp theo: **2.6 Kho ý tưởng**. `demo/index.html` là mẫu giao diện chuẩn.
+**Giai đoạn 2.6 (Kho ý tưởng) đã code + nghiệm thu bằng Supabase giả (ĐẠT); CHỜ người dùng chạy `sql/2.6-y-tuong.sql` rồi thử thật trên 2 thiết bị.** Trước đó: 2.5 xong. Tiếp theo sau khi chốt 2.6: **2.7 Trợ lý gõ câu tự nhiên**. `demo/index.html` là mẫu giao diện chuẩn.
 - Kho: https://github.com/ducthaiktcn02/harry-ai (công khai) · Trang: https://ducthaiktcn02.github.io/harry-ai/ (Pages từ nhánh `main`, thư mục gốc).
 - Máy đã cài `gh` (winget) và đăng nhập tài khoản `ducthaiktcn02`; đường dẫn `C:\Program Files\GitHub CLI\gh.exe` (trong Bash có thể chưa có trong PATH → dùng đường dẫn đầy đủ). git đã đặt tên/email noreply chỉ riêng kho này.
 - Bằng chứng: `docs/bang-chung/2.1/trang-dien-thoai.png` (chụp khổ điện thoại, trang online) + kiểm tra manifest/service worker OK. Script: `tools/chup_bang_chung.py` (chạy `py -3.12 ...` KHÔNG dùng `-I`; dùng `channel="chrome"` vì Playwright chưa tải Chromium riêng).
@@ -12,6 +12,7 @@
 **2.2 đã làm:** Supabase `https://nrvueainkiweuvsoivgp.supabase.co` + Google OAuth (Client ID trong Google Cloud project `harry-ai`, chế độ Testing, Gmail chủ app trong Test users; token có thể hết hạn ~7 ngày → đăng nhập lại). Chủ app = tài khoản đầu tiên đăng nhập, lưu ở bảng `app_owner`; SQL `sql/2.2-chu-app.sql` (đã chạy, gồm GRANT cho `authenticated`). **Mọi bảng dữ liệu sau này: bật RLS, policy dùng `public.la_chu_app()`, và nhớ GRANT cho `authenticated`** (Supabase mới không tự cấp). Config công khai ở `config.js` (sw.js cache v3). Bằng chứng: `docs/bang-chung/2.2/nguoi-la-bi-chan.txt`. Trang đăng nhập hiện ở `index.html` (supabase-js qua CDN).
 
 ## Vừa xong
+- **2.6 (code xong, nghiệm thu giả ĐẠT, chờ thử thật):** bảng `y_tuong` (`sql/2.6-y-tuong.sql`, RLS + GRANT authenticated/service_role + realtime), Kho ý tưởng: bảng 3 cột kéo thả, danh sách, lọc ưu tiên/nhãn, 'để lâu' (>14 ngày tính từ `sua_luc`), thùng rác chung với lịch; điện thoại có thanh menu dưới (Lịch/Ý tưởng/Cài đặt). Chưa làm: sắp xếp thứ tự trong cùng cột. Bằng chứng `docs/bang-chung/2.6/` (+ `nghiem-thu/`), `tools/thu_y_tuong_gia.py` (35 ĐẠT). Chưa thử ngón tay thật trên iPhone, realtime thật. sw.js cache v10.
 - **2.5 (XONG, đã nghiệm thu 2026-11-26 — tin Telegram đến đúng giờ):** form sự kiện có ô "Nhắc qua Telegram" (không/đúng giờ/15 phút/1 giờ/tuỳ chỉnh) lưu `su_kien.nhac_phut`; Edge Function `supabase/functions/nhac-viec/index.ts` (bung lặp theo giờ VN, gửi Telegram, chống trùng); `sql/2.5a-cot-nhac.sql` + `2.5b-hen-gio.sql`. Hạ tầng đã bật: function `nhac-viec` (Verify JWT tắt), secrets `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID`/`CRON_KEY`, pg_cron mỗi phút (`sql/2.5a/2.5b/2.5c`; 2.5c = GRANT cho `service_role`, từng gây lỗi permission denied → `docs/loi-da-gap.md`). Bằng chứng giả: `docs/bang-chung/2.5/thu-logic-nhac.txt` (12 kiểm tra ĐẠT, `tools/thu_nhac_gia.py`); 2.4 vẫn ĐẠT. sw.js cache v7.
 - **2.4 (XONG, đã nghiệm thu):** kéo thả đổi giờ/ngày trong lịch tuần/ngày (chuột kéo luôn; iPhone nhấn giữ ~0,35s rồi kéo; lưới 15 phút); sự kiện lặp ngày/tuần/tháng + "lặp đến hết ngày" (tuỳ chọn), hiện ký hiệu ↻; sửa/xoá/kéo sự kiện lặp hỏi 3 lựa chọn (chỉ này / này và sau / tất cả); thùng rác 30 ngày (khôi phục, xoá hẳn, tự dọn khi mở app; mở từ menu trái hoặc ⚙ Cài đặt). Cách lưu lặp: cột `lap`, `lap_den`, `lap_ngoai` (các lần bị bỏ) trên `su_kien`; "chỉ lần này" = thêm ngoại lệ + tạo sự kiện lẻ mới; "này và sau" = cắt `lap_den` + tạo chuỗi mới. Xoá "chỉ lần này"/"này và sau" cũng tạo bản sao trong thùng rác (khôi phục được). sw.js giờ fetch `no-cache` (cache v6) vì GitHub Pages giữ trang 10 phút → sau mỗi lần đẩy code, đợi ~2 phút rồi Ctrl+Shift+R / đóng mở app. Chưa làm: kéo thả ở lịch tháng, kéo đổi độ dài (có thể thêm nếu người dùng muốn). Bằng chứng: `docs/bang-chung/2.4/` + `tools/thu_lap_gia.py` (Supabase giả nhớ trong bộ nhớ, 17 kiểm tra đều ĐẠT). sw.js cache v5.
 - Bước A: thu yêu cầu. Bước B: tạo `CLAUDE.md`, `docs/yeu-cau.md`, `.env.example`, `.gitignore` (thư mục `.claude/rules` bị chặn quyền ghi → quy tắc bảo mật nằm trong `CLAUDE.md`).
@@ -38,7 +39,7 @@
 - Người dùng chưa có tài khoản Supabase? (hỏi khi bắt đầu code; hướng dẫn tạo).
 
 ## Bước tiếp theo
-**2.6 Kho ý tưởng** theo `docs/roadmap.md` (bảng 3 cột kéo thả + danh sách, lọc nhãn/ưu tiên, thùng rác; mẫu giao diện ở `demo/index.html`). Cần `sql/2.6-*.sql` (bảng mới: RLS + policy `public.la_chu_app()` + GRANT cho `authenticated`, và `service_role` nếu Edge Function dùng sau này). Người dùng chạy SQL qua link raw GitHub (mỗi file SQL dán nguyên được). Bằng chứng: ảnh bảng 3 cột + danh sách, thử giả như 2.4, rồi nghiệm thu 2 thiết bị.
+Người dùng chạy `sql/2.6-y-tuong.sql` (link raw GitHub), thử Kho ý tưởng trên máy tính + iPhone (cổng 3). Chốt → **2.7 Trợ lý** theo `docs/roadmap.md`.
 
 ## File đọc đầu tiên
 `CLAUDE.md` → `docs/tien-do.md` → `docs/roadmap.md` → `demo/index.html` (mẫu giao diện) → `docs/yeu-cau.md` khi cần chi tiết.

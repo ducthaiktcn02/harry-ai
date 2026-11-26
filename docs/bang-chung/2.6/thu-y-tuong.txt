@@ -1,0 +1,51 @@
+1) Bảng 3 cột + cảnh báo để lâu
+  ĐẠT   3 cột Chưa làm / Đang làm / Đã xong
+  ĐẠT   Chưa làm có 2 thẻ, Đang làm 1, Đã xong 1
+  ĐẠT   Thẻ 'Làm kênh review' (20 ngày) có cảnh báo để lâu
+  ĐẠT   Thẻ 'Mua micro' (2 ngày) KHÔNG cảnh báo
+  ĐẠT   Thẻ Đang làm quá lâu cũng không cảnh báo (chỉ Chưa làm)
+2) Thêm ý tưởng
+  ĐẠT   Lưu vào bảng: ưu tiên cao, nhãn [video, bếp] (bỏ #, bỏ trùng), hạn 2026-12-20
+  ĐẠT   Thẻ mới hiện ở đầu cột Chưa làm
+  ĐẠT   Thiếu tiêu đề thì không lưu
+3) Sửa ý tưởng
+  ĐẠT   Đã sửa tiêu đề + ưu tiên thấp
+  ĐẠT   Sửa xong, thẻ hiện tên mới trong bảng
+4) Kéo thả bằng chuột đổi trạng thái
+  ĐẠT   Cột đích sáng lên khi kéo qua
+  ĐẠT   Kéo sang Đang làm -> trang_thai = dang_lam
+  ĐẠT   Kéo xong thì hết 'để lâu' (sua_luc mới)
+  ĐẠT   Thẻ nằm đầu cột Đang làm
+  ĐẠT   Kéo sang Đã xong
+  ĐẠT   Thả lại đúng cột cũ: không đổi gì và không mở hộp thoại
+  ĐẠT   Bấm (không kéo) vào thẻ mở hộp thoại sửa
+5) Lọc ưu tiên và nhãn
+  ĐẠT   Lọc ưu tiên Cao: chỉ thẻ ưu tiên cao
+  ĐẠT   Thêm lọc nhãn 'bếp': còn 1 thẻ
+  ĐẠT   Lọc nhãn 'video' (mọi ưu tiên): 3 thẻ
+  ĐẠT   Bỏ lọc: đủ 5 thẻ
+6) Dạng danh sách
+  ĐẠT   Danh sách có 5 dòng
+  ĐẠT   Danh sách ghi trạng thái tiếng Việt
+  ĐẠT   Bấm dòng mở hộp thoại sửa
+7) Xoá -> thùng rác dùng chung -> khôi phục
+  ĐẠT   Thẻ biến mất khỏi bảng, có xoa_luc
+  ĐẠT   Thùng rác có ý tưởng 💡 và cả sự kiện cũ
+  ĐẠT   Khôi phục: rời thùng rác (sự kiện vẫn còn)
+  ĐẠT   Ý tưởng trở lại cột Đã xong
+8) Xoá hẳn + tự dọn sau 30 ngày
+  ĐẠT   Xoá hẳn: mất khỏi bảng dữ liệu
+  ĐẠT   Mở lại app: ý tưởng xoá > 30 ngày bị dọn
+9) Đồng bộ tức thì (giả lập tin báo thay đổi từ thiết bị khác)
+  ĐẠT   Thẻ từ thiết bị khác hiện ra không cần tải lại
+  ĐẠT   Không có lỗi JS: []
+10) Điện thoại (390x800, cảm ứng): bảng, danh sách, nhấn giữ rồi kéo
+  ĐẠT   Có thanh menu dưới (Lịch / Ý tưởng / Cài đặt)
+  ĐẠT   Mở được Kho ý tưởng từ thanh dưới
+  ĐẠT   Kéo ngay không nhấn giữ: không đổi trạng thái (để cuộn trang)
+  ĐẠT   Đang giữ: thẻ nổi lên (.keo)
+  ĐẠT   Nhấn giữ rồi kéo sang Đang làm -> đổi trạng thái
+  ĐẠT   Danh sách trên điện thoại hiện đủ dòng
+  ĐẠT   Nút + trong trang Ý tưởng mở hộp thoại ý tưởng mới
+  ĐẠT   Không có lỗi JS (điện thoại): []
+TẤT CẢ ĐẠT

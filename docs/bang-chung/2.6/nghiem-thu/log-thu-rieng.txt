@@ -1,0 +1,30 @@
+["Failed to register a ServiceWorker: The URL protocol of the current origin ('null') is not supported."]
+TRƯỢT Rỗng: 3 cột, 0 thẻ, không lỗi JS
+ĐẠT  Rỗng: danh sách hiện thông báo trống
+ĐẠT  Tiêu đề toàn khoảng trắng: không lưu, hộp thoại còn mở
+ĐẠT  XSS: không có alert nào bật
+ĐẠT  XSS: không có img/script bị chèn
+ĐẠT  XSS: tiêu đề hiện thành chữ
+ĐẠT  XSS: ghi chú hiện thành chữ
+ĐẠT  XSS: nhãn đặc biệt hiện nguyên chữ
+ĐẠT  XSS: mở sửa, ô tiêu đề giữ nguyên chuỗi
+ĐẠT  XSS: ô nhãn giữ nguyên (không vỡ thuộc tính value)
+ĐẠT  XSS: danh sách không chèn thẻ
+ĐẠT  XSS: bộ lọc nhãn liệt kê nhãn đặc biệt đúng chữ
+ĐẠT  Lọc theo nhãn a&b: 1 dòng
+ĐẠT  XSS: sau xoá vẫn không alert
+   (hộp confirm đã thấy: ['Xoá ý tưởng "<img src=x onerror=alert(1)'] )
+ĐẠT  XSS thùng rác: không chèn thẻ, có mục đã xoá
+TRƯỢT Không lỗi JS suốt loạt rỗng/XSS
+["Failed to register a ServiceWorker: The URL protocol of the current origin ('null') is not supported."] 150
+TRƯỢT 150 ý tưởng: đủ 150 thẻ (mở 0.6s)
+ĐẠT  150: lọc nhãn n2 = 30 thẻ
+ĐẠT  150: danh sách 150 dòng
+   id y123 trạng thái sau kéo xong
+ĐẠT  150: kéo thẻ sâu trong cột dài sang Đã xong
+ĐẠT  390px bảng: không tràn ngang trang [390, 390]
+ĐẠT  390px danh sách: không tràn ngang [390, 390]
+ĐẠT  390px hộp thoại trong màn hình [10, 380, 171, 629, 390, 800]
+ĐẠT  390px nút Lưu thấy được
+TRƯỢT Không lỗi JS (điện thoại)
+TRƯỢT: ['Rỗng: 3 cột, 0 thẻ, không lỗi JS', 'Không lỗi JS suốt loạt rỗng/XSS', '150 ý tưởng: đủ 150 thẻ (mở 0.6s)', 'Không lỗi JS (điện thoại)']

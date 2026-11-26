@@ -22,6 +22,7 @@ window.supabase={createClient:()=>{
   eq:(c,v)=>{o.f.push(r=>r[c]===v);return o}, lt:(c,v)=>{o.f.push(r=>r[c]!=null&&r[c]<v);return o},
   insert:(p)=>{o.op='insert';o.pl=p;return o}, update:(p)=>{o.op='update';o.pl=p;return o}, delete:()=>{o.op='delete';return o},
   then:(res)=>{ if(t=='app_owner') return res({data:[{user_id:'u1'}],error:null});
+   if(t=='y_tuong') return res({data:[],error:null});  // 2.6: kho ý tưởng rỗng, không liên quan phép thử này
    if(t=='loai_viec') return res({data:%s,error:null});
    const D=window.__DB; const m=D.filter(r=>o.f.every(f=>f(r)));
    if(o.op=='insert'){D.push({id:'n'+(++__n),xoa_luc:null,lap:'none',lap_den:null,lap_ngoai:[],ghi_chu:null,...o.pl});return res({data:null,error:null});}

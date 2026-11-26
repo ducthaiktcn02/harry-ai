@@ -1,0 +1,26 @@
+1) Lặp lại hiện đúng ngày
+  ĐẠT   Họp tuần ↻ 1 lần trong tuần
+  ĐẠT   Uống thuốc lặp hằng ngày = 7 lần/tuần
+  ĐẠT   Trả tiền nhà (tháng) 1 lần
+  ĐẠT   Tuần sau: Họp tuần vẫn hiện
+  ĐẠT   Tuần sau: Trả tiền nhà (tháng) KHÔNG hiện
+2) Kéo thả sự kiện thường (Họp khách 15:00 -> 17:00, sang ngày kế)
+  ĐẠT   Giờ mới 17:00 (thực tế Wed 17:00)
+  ĐẠT   Giờ kết thúc giữ độ dài 1 giờ
+3) Kéo 1 lần của sự kiện lặp -> hỏi 3 lựa chọn -> 'Chỉ sự kiện này'
+  ĐẠT   Hộp thoại có đủ 3 lựa chọn
+  ĐẠT   Gốc ghi 1 ngoại lệ
+  ĐẠT   Có 1 sự kiện lẻ mới lúc 11:00
+  ĐẠT   Trong tuần vẫn đúng 1 'Họp tuần' lặp + 1 lẻ
+4) Xoá 'Uống thuốc' từ thứ 4 trở đi
+  ĐẠT   Còn 2 lần Uống thuốc (T2, T3)
+  ĐẠT   Phần đã xoá nằm trong thùng rác (xoa_luc)
+5) Xoá sự kiện thường -> thùng rác -> khôi phục
+  ĐẠT   Họp khách biến mất khỏi lịch
+  ĐẠT   Có trong thùng rác
+  ĐẠT   Khôi phục: Họp khách rời thùng rác, Uống thuốc còn
+  ĐẠT   Họp khách trở lại lịch
+6) Tạo sự kiện lặp mới từ hộp thoại
+  ĐẠT   Lưu được lặp hằng tuần
+  ĐẠT   Không có lỗi JS: []
+TẤT CẢ ĐẠT

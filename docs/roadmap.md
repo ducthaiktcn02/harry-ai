@@ -36,7 +36,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 - Xong khi: tạo sự kiện thử, tin nhắn Telegram đến **lệch ≤ ~1 phút**.
 - Bằng chứng: ảnh tin Telegram kèm giờ nhận + log.
 
-### 2.6 Kho ý tưởng
+### 2.6 Kho ý tưởng — code xong + nghiệm thu giả ĐẠT 2026-11-26, chờ thử thật 2 thiết bị
 - Làm: thêm ý tưởng (tiêu đề, ghi chú, trạng thái, ưu tiên, nhãn, hạn); bảng kéo thả 3 cột + dạng danh sách; lọc theo nhãn/ưu tiên; thùng rác.
 - Xong khi: thêm/kéo thả/sửa/xoá chạy, đồng bộ 2 thiết bị.
 - Bằng chứng: ảnh bảng 3 cột + danh sách.
