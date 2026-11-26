@@ -1,11 +1,11 @@
 # Tiến độ — Harry AI
 
 ## Đang ở
-**Giai đoạn 2.1 code XONG, chờ người dùng thử trên điện thoại + chốt (2026-11-26).** Sau khi chốt → **2.2 Supabase + đăng nhập Google**. `demo/index.html` là mẫu giao diện chuẩn để bám theo khi code (màu, bố cục, chữ).
+**Giai đoạn 2.1 XONG và đã nghiệm thu trên iPhone thật (2026-11-26): thêm vào màn hình chính được, mở toàn màn hình.** Tiếp theo: **2.2 Supabase + đăng nhập Google**. `demo/index.html` là mẫu giao diện chuẩn để bám theo khi code (màu, bố cục, chữ).
 - Kho: https://github.com/ducthaiktcn02/harry-ai (công khai) · Trang: https://ducthaiktcn02.github.io/harry-ai/ (Pages từ nhánh `main`, thư mục gốc).
 - Máy đã cài `gh` (winget) và đăng nhập tài khoản `ducthaiktcn02`; đường dẫn `C:\Program Files\GitHub CLI\gh.exe` (trong Bash có thể chưa có trong PATH → dùng đường dẫn đầy đủ). git đã đặt tên/email noreply chỉ riêng kho này.
 - Bằng chứng: `docs/bang-chung/2.1/trang-dien-thoai.png` (chụp khổ điện thoại, trang online) + kiểm tra manifest/service worker OK. Script: `tools/chup_bang_chung.py` (chạy `py -3.12 ...` KHÔNG dùng `-I`; dùng `channel="chrome"` vì Playwright chưa tải Chromium riêng).
-- Chưa kiểm chứng: "Thêm vào màn hình chính" trên iPhone thật (Safari) → nhờ người dùng thử. Đã thêm thẻ meta Apple + icon 180.
+- Đã kiểm chứng trên iPhone (Safari → Chia sẻ → Thêm vào MH chính). Lưu ý người dùng từng không thấy nút Chia sẻ vì mở link ngoài Safari — nhắc luôn dùng Safari.
 - Demo gồm: màn đăng nhập Google, Lịch ngày/tuần/tháng (bấm ô trống tạo, kéo thả đổi giờ, sự kiện lặp ↻, xoá lặp hỏi 3 lựa chọn), Kho ý tưởng (bảng 3 cột kéo thả + danh sách, lọc ưu tiên/nhãn, cảnh báo "để lâu"), Bản tin sáng mẫu, Thùng rác 30 ngày, Cài đặt (màu loại việc), nút ✨ Trợ lý (xem trước → Đồng ý). Điện thoại: thanh menu dưới.
 - Vòng góp ý 1 (người dùng đồng ý): thêm (A) khung xem trước của trợ lý sửa được trước khi Đồng ý; (B) nút "Lưu thành ý tưởng" ở mỗi tin bản tin. Đã sửa demo + roadmap (2.7, 2.9). Người dùng nói **"chốt"**.
 
@@ -34,7 +34,7 @@
 - Người dùng chưa có tài khoản Supabase? (hỏi khi bắt đầu code; hướng dẫn tạo).
 
 ## Bước tiếp theo
-Người dùng mở link trên điện thoại, thử "Thêm vào màn hình chính", báo kết quả → chốt 2.1. Rồi phiên mới: **2.2 Supabase + đăng nhập Google** (hướng dẫn người dùng tạo tài khoản Supabase + bật Google đăng nhập; RLS chỉ chủ app). Mỗi lần sửa code → `git add/commit/push` là trang tự cập nhật.
+Phiên mới: **2.2 Supabase + đăng nhập Google** — hướng dẫn người dùng tạo tài khoản Supabase (miễn phí) + bật đăng nhập Google; RLS chỉ chủ app; thử đăng nhập trong app đã cài trên iPhone (iOS hay lỗi OAuth ở chế độ toàn màn hình). Mỗi lần sửa code → git add/commit/push, trang tự cập nhật.
 
 ## File đọc đầu tiên
 `CLAUDE.md` → `docs/tien-do.md` → `docs/roadmap.md` → `demo/index.html` (mẫu giao diện) → `docs/yeu-cau.md` khi cần chi tiết.
