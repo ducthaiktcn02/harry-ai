@@ -1,0 +1,20 @@
+1) Tuần: vuốt ngang
+  ĐẠT   Vuốt trái -> sang tuần sau (T2 đổi +7 ngày)
+  ĐẠT   Vuốt phải -> quay lại tuần trước
+  ĐẠT   Vuốt ngắn/chậm (35px) -> KHÔNG đổi tuần
+2) Tuần: vuốt dọc = cuộn giờ, không đổi tuần
+  ĐẠT   Vuốt dọc không đổi tuần
+  ĐẠT   Vuốt dọc cuộn giờ
+3) Ngày: vuốt ngang
+  ĐẠT   Ngày: vuốt trái -> ngày sau
+  ĐẠT   Ngày: vuốt phải -> quay lại
+4) Tháng: vuốt dọc và ngang
+  ĐẠT   Tháng vừa khung, không cuộn
+  ĐẠT   Vuốt lên -> tháng sau (Tháng 11, 2026 -> Tháng 12, 2026)
+  ĐẠT   Vuốt xuống -> tháng trước
+  ĐẠT   Tháng: vuốt ngang trái -> tháng sau
+  ĐẠT   Không bật hộp thoại ngoài ý muốn
+5) Chạm vẫn mở hộp thoại
+  ĐẠT   Chạm ô ngày mở hộp tạo sự kiện
+  ĐẠT   Không có lỗi JS
+TẤT CẢ ĐẠT
