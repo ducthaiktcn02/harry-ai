@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Harry AI</title>
+<meta name="theme-color" content="#1a73e8">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:Roboto,"Segoe UI",Arial,sans-serif;background:#f8f9fa;color:#202124;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
+.logo{font-size:32px;font-weight:500;color:#1a73e8;margin-bottom:8px}
+p{color:#5f6368;font-size:15px;margin-top:6px}
+#trangthai{margin-top:20px;font-size:13px;color:#188038}
+</style>
+</head>
+<body>
+<main>
+  <div class="logo">Harry AI</div>
+  <p>Trợ lý cá nhân của bạn</p>
+  <p>Khung ứng dụng đã sẵn sàng. Các tính năng sẽ được thêm dần.</p>
+  <p id="trangthai"></p>
+</main>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function () {
+    document.getElementById('trangthai').textContent = '✓ Sẵn sàng cài lên màn hình chính';
+  });
+}
+</script>
+</body>
+</html>
