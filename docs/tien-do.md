@@ -12,6 +12,7 @@
 **2.2 đã làm:** Supabase `https://nrvueainkiweuvsoivgp.supabase.co` + Google OAuth (Client ID trong Google Cloud project `harry-ai`, chế độ Testing, Gmail chủ app trong Test users; token có thể hết hạn ~7 ngày → đăng nhập lại). Chủ app = tài khoản đầu tiên đăng nhập, lưu ở bảng `app_owner`; SQL `sql/2.2-chu-app.sql` (đã chạy, gồm GRANT cho `authenticated`). **Mọi bảng dữ liệu sau này: bật RLS, policy dùng `public.la_chu_app()`, và nhớ GRANT cho `authenticated`** (Supabase mới không tự cấp). Config công khai ở `config.js` (sw.js cache v3). Bằng chứng: `docs/bang-chung/2.2/nguoi-la-bi-chan.txt`. Trang đăng nhập hiện ở `index.html` (supabase-js qua CDN).
 
 ## Vừa xong
+- **2.3 (code xong, CHỜ nghiệm thu):** `index.html` giờ là app Lịch (ngày/tuần/tháng, tạo/sửa/xoá mềm, loại việc sửa tên+màu ở ⚙, realtime). SQL `sql/2.3-lich.sql` (bảng `su_kien`, `loai_viec`) **người dùng phải dán chạy trong Supabase SQL Editor**. Đã thử giao diện bằng dữ liệu giả: `tools/thu_lich_gia.py`, ảnh ở `docs/bang-chung/2.3/`. Còn thiếu: ảnh 2 thiết bị cùng sự kiện (cần người dùng thử thật). sw.js cache v4.
 - Bước A: thu yêu cầu. Bước B: tạo `CLAUDE.md`, `docs/yeu-cau.md`, `.env.example`, `.gitignore` (thư mục `.claude/rules` bị chặn quyền ghi → quy tắc bảo mật nằm trong `CLAUDE.md`).
 - Bước C: 2 vòng phỏng vấn + câu hỏi về lượt Gemini; người dùng nói **"chốt"**.
 
@@ -36,6 +37,7 @@
 - Người dùng chưa có tài khoản Supabase? (hỏi khi bắt đầu code; hướng dẫn tạo).
 
 ## Bước tiếp theo
+(2.3 đang chờ: người dùng chạy SQL → tạo sự kiện ở máy tính → xem trên iPhone → báo kết quả/lỗi; ghi lỗi vào `docs/loi-da-gap.md`; khi chốt mới sang 2.4.)
 Phiên mới: **2.3 Lịch — xem + thêm/sửa/xoá** theo `docs/roadmap.md` và `demo/index.html`: bảng sự kiện + RLS (`la_chu_app()` + GRANT), lịch ngày/tuần/tháng, 5 loại màu, đồng bộ tức thì (Supabase Realtime). Bằng chứng: ảnh 2 màn hình cùng sự kiện. Mỗi lần sửa code → git add/commit/push.
 
 ## File đọc đầu tiên
