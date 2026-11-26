@@ -436,9 +436,9 @@ function dongHop() { $('ov').classList.remove('on'); }
 $('ov').onclick = (e) => { if (e.target === $('ov')) dongHop(); };
 function moHopThoai(ev, mac) {
   const moi = !ev;
-  let s, e, canNgay = false, loai = CATS[0] ? CATS[0].id : 'cv', lap = 'none', lapDen = '';
+  let s, e, canNgay = false, loai = CATS[0] ? CATS[0].id : 'cv', lap = 'none', lapDen = '', nhac = null;
   if (moi) { s = parseLocal(mac.ngay, mac.gio); e = new Date(s.getTime() + 3600000); }
-  else { s = ev.s; e = ev.e; canNgay = ev.ca_ngay; loai = ev.loai; lap = ev.lap || 'none'; lapDen = ev.lap_den || ''; }
+  else { s = ev.s; e = ev.e; canNgay = ev.ca_ngay; loai = ev.loai; lap = ev.lap || 'none'; lapDen = ev.lap_den || ''; nhac = ev.nhac_phut == null ? null : ev.nhac_phut; }
   $('dlg').innerHTML = `
     <h3>${moi ? 'Sự kiện mới' : 'Sửa sự kiện'}${lap !== 'none' ? ' lặp' : ''}</h3>
     <div class="f"><input class="lon" id="fTen" placeholder="Thêm tiêu đề" value="${esc(ev ? ev.tieu_de : '')}"></div>
@@ -449,6 +449,8 @@ function moHopThoai(ev, mac) {
       <div class="f" id="g2"><label>Giờ kết thúc</label><input type="time" id="fG2" value="${hm(e)}"></div></div>
     <div class="hang"><div class="f"><label>Lặp lại</label><select id="fLap">${Object.keys(LAP_TEN).map((k) => `<option value="${k}" ${k === lap ? 'selected' : ''}>${LAP_TEN[k]}</option>`).join('')}</select></div>
       <div class="f" id="gDen"><label>Lặp đến hết ngày (tuỳ chọn)</label><input type="date" id="fDen" value="${lapDen}"></div></div>
+    <div class="hang"><div class="f"><label>Nhắc qua Telegram</label><select id="fNhac">${[['','Không nhắc'],['0','Đúng giờ'],['15','Trước 15 phút'],['60','Trước 1 giờ'],['tc','Tuỳ chỉnh…']].map(([v, t]) => `<option value="${v}" ${(nhac == null ? '' : [0, 15, 60].includes(nhac) ? String(nhac) : 'tc') === v ? 'selected' : ''}>${t}</option>`).join('')}</select></div>
+      <div class="f" id="gNhac"><label>Nhắc trước (phút)</label><input type="number" id="fNhacPhut" min="0" max="10080" value="${nhac == null ? 30 : nhac}"></div></div>
     <div class="f"><label>Loại việc</label><select id="fLoai">${CATS.map((c) => `<option value="${esc(c.id)}" ${c.id === loai ? 'selected' : ''}>${esc(c.ten)}</option>`).join('')}</select></div>
     <div class="f"><label>Ghi chú</label><textarea id="fGhi" rows="3">${esc(ev ? ev.ghi_chu : '')}</textarea></div>
     <div class="hanh-dong">${moi ? '' : '<button class="btn-chu btn-do" id="bXoa">Xoá</button>'}<div class="spacer"></div>
@@ -457,6 +459,8 @@ function moHopThoai(ev, mac) {
   $('fCaNgay').onchange = doiCaNgay; doiCaNgay();
   const doiLap = () => { $('gDen').hidden = $('fLap').value === 'none'; };
   $('fLap').onchange = doiLap; doiLap();
+  const doiNhac = () => { $('gNhac').hidden = $('fNhac').value !== 'tc'; };
+  $('fNhac').onchange = doiNhac; doiNhac();
   $('fN1').onchange = () => { if ($('fN2').value < $('fN1').value) $('fN2').value = $('fN1').value; };
   $('bHuy').onclick = dongHop;
   $('bLuu').onclick = () => luu(ev);
@@ -475,6 +479,7 @@ async function luu(ev) {
   if (e <= s) { if (cn) return toast('Ngày kết thúc phải sau ngày bắt đầu'); e = new Date(s.getTime() + 15 * 60000); }
   const row = { tieu_de: ten, ghi_chu: $('fGhi').value.trim() || null, bat_dau: s.toISOString(), ket_thuc: e.toISOString(), ca_ngay: cn, loai: $('fLoai').value, sua_luc: new Date().toISOString() };
   row.lap = $('fLap').value; row.lap_den = row.lap === 'none' ? null : ($('fDen').value || null);
+  { const v = $('fNhac').value; row.nhac_phut = v === '' ? null : v === 'tc' ? Math.max(0, Math.min(10080, parseInt($('fNhacPhut').value, 10) || 0)) : parseInt(v, 10); }
   if (row.lap_den && row.lap_den < ymd(s)) return toast('Ngày kết thúc lặp phải sau ngày bắt đầu');
   let r;
   if (ev && ev.base.lap !== 'none') {
@@ -525,7 +530,7 @@ async function apDung(ev, f, pham) {
     if (delta) g.lap_ngoai = (b.lap_ngoai || []).map((x) => new Date(new Date(x).getTime() + delta).toISOString());
     return sb.from('su_kien').update(g).eq('id', b.id);
   }
-  const moi = { tieu_de: b.tieu_de, ghi_chu: b.ghi_chu, ca_ngay: b.ca_ngay, loai: b.loai, lap: b.lap, lap_den: b.lap_den, ...f };
+  const moi = { tieu_de: b.tieu_de, ghi_chu: b.ghi_chu, ca_ngay: b.ca_ngay, loai: b.loai, lap: b.lap, lap_den: b.lap_den, nhac_phut: b.nhac_phut, ...f };
   let r1;
   if (pham === 'one') { moi.lap = 'none'; moi.lap_den = null; r1 = await sb.from('su_kien').update({ lap_ngoai: isoNgoai(b, occ) }).eq('id', b.id); }
   else r1 = await sb.from('su_kien').update({ lap_den: ymd(addDays(sod(ev.occ), -1)) }).eq('id', b.id);
@@ -537,7 +542,7 @@ async function xoaLap(ev, pham) {
   if (pham === 'fut' && occ === new Date(b.bat_dau).getTime()) pham = 'all';
   if (pham === 'all') return sb.from('su_kien').update({ xoa_luc: new Date().toISOString() }).eq('id', b.id);
   // Bản sao bỏ vào thùng rác để khôi phục được
-  const bs = { tieu_de: b.tieu_de, ghi_chu: b.ghi_chu, ca_ngay: b.ca_ngay, loai: b.loai, bat_dau: ev.s.toISOString(), ket_thuc: ev.e.toISOString(), xoa_luc: new Date().toISOString() };
+  const bs = { tieu_de: b.tieu_de, ghi_chu: b.ghi_chu, ca_ngay: b.ca_ngay, loai: b.loai, nhac_phut: b.nhac_phut, bat_dau: ev.s.toISOString(), ket_thuc: ev.e.toISOString(), xoa_luc: new Date().toISOString() };
   let r1;
   if (pham === 'one') {
     r1 = await sb.from('su_kien').update({ lap_ngoai: isoNgoai(b, occ) }).eq('id', b.id);
