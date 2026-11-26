@@ -1,0 +1,46 @@
+1) Mở trang Bản tin trên máy tính
+  ĐẠT   Menu trái có mục 'Bản tin'
+  ĐẠT   Mặc định hiện bản tin mới nhất (hôm nay) + danh sách 3 ngày để xem lại
+  ĐẠT   Đầu trang: 'Đã gửi qua Telegram lúc 08:00' + 8 tin
+  ĐẠT   Phần đầu: lịch hôm nay (có cả ngày + giờ), việc trễ hạn, ý tưởng để lâu
+  ĐẠT   Tin nhóm theo 7 chủ đề, mỗi tin có tên báo
+  ĐẠT   Link tên báo mở tab mới, rel có noopener
+  ĐẠT   Tin gộp ghi 'cũng đưa tin: Tuổi Trẻ'
+  ĐẠT   Dòng cuối: 'không lấy được tin từ: NHK World (Thế giới)'
+  ĐẠT   XSS: thẻ <img>/<script> trong tin chỉ hiện thành chữ, không chạy
+  ĐẠT   XSS: link javascript: không thành thẻ <a> bấm được
+  ĐẠT   Tin có nút '💡 Lưu thành ý tưởng' (8 nút)
+2) Xem lại ngày trước
+  ĐẠT   Ngày hôm qua: chưa gửi Telegram + cảnh báo chưa dịch + tin Anh có nhãn 'tiếng Anh'
+  ĐẠT   Ngày hôm qua: phần đầu rỗng hiện 'Hôm nay không có lịch'
+  ĐẠT   Ngày kia: chỉ 1 tin
+3) Lưu thành ý tưởng
+  ĐẠT   Thêm 1 dòng vào y_tuong: tiêu đề, ghi chú=tóm tắt, nhãn 'từ bản tin', nguồn=tên báo, link gốc
+  ĐẠT   Nút đổi thành '✓ Đã lưu' (không còn nút lưu cho tin đó)
+  ĐẠT   Tin có link không hợp lệ (javascript:) vẫn lưu được nhưng link = rỗng (không lưu link độc)
+  ĐẠT   Kho ý tưởng có thẻ mới kèm nhãn #từ bản tin
+  ĐẠT   Tải lại trang: tin đã lưu vẫn hiện '✓ Đã lưu' (nhớ theo link)
+  ĐẠT   Lưu lỗi: có thông báo, nút vẫn bấm lại được
+4) Nút 'Tạo bản tin hôm nay' khi đã có bản hôm nay
+  ĐẠT   Nút đổi chữ thành 'Tạo lại bản tin hôm nay'
+  ĐẠT   Có hỏi xác nhận trước khi tạo lại; đang tạo thì nút bị khoá
+  ĐẠT   Gọi function ban-tin-gui với token đăng nhập + chi_tao:true + ep:true (không gửi Telegram)
+  ĐẠT   Hiện bản mới tạo (2 tin)
+  ĐẠT   Function báo lỗi: hiện đúng thông báo, trang không hỏng
+  ĐẠT   Function chưa deploy (404): thông báo dễ hiểu
+  ĐẠT   Không có lỗi JS (máy tính): []
+5) Mất mạng: xem bản đã lưu, chỉ đọc
+  ĐẠT   Vẫn xem được bản tin đã lưu trong máy, có dòng 'chỉ đọc'
+  ĐẠT   Mất mạng: bấm Lưu thành ý tưởng bị chặn (không thêm gì)
+6) Chưa có bản tin hôm nay -> bấm Tạo
+  ĐẠT   Chưa có hôm nay: nút ghi 'Tạo bản tin hôm nay', mặc định hiện ngày mới nhất đang có
+  ĐẠT   Không hỏi xác nhận, gọi với ep:false; tự chuyển sang bản hôm nay
+7) Chưa có bản tin nào
+  ĐẠT   Hiện hướng dẫn thân thiện, không lỗi
+8) Điện thoại (390x800)
+  ĐẠT   Thanh menu dưới có 4 mục: Lịch / Ý tưởng / Bản tin / Cài đặt
+  ĐẠT   Mở được Bản tin từ thanh dưới (mục sáng lên)
+  ĐẠT   Không tràn ngang trên điện thoại
+  ĐẠT   Lưu thành ý tưởng bằng cảm ứng chạy được
+  ĐẠT   Không có lỗi JS (điện thoại): []
+TẤT CẢ ĐẠT

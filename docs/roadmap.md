@@ -56,7 +56,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 - Xong khi: chạy thử ra danh sách tin thô đủ chủ đề.
 - Bằng chứng: log danh sách tin + báo nào lỗi.
 
-### 2.9 Bản tin sáng — dịch/tóm tắt + gửi 8:00
+### 2.9 Bản tin sáng — dịch/tóm tắt + gửi 8:00 — ✅ code xong, nghiệm thu giả ĐẠT 2026-11-26; chờ deploy + 2 ngày thử thật
 - Làm: gộp 1–2 lần gọi Gemini/ngày, chọn 10–15 tin, tóm tắt 2–3 câu + tên báo + link; phần đầu: lịch hôm nay, việc trễ hạn, tối đa 3 ý tưởng để lâu (>14 ngày); hết lượt Gemini → để tiếng Anh; gửi Telegram 8:00 + trang Bản tin trong app (xem lại các ngày trước; mỗi tin có nút **"Lưu thành ý tưởng"** → vào Kho ý tưởng, nhãn "từ bản tin", kèm tên báo + link).
 - Xong khi: bản tin đến Telegram đúng 8:00 hai ngày liên tiếp.
 - Bằng chứng: ảnh Telegram + trang Bản tin trong app.

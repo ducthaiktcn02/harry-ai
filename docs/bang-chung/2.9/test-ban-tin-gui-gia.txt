@@ -1,0 +1,81 @@
+[ĐẠT] Ứng viên: tối đa 8 tin/chủ đề
+[ĐẠT] Ứng viên: id số liên tục 1..n, không trùng link
+[ĐẠT] Ứng viên: bỏ tin có link không phải http(s) (javascript:)
+[ĐẠT] Ứng viên: mô tả cắt ≤ 240 ký tự (tiết kiệm token)
+[ĐẠT] Ứng viên: nhận ngôn ngữ vi/en theo dấu tiếng Việt
+[ĐẠT] Ứng viên: đủ 7 chủ đề khi có tin
+[ĐẠT] Prompt: dữ liệu là JSON, mỗi tin có id/chu_de/bao/tieu_de/mo_ta
+[ĐẠT] Prompt: KHÔNG gửi link cho Gemini (link luôn lấy từ dữ liệu gốc)
+[ĐẠT] Prompt: có quy tắc cấm bịa + coi nội dung là dữ liệu + bù TMĐT bằng Kinh tế
+[ĐẠT] Lọc đầu ra: bỏ id lạ/trùng/âm/lẻ/chuỗi/rác, chỉ còn 2 mục hợp lệ
+[ĐẠT] Lọc đầu ra: link + tên báo luôn lấy từ dữ liệu gốc, không từ Gemini
+[ĐẠT] Lọc đầu ra: thiếu tiêu đề dịch thì dùng tiêu đề gốc; tóm tắt cắt ≤ 600
+[ĐẠT] Lọc đầu ra: đầu ra không phải đối tượng -> 0 mục
+[ĐẠT] Lọc đầu ra: tối đa 15 mục
+[ĐẠT] Dự phòng: đúng 12 tin, không trùng link
+[ĐẠT] Dự phòng: mọi chủ đề có tin đều xuất hiện
+[ĐẠT] Dự phòng: TMĐT chỉ có 1 tin -> phần còn thiếu bù bằng Kinh tế (Kinh tế ≥ 3 tin)
+[ĐẠT] Dự phòng: tin tiếng Anh giữ nguyên tiêu đề + mô tả gốc, đánh dấu ngon_ngu=en, ai=false
+[ĐẠT] Dự phòng: ít tin hơn 12 thì lấy hết (không lỗi)
+[ĐẠT] Ghép: Gemini chỉ trả 6 tin -> bù dự phòng cho đủ 10, không trùng
+[ĐẠT] Ghép: Gemini lỗi -> dự phòng 12 tin, dung_ai=false, có lý do
+[ĐẠT] Ghép: tin xếp theo thứ tự chủ đề
+[ĐẠT] Gemini giả OK: 1 lần gọi, đúng khoá + schema + model nhẹ + JSON
+[ĐẠT] Gemini 429 (hết lượt): KHÔNG gọi lại (đúng 1 lần), trả lý do hết lượt
+[ĐẠT] Gemini 500 rồi OK: thử lại 1 lần (tối đa 2 lần/ngày)
+[ĐẠT] Gemini JSON hỏng 2 lần: dừng ở 2 lần gọi, báo lỗi (không gọi lần 3)
+[ĐẠT] Gemini bịa chỉ số: mọi mục bị bỏ -> coi là hỏng (chuyển dự phòng)
+[ĐẠT] Mạng chết: báo lỗi tạm thời, thử 2 lần, không ném lỗi
+[ĐẠT] Gemini 404 (model bị gỡ) có lý do riêng, 1 lần gọi
+[ĐẠT] Gemini 403 (khoá sai): lý do riêng, không gọi lại
+[ĐẠT] Không có khoá: không gọi mạng
+[ĐẠT] Gemini trả rỗng (candidates=[]): lỗi đầu ra, không ném
+[ĐẠT] Lịch hôm nay: đúng các sự kiện (A,C,F,H,I,K,L) kể cả lặp ngày/tuần/tháng + cả ngày + kéo qua nửa đêm
+[ĐẠT] Lịch hôm nay: bỏ hôm qua, ngoại lệ lặp (D), lặp hết hạn (E), lặp tuần khác thứ (G), cả ngày mai (J)
+[ĐẠT] Lịch hôm nay: cả ngày đứng đầu, sau đó theo giờ tăng dần
+[ĐẠT] Lịch hôm nay: giờ hiển thị theo giờ VN (A = 09:00–10:00, L = 23:30–00:30 không ghi giờ kết)
+[ĐẠT] Việc trễ hạn: chỉ ý tưởng có hạn < hôm nay, chưa xong, chưa xoá, hạn cũ trước
+[ĐẠT] Ý tưởng để lâu: tối đa 3, chỉ "chưa làm" >14 ngày, cũ nhất trước, bỏ đã xoá/đang làm/xong/đã trễ hạn (không lặp)
+[ĐẠT] Phần đầu rỗng khi không có dữ liệu
+[ĐẠT] Bung lặp tháng 31: tháng không có ngày 31 thì bỏ
+[ĐẠT] Telegram: escape HTML (không còn thẻ <img>, <script>, <i> thô của nội dung)
+[ĐẠT] Telegram: link trong href được escape (& -> &amp;, " -> &quot;)
+[ĐẠT] Telegram: bản tin dài được chia khúc, mỗi khúc < 4096 ký tự
+[ĐẠT] Telegram: trường hợp xấu nhất (toàn ký tự cần escape) vẫn mọi khúc < 4096
+[ĐẠT] Telegram: có tiêu đề ngày, lịch hôm nay, trễ hạn, để lâu, tên báo + link, dòng "không lấy được tin từ"
+[ĐẠT] Telegram: khi không có AI có cảnh báo + đánh dấu (tiếng Anh) ở tin nước ngoài
+[ĐẠT] ngayDep / escHtml cơ bản
+[ĐẠT] Quyền: không đăng nhập, không cron -> 401
+[ĐẠT] Quyền: sai x-cron-key -> 403, không tạo gì
+[ĐẠT] Quyền: tài khoản không phải chủ app -> 403, không gọi Gemini/Telegram
+[ĐẠT] Cron: tạo bản tin + gửi Telegram, 1 lần gọi Gemini, đúng khoá
+[ĐẠT] Cron: bảng ban_tin có đúng 1 dòng ngày hôm nay (giờ VN), có telegram_luc
+[ĐẠT] Bản tin lưu: 10–15 tin, dung_ai, đủ 7 chủ đề, mỗi tin có báo + link http(s) lấy từ dữ liệu gốc
+[ĐẠT] Bản tin lưu: mọi link đều nằm trong dữ liệu gốc (không có link Gemini tự bịa)
+[ĐẠT] Bản tin lưu: phần đầu có lịch hôm nay, việc trễ hạn, ý tưởng để lâu
+[ĐẠT] Bản tin lưu: ghi các báo lỗi lấy tin (loi_nguon)
+[ĐẠT] Telegram nhận: có nội dung đã dịch (VI:), parse_mode HTML, chat_id đúng, tắt xem trước link, mọi khúc < 4096
+[ĐẠT] Chống trùng: cron chạy lại cùng ngày -> KHÔNG gọi Gemini, KHÔNG gửi Telegram nữa, vẫn báo đã gửi
+[ĐẠT] Chủ app ép tạo lại (ep): tạo lại + gửi lại Telegram, vẫn 1 dòng/ngày
+[ĐẠT] Không lộ khoá / token trong kết quả trả về hay nội dung Telegram
+[ĐẠT] Nút "Tạo bản tin hôm nay" (chi_tao): lưu bản tin, KHÔNG gửi Telegram
+[ĐẠT] Bấm nút lần 2 khi đã có bản tin (không ep): không tạo lại, không tốn lượt Gemini
+[ĐẠT] Sau đó cron 8:00: dùng lại bản đã tạo (không gọi Gemini lại), gửi Telegram, đặt telegram_luc
+[ĐẠT] Gemini 429 hết lượt: vẫn ra bản tin 12 tin dự phòng (tiếng Anh nguyên gốc) + vẫn gửi Telegram (1 lần gọi Gemini)
+[ĐẠT] Dự phòng: tiêu đề giữ nguyên bản gốc, tin Anh có ngon_ngu=en, Telegram có cảnh báo
+[ĐẠT] Gemini JSON hỏng: vẫn ra bản tin 12 tin dự phòng (tiếng Anh nguyên gốc) + vẫn gửi Telegram (2 lần gọi Gemini)
+[ĐẠT] Gemini chỉ số bịa: vẫn ra bản tin 12 tin dự phòng (tiếng Anh nguyên gốc) + vẫn gửi Telegram (2 lần gọi Gemini)
+[ĐẠT] Thiếu secret GEMINI_API_KEY: không gọi Gemini, vẫn gửi bản dự phòng
+[ĐẠT] Gemini trả nội dung có thẻ HTML/link độc: Telegram được escape, link vẫn là link gốc
+[ĐẠT] Telegram lỗi 400: bản tin VẪN được lưu, telegram_luc rỗng, báo lỗi, ghi vào cột loi
+[ĐẠT] Lần cron sau (Telegram ổn lại): chỉ GỬI LẠI bản đã lưu, không gọi Gemini/RSS nữa, đặt telegram_luc
+[ĐẠT] Telegram mất mạng: không ném lỗi, bản tin vẫn lưu, báo lỗi mạng
+[ĐẠT] ban-tin-lay lỗi (500): vẫn có bản tin với phần đầu + ghi lý do, không gọi Gemini, vẫn gửi Telegram
+[ĐẠT] ban-tin-lay lỗi (net): vẫn có bản tin với phần đầu + ghi lý do, không gọi Gemini, vẫn gửi Telegram
+[ĐẠT] ban-tin-lay lỗi (404): vẫn có bản tin với phần đầu + ghi lý do, không gọi Gemini, vẫn gửi Telegram
+[ĐẠT] Chưa chạy SQL (bảng ban_tin thiếu): báo lỗi rõ ràng, không gọi Gemini/Telegram
+[ĐẠT] Lưu bản tin lỗi (thiếu GRANT): báo lỗi, KHÔNG gửi Telegram (tránh gửi mà không lưu)
+[ĐẠT] Không có lịch/ý tưởng: phần đầu rỗng, bản tin vẫn đủ
+[ĐẠT] CORS: OPTIONS trả ok; GET bị từ chối 405
+
+79/79 ĐẠT (deno 2.9.8 (stable, release, x86_64-pc-windows-msvc); chạy không có --allow-net: không mở mạng thật)

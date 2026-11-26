@@ -169,7 +169,7 @@ with sync_playwright() as p:
 
     say("10) Điện thoại (390x800, cảm ứng): bảng, danh sách, nhấn giữ rồi kéo")
     ctx, pg, errs = mo(b, viewport=dict(width=390, height=800), has_touch=True, is_mobile=True, device_scale_factor=2)
-    check("Có thanh menu dưới (Lịch / Ý tưởng / Cài đặt)", pg.locator("#duoi a").count() == 3)
+    check("Có thanh menu dưới (Lịch / Ý tưởng / Bản tin / Cài đặt)", pg.locator("#duoi a").count() == 4)
     pg.click("#duoi a[data-p=y]"); pg.wait_for_timeout(300)
     check("Mở được Kho ý tưởng từ thanh dưới", pg.locator("#p-y.on").count() == 1)
     shot(pg, "08-bang-dien-thoai.png")

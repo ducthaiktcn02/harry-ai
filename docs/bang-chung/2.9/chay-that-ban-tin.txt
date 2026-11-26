@@ -1,0 +1,62 @@
+Chạy thật lúc 2026-11-26T14:17:16.427Z: RSS 507 tin (42/42 nguồn OK) -> 50 ứng viên gửi Gemini
+Ứng viên theo chủ đề: Thời sự trong nước=8, Thế giới=8, Kinh tế – tài chính=8, Công nghệ – AI=8, Kinh doanh online / TMĐT=2, Sức khoẻ=8, Thể thao=8
+Gemini THẬT: OK sau 1 lần gọi, 11 tin hợp lệ (bỏ 0)
+Bản tin: 11 tin, dung_ai=true
+Mọi link đều lấy từ RSS gốc: true
+Telegram sẽ gửi 2 tin nhắn, độ dài: 3486, 1222 (giới hạn 4096)
+
+----- NỘI DUNG TELEGRAM (HTML) -----
+📰 <b>Bản tin sáng — Thứ năm, 26/11/2026</b>
+
+📅 <b>Lịch hôm nay</b>
+Hôm nay không có lịch
+
+🇻🇳 <b>THỜI SỰ TRONG NƯỚC</b>
+• <b>Năm 2027, Hà Nội đánh giá cán bộ theo sản phẩm, kết quả phục vụ nhân dân</b>
+Bí thư Thành ủy Hà Nội cho biết năm 2027 sẽ đánh giá cán bộ dựa trên sản phẩm và kết quả phục vụ nhân dân. Đây sẽ là căn cứ quan trọng để quy hoạch, bổ nhiệm, luân chuyển và sàng lọc cán bộ trong thời gian tới.
+🔗 <a href="https://thanhnien.vn/nam-2027-ha-noi-danh-gia-can-bo-theo-san-pham-ket-qua-phuc-vu-nhan-dan-185261126195412728.htm">Thanh Niên</a>
+
+🌍 <b>THẾ GIỚI</b>
+• <b>Tổng thống Zelensky lo Nga sắp tấn công lớn</b>
+Tổng thống Ukraine Volodymyr Zelensky đưa ra cảnh báo về việc Nga đang chuẩn bị một đợt tập kích quy mô lớn mới. Mục tiêu của đợt tấn công này nhằm vào các trọng yếu của Ukraine.
+🔗 <a href="https://tuoitre.vn/tong-thong-zelensky-lo-nga-sap-tan-cong-lon-100261126105852981.htm">Tuổi Trẻ</a>
+
+💹 <b>KINH TẾ – TÀI CHÍNH</b>
+• <b>Chuyên gia VPBankS: Kỳ vọng lãi suất cho vay hạ nhiệt từ nửa cuối năm 2027</b>
+Giám đốc chiến lược thị trường VPBankS dự báo chi phí vốn của nền kinh tế sẽ có dư địa giảm trong năm 2027. Điều kiện đi kèm là giá dầu thế giới tiếp tục xu hướng hạ nhiệt trong thời gian tới.
+🔗 <a href="https://tuoitre.vn/chuyen-gia-vpbanks-ky-vong-lai-suat-cho-vay-ha-nhiet-tu-nua-cuoi-nam-2027-100261126202938362.htm">Tuổi Trẻ</a>
+
+• <b>Cao ủy EU về Thương mại và An ninh kinh tế: Việt Nam đóng vai trò quan trọng để EU đa dạng hóa chuỗi cung ứng</b>
+Đại diện EU bày tỏ mong muốn đầu tư vào Việt Nam trong các lĩnh vực trọng yếu. Việc này nhằm thực hiện mục tiêu đa dạng hóa chuỗi cung ứng của liên minh.
+🔗 <a href="https://tuoitre.vn/cao-uy-eu-ve-thuong-mai-va-an-ninh-kinh-te-viet-nam-dong-vai-tro-quan-trong-de-eu-da-dang-hoa-chuoi-cung-ung-100261126181507266.htm">Tuổi Trẻ</a>
+
+🤖 <b>CÔNG NGHỆ – AI</b>
+• <b>'Metro, cao tốc góp phần nâng khả năng làm chủ công nghệ của Việt Nam'</b>
+Chủ nhiệm Uỷ ban Khoa học, Công nghệ và Môi trường cho rằng các dự án hạ tầng lớn đòi hỏi kỹ sư trong nước tiếp nhận công nghệ. Qua đó, Việt Nam có thể dần tiến tới làm chủ công nghệ và nâng cao năng lực.
+🔗 <a href="https://vnexpress.net/metro-cao-toc-gop-phan-nang-kha-nang-lam-chu-cong-nghe-cua-viet-nam-5149342.html">VnExpress</a>
+
+• <b>Viettel cung cấp internet vệ tinh Starlink tại Việt Nam</b>
+Tổng công ty Viễn thông Viettel chính thức triển khai cung cấp dịch vụ internet vệ tinh Starlink tại thị trường Việt Nam trong ngày 26.11.
+🔗 <a href="https://thanhnien.vn/viettel-cung-cap-internet-ve-tinh-starlink-tai-viet-nam-185261126181520825.htm">Thanh Niên</a>
+
+🛒 <b>KINH DOANH ONLINE / TMĐT</b>
+• <b>Shopee triển khai sáng kiến quảng bá và kết nối hàng Việt</b>
+Sáng kiến Shopee Hàng Việt chính thức khởi động từ ngày 1-12 nhằm mở rộng kênh giới thiệu sản phẩm nội địa. Hoạt động này tạo cơ hội cho thương hiệu và nhà bán hàng trong nước tiếp cận người tiêu dùng tốt hơn.
+🔗 <a href="https://tuoitre.vn/shopee-trien-khai-sang-kien-quang-ba-va-ket-noi-hang-viet-100261126172743113.htm">Tuổi Trẻ</a>
+
+🩺 <b>SỨC KHOẺ</b>
+• <b>'Ba chủ động' để bảo vệ sức khỏe, giảm tác hại của ô nhiễm không khí</b>
+Trước tác động âm thầm và kéo dài của ô nhiễm không khí, việc áp dụng ba chủ động ngày càng trở nên cần thiết. Người dân cần chủ động nhận diện nguy cơ, giảm phơi nhiễm và theo dõi sát sao tình hình sức khỏe.
+🔗 <a href="https://baochinhphu.vn/ba-chu-dong-de-bao-ve-suc-khoe-giam-tac-hai-cua-o-nhiem-khong-khi-102261126131418182.htm">Báo Chính phủ</a>
+• <b>24 xã, phường ở Đắk Lắk còn hạn chế khả năng xử lý ổ dịch sốt xuất huyết</b>
+Tỉnh Đắk Lắk ghi nhận hơn 13.600 ca mắc, 4 người tử vong và 79 ổ dịch sốt xuất huyết còn hoạt động. Do đó, địa phương yêu cầu các xã, phường huy động lực lượng xử lý dịch tận gốc đến từng khu dân cư.
+🔗 <a href="https://tuoitre.vn/24-xa-phuong-o-dak-lak-con-han-che-kha-nang-xu-ly-o-dich-sot-xuat-huyet-100261126171206263.htm">Tuổi Trẻ</a>
+
+⚽ <b>THỂ THAO</b>
+• <b>Việt Nam lần đầu tổ chức giải đua Rally Sprint quốc tế</b>
+Giải đua Petrolimex XCR Sprint Cup Vietnam 2026 - Trường Sơn Rally chính thức ra mắt. Đây là giải đua Rally theo thể thức Sprint chuẩn quốc tế lần đầu tiên có mặt tại Việt Nam.
+🔗 <a href="https://vov.vn/the-thao/viet-nam-lan-dau-to-chuc-giai-dua-rally-sprint-quoc-te-post1353579.vov">VOV</a>
+
+• <b>Mỹ Tiên lần thứ hai đánh bại Ánh Viên, đoạt HCV thứ 8 tại Đại hội Thể thao toàn quốc</b>
+Kình ngư 21 tuổi Võ Thị Mỹ Tiên tiếp tục thi đấu bùng nổ trên đường đua xanh. Vận động viên này vừa xuất sắc giành huy chương vàng thứ 8 tại Đại hội Thể thao toàn quốc 2026.
+🔗 <a href="https://thanhnien.vn/my-tien-lan-thu-hai-danh-bai-anh-vien-doat-hcv-thu-8-tai-dai-hoi-the-thao-toan-quoc-185261126192800651.htm">Thanh Niên</a>
