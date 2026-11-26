@@ -1,0 +1,65 @@
+Chạy thật lúc 2026-11-26T14:03:02.592Z — mất 1.1s cho 42 nguồn RSS
+Tổng 507 tin (trước khi gộp 532, gộp trùng 25); nguồn OK 42, lỗi 0
+
+## Thời sự trong nước: 88 tin
+  - [Thanh Niên] Tiêu hủy ma túy tang vật trong vụ án Bùi Đình Khánh (2026-11-26T14:00Z)
+      https://thanhnien.vn/tieu-huy-ma-tuy-tang-vat-trong-vu-an-bui-dinh-khanh-185261126171507052.htm
+  - [VOV] Thời tiết ngày 27/11: Miền Bắc tiếp tục rét, miền Trung có nơi mưa rất to (2026-11-26T14:00Z)
+      https://vov.vn/xa-hoi/thoi-tiet-ngay-2711-mien-bac-tiep-tuc-ret-mien-trung-co-noi-mua-rat-to-post1353509.vov
+  - [Thanh Niên] Mưa lớn ở Quảng Ngãi gây ngập trong đêm, người dân dùng máy bơm đẩy nước ra ngoài (2026-11-26T13:55Z)
+      https://thanhnien.vn/mua-lon-o-quang-ngai-gay-ngap-trong-dem-nguoi-dan-dung-may-bom-day-nuoc-ra-ngoai-185261126194414471.htm
+  - [VOV] Tổng Bí thư, Chủ tịch nước Tô Lâm tiếp Thống đốc Saint Petersburg (2026-11-26T13:42Z)
+      https://vov.vn/chinh-tri/tong-bi-thu-chu-tich-nuoc-to-lam-tiep-thong-doc-saint-petersburg-post1353576.vov
+## Thế giới: 99 tin
+  - [BBC] Diesel tanker carrying up to 7,000 tonnes sinks near Ibiza, killing one (2026-11-26T14:00Z)
+      https://www.bbc.co.uk/news/articles/c9gklryvj24do
+  - [The Guardian] Number of Neets in UK falls below a million as Burnham pushes to tackle crisis (2026-11-26T13:43Z)
+      https://www.theguardian.com/society/2026/nov/26/neets-uk-young-people-education-employment-training-andy-burnham
+  - [The Guardian] Ministers have ‘failed to make the case’ for Heathrow third runway, MPs says (2026-11-26T13:43Z)
+      https://www.theguardian.com/environment/2026/nov/26/ministers-fail-to-make-case-for-heathrow-third-runway-mps-report-says
+  - [The Guardian] Net migration to UK falls to lowest level since 1997 excluding pandemic (2026-11-26T13:43Z)
+      https://www.theguardian.com/uk-news/2026/nov/26/net-migration-to-uk-falls-to-lowest-level-since-1997-excluding-pandemic
+## Kinh tế – tài chính: 93 tin
+  - [BBC] Millions of people to see average monthly mortgage payments rise by £100 (2026-11-26T14:00Z)
+      https://www.bbc.co.uk/news/articles/cwg5r02zel9qo
+  - [The Guardian] Marlboro maker Altria says considering takeover of Davidoff maker Imperial Bands – business live (2026-11-26T13:45Z)
+      https://www.theguardian.com/business/live/2026/nov/26/nvidia-chip-shipments-south-east-asia-stock-dentists-live-updates
+  - [BBC] Simon Jack: Is Poundland's US owner to blame for its collapse? (2026-11-26T13:40Z)
+      https://www.bbc.co.uk/news/articles/c62klzxvyzyqo
+  - [BBC] Norse Atlantic suspends all flights as it faces potential collapse (2026-11-26T13:30Z)
+      https://www.bbc.co.uk/news/articles/c9kgmd0ldy0lo
+## Công nghệ – AI: 61 tin
+  - [VnExpress] 'Metro, cao tốc góp phần nâng khả năng làm chủ công nghệ của Việt Nam' (2026-11-26T12:33Z)
+      https://vnexpress.net/metro-cao-toc-gop-phan-nang-kha-nang-lam-chu-cong-nghe-cua-viet-nam-5149342.html
+  - [The Guardian] Dozens of court cases in England and Wales affected by undisclosed AI use in 2026 (2026-11-26T12:19Z)
+      https://www.theguardian.com/technology/2026/nov/26/dozens-of-court-cases-in-england-and-wales-affected-by-undisclosed-ai-use-in-2026
+  - [Thanh Niên] Ba nhà mạng Trung Quốc bị Mỹ áp dụng hạn chế nhằm chống cuộc gọi lừa đảo (2026-11-26T12:18Z)
+      https://thanhnien.vn/ba-nha-mang-trung-quoc-bi-my-ap-dung-han-che-nham-chong-cuoc-goi-lua-dao-18526112616000091.htm
+  - [The Guardian] Dressmaker review – delightful business sim is a cut above (2026-11-26T12:00Z)
+      https://www.theguardian.com/games/2026/nov/26/dressmaker-review-delightful-business-sim-is-a-cut-above
+## Kinh doanh online / TMĐT: 2 tin
+  - [Tuổi Trẻ] Shopee triển khai sáng kiến quảng bá và kết nối hàng Việt (2026-11-26T11:00Z)
+      https://tuoitre.vn/shopee-trien-khai-sang-kien-quang-ba-va-ket-noi-hang-viet-100261126172743113.htm
+  - [Tuổi Trẻ] Hàng giả quá tinh vi khiến người dùng 'cực kỳ thông minh' mới nhận diện được (2026-11-26T08:28Z)
+      https://tuoitre.vn/hang-gia-qua-tinh-vi-khien-nguoi-dung-cuc-ky-thong-minh-moi-nhan-dien-duoc-100261126141155826.htm
+## Sức khoẻ: 77 tin
+  - [VOV] Hội Phổi Việt Nam và Hội Phẫu thuật Lồng ngực Nhật Bản chính thức ký kết hợp tác (2026-11-26T13:20Z)
+      https://vov.vn/suc-khoe/hoi-phoi-viet-nam-va-hoi-phau-thuat-long-nguc-nhat-ban-chinh-thuc-ky-ket-hop-tac-post1353573.vov
+  - [The Guardian] Contraceptive pill usage in Great Britain fell drastically in last decade, research finds (2026-11-26T13:00Z)
+      https://www.theguardian.com/society/2026/nov/26/contraceptive-pill-usage-in-great-britain-fell-drastically-in-last-decade-research-finds
+  - [Báo Chính phủ] 'Ba chủ động' để bảo vệ sức khỏe, giảm tác hại của ô nhiễm không khí (2026-11-26T12:15Z)
+      https://baochinhphu.vn/ba-chu-dong-de-bao-ve-suc-khoe-giam-tac-hai-cua-o-nhiem-khong-khi-102261126131418182.htm
+  - [Tuổi Trẻ] 24 xã, phường ở Đắk Lắk còn hạn chế khả năng xử lý ổ dịch sốt xuất huyết (2026-11-26T12:01Z)
+      https://tuoitre.vn/24-xa-phuong-o-dak-lak-con-han-che-kha-nang-xu-ly-o-dich-sot-xuat-huyet-100261126171206263.htm
+## Thể thao: 87 tin
+  - [BBC] Wales and Ospreys fly-half Edwards faces months out (2026-11-26T13:59Z)
+      https://www.bbc.co.uk/sport/rugby-union/articles/cvwy0e421k9eo
+  - [BBC] The American manager with a maths degree making history in La Liga (2026-11-26T13:49Z)
+      https://www.bbc.co.uk/sport/football/articles/c6r7g4v8vee5o
+  - [BBC] Zverev too good for Fery in Davis Cup quarter-final (2026-11-26T13:28Z)
+      https://www.bbc.co.uk/sport/tennis/videos/c8p3vez6zzz4o
+  - [BBC] Not even making a 12-man bench - what next for Garnacho? (2026-11-26T13:23Z)
+      https://www.bbc.co.uk/sport/football/articles/cr3wgd5exl0do
+
+Theo báo: VnExpress=90, Tuổi Trẻ=77, Thanh Niên=89, VOV=91, Báo Chính phủ=34, BBC=51, The Guardian=63, DW=12
+Nguồn lỗi (bỏ qua): (không có)

@@ -1,0 +1,41 @@
+[ĐẠT] RSS 2.0: đọc đủ 5 mục
+[ĐẠT] RSS 2.0: tiêu đề CDATA + mô tả cắt sạch HTML, giải mã &agrave;
+[ĐẠT] RSS 2.0: tiêu đề có &amp; được giải mã
+[ĐẠT] RSS 2.0: pubDate RFC822 +0700 đổi đúng sang UTC
+[ĐẠT] RSS: ngày kiểu MM/DD/YYYY h:mm:ss AM (Tuổi Trẻ/Báo Chính phủ) hiểu là giờ VN
+[ĐẠT] RSS: dc:date ISO được đọc
+[ĐẠT] RSS: mục không có ngày -> t=null
+[ĐẠT] Atom: đọc đủ 4 mục
+[ĐẠT] Atom: lấy link rel=alternate (không lấy rel=self)
+[ĐẠT] Atom: summary HTML thoát (&lt;p&gt;) cũng được cắt sạch
+[ĐẠT] Atom: <published> có múi giờ +07:00
+[ĐẠT] Atom: link self-closing <link href="..."/> đọc được
+[ĐẠT] Lọc 36 giờ: bỏ tin cũ (23/11) và tin không rõ ngày -> còn 3
+[ĐẠT] Mô tả dài bị cắt ≤ 300 ký tự và có …
+[ĐẠT] Mô tả không còn thẻ HTML hay &xxx; thô
+[ĐẠT] Đủ trường chuẩn hoá
+[ĐẠT] Link đưa ra đã bỏ utm_/fbclid/#
+[ĐẠT] Từ khoá TMĐT (Shopee) -> chủ đề "Kinh doanh online / TMĐT" khi nguồn có tmdt
+[ĐẠT] Tin kinh tế thường vẫn ở "Kinh tế – tài chính"
+[ĐẠT] Nguồn không bật tmdt giữ nguyên chủ đề
+[ĐẠT] Chuẩn hoá link: bỏ utm/fbclid/#/www/dấu / cuối
+[ĐẠT] Link sạch giữ tham số thật (id=5), bỏ tham số theo dõi
+[ĐẠT] Gộp trùng theo link (khác utm/www/dấu /) dù tiêu đề khác
+[ĐẠT] Gộp trùng theo tiêu đề giống (≥ 0.6): giữ bản đầu, ghi trung_voi, KHÔNG gộp nhầm tin khác ý
+[ĐẠT] Độ giống: cùng ý = 0.89 (>=0.6), khác ý = 0.18 (<0.3)
+[ĐẠT] Tiêu đề quá ngắn (<4 từ) không so khớp mờ
+[ĐẠT] Nguồn treo bị cắt đúng hạn (không treo cả bản)
+[ĐẠT] Có tên báo lỗi: 503, treo, XML hỏng, trả HTML
+[ĐẠT] Nguồn rỗng hợp lệ (RSS không có tin) KHÔNG bị coi là lỗi
+[ĐẠT] Lý do lỗi được ghi cho từng nguồn
+[ĐẠT] Bản vẫn ra tin từ các nguồn tốt
+[ĐẠT] Gộp trùng chạy trong layTatCa (giá vàng A+B chỉ còn 1)
+[ĐẠT] Tin gộp ghi trung_voi: Báo Giả B
+[ĐẠT] Đủ 7 chủ đề, chủ đề rỗng là mảng rỗng
+[ĐẠT] Tin TMĐT tách đúng chủ đề trong bản tổng hợp
+[ĐẠT] Tin trong chủ đề xếp mới nhất trước
+[ĐẠT] Mọi nguồn lỗi: vẫn trả kết quả, 7 chủ đề đều rỗng, ghi đủ 4 lỗi
+[ĐẠT] Danh sách nguồn rỗng không lỗi
+[ĐẠT] Giải mã &ecirc; &#7849; &#x1EA9; &amp;, giữ nguyên thực thể lạ
+
+39/39 ĐẠT (deno 2.9.8 (stable, release, x86_64-pc-windows-msvc))

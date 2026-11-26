@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel><title>Báo Giả A</title><link>https://a.example</link>
+<item>
+  <title><![CDATA[Giá vàng trong nước tăng mạnh phiên sáng nay]]></title>
+  <description><![CDATA[<a href="https://a.example/x"><img src="https://a.example/i.jpg"></a><p>Giá v&agrave;ng <b>SJC</b> tăng 500.000 đồng mỗi lượng.</p>]]></description>
+  <pubDate>Thu, 26 Nov 2026 03:00:00 +0700</pubDate>
+  <link>https://a.example/gia-vang-tang?utm_source=rss&amp;utm_medium=feed&amp;fbclid=abc#top</link>
+</item>
+<item>
+  <title>Tin cũ hơn 36 giờ</title>
+  <description>Không được xuất hiện</description>
+  <pubDate>Mon, 23 Nov 2026 03:00:00 +0700</pubDate>
+  <link>https://a.example/tin-cu</link>
+</item>
+<item>
+  <title>Tin không có ngày đăng</title>
+  <description>Bị bỏ vì không rõ mới hay cũ</description>
+  <link>https://a.example/khong-ngay</link>
+</item>
+<item>
+  <title>Bão số 9 đổ bộ miền Trung &amp; Tây Nguyên</title>
+  <description>&lt;p&gt;Mô tả rất dài &lt;/p&gt; Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự.  Câu dài lặp lại để vượt quá ba trăm ký tự. </description>
+  <pubDate>11/26/2026 7:23:00 AM</pubDate>
+  <link>https://a.example/bao-so-9/</link>
+</item>
+<item>
+  <title>Shopee tung chương trình giảm giá 11.11 cho người bán</title>
+  <description>Sàn thương mại điện tử mở đợt khuyến mãi mới.</description>
+  <dc:date>2026-11-25T22:00:00Z</dc:date>
+  <link>https://a.example/shopee-giam-gia</link>
+</item>
+</channel></rss>

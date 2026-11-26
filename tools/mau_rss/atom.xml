@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Báo Giả B</title>
+  <entry>
+    <title>Giá vàng trong nước tăng mạnh trong phiên sáng</title>
+    <link rel="self" href="https://b.example/api/1"/>
+    <link rel="alternate" href="https://www.b.example/vang-tang-manh-phien-sang"/>
+    <updated>2026-11-25T23:30:00Z</updated>
+    <summary type="html">&lt;p&gt;Bản tin của báo B về giá vàng.&lt;/p&gt;</summary>
+  </entry>
+  <entry>
+    <title>Bão số 9 đổ bộ miền Trung</title>
+    <link href="https://b.example/bao-so-9-do-bo"/>
+    <published>2026-11-25T23:00:00+07:00</published>
+    <content type="html">Nội dung ngắn</content>
+  </entry>
+  <entry>
+    <title>Giá vàng thế giới giảm nhẹ khi đồng USD mạnh lên</title>
+    <link href="https://b.example/vang-the-gioi"/>
+    <updated>2026-11-25T21:00:00Z</updated>
+    <summary>Khác chủ đề với tin giá vàng trong nước, không được gộp nhầm.</summary>
+  </entry>
+  <entry>
+    <title>Tin atom quá cũ</title>
+    <link href="https://b.example/cu"/>
+    <updated>2026-11-20T00:00:00Z</updated>
+  </entry>
+</feed>

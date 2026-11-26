@@ -51,7 +51,7 @@ Quyết định ở Bước D: **bản tin 8:00 chạy trên Supabase** (hẹn g
 - Xong khi: "chiều thứ 6 họp khách 3h" tạo đúng sự kiện; "ý tưởng: làm kênh review đồ bếp" vào kho ý tưởng.
 - Bằng chứng: ảnh trước/sau + 5 câu thử.
 
-### 2.8 Bản tin sáng — lấy tin
+### 2.8 Bản tin sáng — lấy tin — ✅ code + nghiệm thu giả/RSS thật ĐẠT 2026-11-26 (NHK bỏ vì hết RSS; chưa deploy)
 - Làm: đọc RSS 9 báo, xếp vào 7 chủ đề, gộp tin trùng; kiểm chứng báo nào còn RSS (VOV, Báo Chính phủ, NHK); báo lỗi → bỏ qua và ghi tên.
 - Xong khi: chạy thử ra danh sách tin thô đủ chủ đề.
 - Bằng chứng: log danh sách tin + báo nào lỗi.

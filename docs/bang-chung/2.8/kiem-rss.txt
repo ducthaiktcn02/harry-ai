@@ -1,0 +1,269 @@
+Kiểm RSS lúc 2026-11-26 13:58Z — 60 URL ứng viên
+
+[SỐNG ] VnExpress | Thời sự trong nước
+   https://vnexpress.net/rss/thoi-su.rss
+   mã=200 tin=60 mới nhất=2026-11-26 12:26Z (0.0s) 
+   «Đề nghị kỷ luật hai nguyên lãnh đạo ở Sơn La, Hải Dương»
+[SỐNG ] VnExpress | Thế giới
+   https://vnexpress.net/rss/the-gioi.rss
+   mã=200 tin=60 mới nhất=2026-11-26 13:24Z (0.0s) 
+   «Israel dọa ép 1 triệu người rời bỏ nhà cửa ở Dải Gaza»
+[SỐNG ] VnExpress | Kinh tế – tài chính
+   https://vnexpress.net/rss/kinh-doanh.rss
+   mã=200 tin=60 mới nhất=2026-11-26 13:14Z (0.0s) 
+   «TP HCM mời Singapore phát triển 3 nhóm hạ tầng chiến lược»
+[SỐNG ] VnExpress | Công nghệ – AI
+   https://vnexpress.net/rss/so-hoa.rss
+   mã=200 tin=60 mới nhất=2026-11-26 12:33Z (0.1s) 
+   «'Metro, cao tốc góp phần nâng khả năng làm chủ công nghệ của Việt Nam'»
+[SỐNG ] VnExpress | Kinh doanh online / TMĐT
+   https://vnexpress.net/rss/kinh-doanh.rss
+   mã=200 tin=60 mới nhất=2026-11-26 13:14Z (0.0s) 
+   «TP HCM mời Singapore phát triển 3 nhóm hạ tầng chiến lược»
+[SỐNG ] VnExpress | Sức khoẻ
+   https://vnexpress.net/rss/suc-khoe.rss
+   mã=200 tin=60 mới nhất=2026-11-26 12:00Z (0.1s) 
+   «Thói quen giữ ấm sai gây ảnh hưởng sức khỏe»
+[SỐNG ] VnExpress | Thể thao
+   https://vnexpress.net/rss/the-thao.rss
+   mã=200 tin=60 mới nhất=2026-11-26 12:00Z (0.0s) 
+   «Việt Nam - Mali: Nguyễn Lực đá chính»
+[SỐNG ] Tuổi Trẻ | Thời sự trong nước
+   https://tuoitre.vn/rss/thoi-su.rss
+   mã=200 tin=50 mới nhất=2026-11-26 11:52Z (0.1s) 
+   «Khánh Hòa, Đắk Lắk cảnh báo nguy cơ ngập úng, sạt lở trước dự báo mưa lớn»
+[SỐNG ] Tuổi Trẻ | Thế giới
+   https://tuoitre.vn/rss/the-gioi.rss
+   mã=200 tin=50 mới nhất=2026-11-26 11:44Z (0.1s) 
+   «Nga - Ukraine tối 26-11: Nhiều diễn biến mới trên cả thực địa lẫn bàn đàm phán»
+[SỐNG ] Tuổi Trẻ | Kinh tế – tài chính
+   https://tuoitre.vn/rss/kinh-doanh.rss
+   mã=200 tin=50 mới nhất=2026-11-26 12:00Z (0.1s) 
+   «30 năm chứng khoán Việt Nam: Từ mở rộng quy mô đến đổi mới phương thức đầu tư»
+[SỐNG ] Tuổi Trẻ | Công nghệ – AI
+   https://tuoitre.vn/rss/nhip-song-so.rss
+   mã=200 tin=50 mới nhất=2026-11-26 08:00Z (0.1s) 
+   «Viettel đẩy mạnh kết nối, xóa lõm sóng tại những bản làng năm 2026»
+[SỐNG ] Tuổi Trẻ | Sức khoẻ
+   https://tuoitre.vn/rss/suc-khoe.rss
+   mã=200 tin=50 mới nhất=2026-11-26 12:01Z (0.1s) 
+   «24 xã, phường ở Đắk Lắk còn hạn chế khả năng xử lý ổ dịch sốt xuất huyết»
+[SỐNG ] Tuổi Trẻ | Thể thao
+   https://tuoitre.vn/rss/the-thao.rss
+   mã=200 tin=50 mới nhất=2026-11-26 13:15Z (0.1s) 
+   «Đường đua xe đạp ở Vinhomes Green Paradise gây ấn tượng tại Đại hội Thể thao toàn quốc»
+[SỐNG ] Thanh Niên | Thời sự trong nước
+   https://thanhnien.vn/rss/thoi-su.rss
+   mã=200 tin=50 mới nhất=2026-11-26 13:24Z (0.1s) 
+   «C&agrave; Mau đề xuất nghi&ecirc;n cứu ph&aacute;t triển cụm đảo H&ograve;n Khoai»
+[SỐNG ] Thanh Niên | Thế giới
+   https://thanhnien.vn/rss/the-gioi.rss
+   mã=200 tin=50 mới nhất=2026-11-26 13:12Z (0.1s) 
+   «N&ecirc;n đi bộ qu&atilde;ng ngắn nhiều lần trong ng&agrave;y hay một lần đi hết?»
+[SỐNG ] Thanh Niên | Kinh tế – tài chính
+   https://thanhnien.vn/rss/kinh-te.rss
+   mã=200 tin=50 mới nhất=2026-11-26 10:31Z (0.1s) 
+   «Tăng quyền cho hải quan trong chống h&agrave;ng giả, h&agrave;ng x&acirc;m phạm sở hữu tr&»
+[SỐNG ] Thanh Niên | Công nghệ – AI
+   https://thanhnien.vn/rss/cong-nghe.rss
+   mã=200 tin=50 mới nhất=2026-11-26 12:18Z (0.1s) 
+   «Ba nh&agrave; mạng Trung Quốc bị Mỹ &aacute;p dụng hạn chế nhằm chống cuộc gọi lừa đảo»
+[CHẾT ] Thanh Niên | Công nghệ – AI
+   https://thanhnien.vn/rss/cong-nghe-game.rss
+   mã=404 tin=0 mới nhất=None (0.1s) HTTP 404
+   «»
+[SỐNG ] Thanh Niên | Sức khoẻ
+   https://thanhnien.vn/rss/suc-khoe.rss
+   mã=200 tin=50 mới nhất=2026-11-26 11:01Z (0.1s) 
+   «Sau tuổi 40, đi bộ ng&agrave;y c&agrave;ng chậm: 3 thay đổi cơ thể kh&ocirc;ng n&ecirc;n b»
+[SỐNG ] Thanh Niên | Thể thao
+   https://thanhnien.vn/rss/the-thao.rss
+   mã=200 tin=50 mới nhất=2026-11-26 12:48Z (0.1s) 
+   «Mỹ Ti&ecirc;n lần thứ hai đ&aacute;nh bại &Aacute;nh Vi&ecirc;n, đoạt HCV thứ 8 tại Đại hộ»
+[SỐNG ] VOV | Thời sự trong nước
+   https://vov.vn/rss/chinh-tri.rss
+   mã=200 tin=30 mới nhất=2026-11-26 13:42Z (0.8s) 
+   «Tổng Bí thư, Chủ tịch nước Tô Lâm tiếp Thống đốc Saint Petersburg»
+[SỐNG ] VOV | Thời sự trong nước
+   https://vov.vn/rss/xa-hoi.rss
+   mã=200 tin=30 mới nhất=2026-11-26 12:39Z (0.5s) 
+   «Sau hơn 5 tháng đã quy tập được 1.141 hài cốt liệt sĩ tại Công viên Lê Thị Riêng»
+[SỐNG ] VOV | Thế giới
+   https://vov.vn/rss/the-gioi.rss
+   mã=200 tin=30 mới nhất=2026-11-26 11:55Z (0.2s) 
+   «Đòn đánh thuế quan vẫn được ưu tiên dù gây tổn hại với chính nước Mỹ»
+[SỐNG ] VOV | Kinh tế – tài chính
+   https://vov.vn/rss/kinh-te.rss
+   mã=200 tin=30 mới nhất=2026-11-26 13:05Z (0.5s) 
+   «Hà Nội cần 56.000 tỷ đồng tiền sử dụng đất để đạt mục tiêu thu ngân sách»
+[CHẾT ] VOV | Kinh doanh online / TMĐT
+   https://vov.vn/rss/doanh-nghiep.rss
+   mã=404 tin=0 mới nhất=None (0.1s) HTTP 404
+   «»
+[SỐNG ] VOV | Công nghệ – AI
+   https://vov.vn/rss/cong-nghe.rss
+   mã=200 tin=30 mới nhất=2026-11-26 04:36Z (0.2s) 
+   «Thêm cầu nối đưa bán dẫn Việt Nam vào chuỗi giá trị toàn cầu»
+[SỐNG ] VOV | Sức khoẻ
+   https://vov.vn/rss/suc-khoe.rss
+   mã=200 tin=30 mới nhất=2026-11-26 13:20Z (0.7s) 
+   «Hội Phổi Việt Nam và Hội Phẫu thuật Lồng ngực Nhật Bản chính thức ký kết hợp tác»
+[SỐNG ] VOV | Thể thao
+   https://vov.vn/rss/the-thao.rss
+   mã=200 tin=30 mới nhất=2026-11-26 13:00Z (0.2s) 
+   «Trực tiếp U17 Việt Nam 0-0 U17 Mali tại bảng G U17 World Cup 2026»
+[CHẾT ] VOV | Thời sự trong nước
+   https://vov.vn/rss/home.rss
+   mã=404 tin=0 mới nhất=None (0.1s) HTTP 404
+   «»
+[CHẾT ] VOV | Thời sự trong nước
+   https://vov.vn/rss/chinh-tri-212.rss
+   mã=404 tin=0 mới nhất=None (1.1s) HTTP 404
+   «»
+[CHẾT ] Báo Chính phủ | Thời sự trong nước
+   https://baochinhphu.vn/rss/home.rss
+   mã=404 tin=0 mới nhất=None (0.0s) HTTP 404
+   «»
+[SỐNG ] Báo Chính phủ | Thời sự trong nước
+   https://baochinhphu.vn/chinh-tri.rss
+   mã=200 tin=50 mới nhất=2026-11-26 12:23Z (0.1s) 
+   «Đại tướng Phan Văn Giang tiếp Phó Thư ký Hội đồng An ninh Liên bang Nga»
+[SỐNG ] Báo Chính phủ | Thời sự trong nước
+   https://baochinhphu.vn/thoi-su.rss
+   mã=200 tin=50 mới nhất=2026-11-26 08:54Z (0.1s) 
+   «Thủ tướng: Đánh giá đầy đủ, huy động và sử dụng hiệu quả 4 nguồn lực truyền thống, 5 nguồn»
+[CHẾT ] Báo Chính phủ | Thời sự trong nước
+   https://baochinhphu.vn/rss/chinh-tri.rss
+   mã=404 tin=0 mới nhất=None (0.1s) HTTP 404
+   «»
+[SỐNG ] Báo Chính phủ | Kinh tế – tài chính
+   https://baochinhphu.vn/kinh-te.rss
+   mã=200 tin=50 mới nhất=2026-11-26 12:28Z (0.1s) 
+   «Thủ tướng Lê Minh Hưng: PETROVIETNAM phải xác định tầm nhìn chiến lược dài hạn, khát vọng »
+[CHẾT ] Báo Chính phủ | Kinh tế – tài chính
+   https://baochinhphu.vn/rss/kinh-te.rss
+   mã=404 tin=0 mới nhất=None (0.0s) HTTP 404
+   «»
+[CHẾT ] Báo Chính phủ | Thế giới
+   https://baochinhphu.vn/thoi-su-quoc-te.rss
+   mã=404 tin=0 mới nhất=None (0.0s) HTTP 404
+   «»
+[SỐNG ] Báo Chính phủ | Sức khoẻ
+   https://baochinhphu.vn/y-te.rss
+   mã=200 tin=50 mới nhất=2026-11-26 12:15Z (0.1s) 
+   «'Ba chủ động' để bảo vệ sức khỏe, giảm tác hại của ô nhiễm không khí»
+[SỐNG ] Báo Chính phủ | Công nghệ – AI
+   https://baochinhphu.vn/khoa-hoc-cong-nghe.rss
+   mã=200 tin=50 mới nhất=2026-11-25 14:26Z (0.1s) 
+   «Diễn đàn quốc tế Phát triển bền vững ĐBSCL: Tìm lời giải từ công nghệ chiến lược»
+[SỐNG ] BBC | Thế giới
+   https://feeds.bbci.co.uk/news/world/rss.xml
+   mã=200 tin=35 mới nhất=2026-11-26 13:09Z (0.1s) 
+   «Miami runway incident disrupts flights on Thanksgiving eve»
+[SỐNG ] BBC | Kinh tế – tài chính
+   https://feeds.bbci.co.uk/news/business/rss.xml
+   mã=200 tin=55 mới nhất=2026-11-26 13:40Z (0.1s) 
+   «Simon Jack: Is Poundland's US owner to blame for its collapse?»
+[SỐNG ] BBC | Công nghệ – AI
+   https://feeds.bbci.co.uk/news/technology/rss.xml
+   mã=200 tin=21 mới nhất=2026-11-26 09:27Z (0.1s) 
+   «Musk's plan to send a million SpaceX data satellites into space approved»
+[SỐNG ] BBC | Sức khoẻ
+   https://feeds.bbci.co.uk/news/health/rss.xml
+   mã=200 tin=57 mới nhất=2026-11-26 11:23Z (0.4s) 
+   «Long waits 'a tragedy' as thousands seek ADHD and autism assessments»
+[SỐNG ] BBC | Thể thao
+   https://feeds.bbci.co.uk/sport/rss.xml
+   mã=200 tin=66 mới nhất=2026-11-26 13:49Z (0.4s) 
+   «The American manager with a maths degree making history in La Liga»
+[SỐNG ] The Guardian | Thế giới
+   https://www.theguardian.com/world/rss
+   mã=200 tin=45 mới nhất=2026-11-26 13:43Z (0.3s) 
+   «Number of Neets in UK falls below a million as Burnham pushes to tackle crisis»
+[SỐNG ] The Guardian | Kinh tế – tài chính
+   https://www.theguardian.com/business/rss
+   mã=200 tin=40 mới nhất=2026-11-26 13:45Z (0.5s) 
+   «Marlboro maker Altria says considering takeover of Davidoff maker Imperial Bands – busines»
+[SỐNG ] The Guardian | Công nghệ – AI
+   https://www.theguardian.com/technology/rss
+   mã=200 tin=32 mới nhất=2026-11-26 12:19Z (0.5s) 
+   «Dozens of court cases in England and Wales affected by undisclosed AI use in 2026»
+[SỐNG ] The Guardian | Sức khoẻ
+   https://www.theguardian.com/society/health/rss
+   mã=200 tin=20 mới nhất=2026-11-26 13:00Z (0.6s) 
+   «Contraceptive pill usage in Great Britain fell drastically in last decade, research finds»
+[SỐNG ] The Guardian | Thể thao
+   https://www.theguardian.com/sport/rss
+   mã=200 tin=48 mới nhất=2026-11-26 12:36Z (0.4s) 
+   «Manchester United held in Lisbon: is Mauricio Pochettino just unlucky? | Football Weekly»
+[SỐNG ] DW | Thế giới
+   https://rss.dw.com/xml/rss-en-world
+   mã=200 tin=12 mới nhất=2026-11-26 13:41Z (0.1s) 
+   «EU-Indonesia trade deal opens new markets, but challenges remain»
+[SỐNG ] DW | Kinh tế – tài chính
+   https://rss.dw.com/xml/rss-en-bus
+   mã=200 tin=20 mới nhất=2026-11-25 14:38Z (0.1s) 
+   «German firms eye Africa as global trade shocks hit traditional markets»
+[CHẾT ] DW | Công nghệ – AI
+   https://rss.dw.com/xml/rss-en-sci
+   mã=200 tin=0 mới nhất=None (0s) Không phải XML hợp lệ (có thể là trang HTML): syntax error: line 1, column 0
+   «»
+[CHẾT ] DW | Thể thao
+   https://rss.dw.com/xml/rss-en-sport
+   mã=200 tin=0 mới nhất=None (0s) Không phải XML hợp lệ (có thể là trang HTML): syntax error: line 1, column 0
+   «»
+[SỐNG ] DW | Thế giới
+   https://rss.dw.com/xml/rss-en-all
+   mã=200 tin=144 mới nhất=2026-11-26 13:41Z (0.1s) 
+   «EU-Indonesia trade deal opens new markets, but challenges remain»
+[CHẾT ] NHK World | Thế giới
+   https://www3.nhk.or.jp/nhkworld/en/news/feeds/
+   mã=404 tin=0 mới nhất=None (0.6s) HTTP 404
+   «»
+[CHẾT ] NHK World | Thế giới
+   https://www3.nhk.or.jp/nhkworld/en/news/feeds/world.xml
+   mã=404 tin=0 mới nhất=None (0.5s) HTTP 404
+   «»
+[CHẾT ] NHK World | Thế giới
+   https://www3.nhk.or.jp/nhkworld/en/news/rss.xml
+   mã=404 tin=0 mới nhất=None (0.3s) HTTP 404
+   «»
+[CHẾT ] NHK World | Thế giới
+   https://www3.nhk.or.jp/nhkworld/news/feeds/world.xml
+   mã=404 tin=0 mới nhất=None (0.3s) HTTP 404
+   «»
+[CHẾT ] NHK World | Kinh tế – tài chính
+   https://www3.nhk.or.jp/nhkworld/en/news/feeds/business.xml
+   mã=404 tin=0 mới nhất=None (0.5s) HTTP 404
+   «»
+[CHẾT ] NHK World | Thế giới
+   https://www3.nhk.or.jp/nhkworld/data/en/news/all.xml
+   mã=404 tin=0 mới nhất=None (0.6s) HTTP 404
+   «»
+[SỐNG ] NHK World | Thế giới
+   https://www3.nhk.or.jp/rss/news/cat6.xml
+   mã=200 tin=98 mới nhất=2026-08-08 11:55Z (0.0s) 
+   «イチローさん マリナーズOBのホームラン競争でファンわかせる»
+[SỐNG ] Tuổi Trẻ | Kinh doanh online / TMĐT
+   https://tuoitre.vn/rss/kinh-doanh.rss
+   mã=200 tin=50 mới nhất=2026-11-26 12:00Z (0.1s) 
+   «30 năm chứng khoán Việt Nam: Từ mở rộng quy mô đến đổi mới phương thức đầu tư»
+[SỐNG ] Thanh Niên | Kinh doanh online / TMĐT
+   https://thanhnien.vn/rss/kinh-te.rss
+   mã=200 tin=50 mới nhất=2026-11-26 10:31Z (0.1s) 
+   «Tăng quyền cho hải quan trong chống h&agrave;ng giả, h&agrave;ng x&acirc;m phạm sở hữu tr&»
+[SỐNG ] Báo Chính phủ | Kinh doanh online / TMĐT
+   https://baochinhphu.vn/kinh-te.rss
+   mã=200 tin=50 mới nhất=2026-11-26 12:28Z (0.1s) 
+   «Thủ tướng Lê Minh Hưng: PETROVIETNAM phải xác định tầm nhìn chiến lược dài hạn, khát vọng »
+
+TÓM TẮT THEO BÁO (số URL sống / tổng):
+  VnExpress: 7/7
+  Tuổi Trẻ: 7/7
+  Thanh Niên: 7/8
+  VOV: 7/10
+  Báo Chính phủ: 6/10
+  BBC: 5/5
+  The Guardian: 5/5
+  DW: 3/5
+  NHK World: 1/7
