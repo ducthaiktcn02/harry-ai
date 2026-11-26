@@ -12,7 +12,7 @@
 **2.2 đã làm:** Supabase `https://nrvueainkiweuvsoivgp.supabase.co` + Google OAuth (Client ID trong Google Cloud project `harry-ai`, chế độ Testing, Gmail chủ app trong Test users; token có thể hết hạn ~7 ngày → đăng nhập lại). Chủ app = tài khoản đầu tiên đăng nhập, lưu ở bảng `app_owner`; SQL `sql/2.2-chu-app.sql` (đã chạy, gồm GRANT cho `authenticated`). **Mọi bảng dữ liệu sau này: bật RLS, policy dùng `public.la_chu_app()`, và nhớ GRANT cho `authenticated`** (Supabase mới không tự cấp). Config công khai ở `config.js` (sw.js cache v3). Bằng chứng: `docs/bang-chung/2.2/nguoi-la-bi-chan.txt`. Trang đăng nhập hiện ở `index.html` (supabase-js qua CDN).
 
 ## Vừa xong
-- **2.5 (code xong 2026-11-26, chưa nghiệm thu):** form sự kiện có ô "Nhắc qua Telegram" (không/đúng giờ/15 phút/1 giờ/tuỳ chỉnh) lưu `su_kien.nhac_phut`; Edge Function `supabase/functions/nhac-viec/index.ts` (bung lặp theo giờ VN, gửi Telegram, chống trùng); `sql/2.5-nhac-viec.sql`. Bằng chứng giả: `docs/bang-chung/2.5/thu-logic-nhac.txt` (12 kiểm tra ĐẠT, `tools/thu_nhac_gia.py`); 2.4 vẫn ĐẠT. sw.js cache v7.
+- **2.5 (code xong 2026-11-26, chưa nghiệm thu):** form sự kiện có ô "Nhắc qua Telegram" (không/đúng giờ/15 phút/1 giờ/tuỳ chỉnh) lưu `su_kien.nhac_phut`; Edge Function `supabase/functions/nhac-viec/index.ts` (bung lặp theo giờ VN, gửi Telegram, chống trùng); `sql/2.5a-cot-nhac.sql` + `2.5b-hen-gio.sql`. Bằng chứng giả: `docs/bang-chung/2.5/thu-logic-nhac.txt` (12 kiểm tra ĐẠT, `tools/thu_nhac_gia.py`); 2.4 vẫn ĐẠT. sw.js cache v7.
 - **2.4 (XONG, đã nghiệm thu):** kéo thả đổi giờ/ngày trong lịch tuần/ngày (chuột kéo luôn; iPhone nhấn giữ ~0,35s rồi kéo; lưới 15 phút); sự kiện lặp ngày/tuần/tháng + "lặp đến hết ngày" (tuỳ chọn), hiện ký hiệu ↻; sửa/xoá/kéo sự kiện lặp hỏi 3 lựa chọn (chỉ này / này và sau / tất cả); thùng rác 30 ngày (khôi phục, xoá hẳn, tự dọn khi mở app; mở từ menu trái hoặc ⚙ Cài đặt). Cách lưu lặp: cột `lap`, `lap_den`, `lap_ngoai` (các lần bị bỏ) trên `su_kien`; "chỉ lần này" = thêm ngoại lệ + tạo sự kiện lẻ mới; "này và sau" = cắt `lap_den` + tạo chuỗi mới. Xoá "chỉ lần này"/"này và sau" cũng tạo bản sao trong thùng rác (khôi phục được). sw.js giờ fetch `no-cache` (cache v6) vì GitHub Pages giữ trang 10 phút → sau mỗi lần đẩy code, đợi ~2 phút rồi Ctrl+Shift+R / đóng mở app. Chưa làm: kéo thả ở lịch tháng, kéo đổi độ dài (có thể thêm nếu người dùng muốn). Bằng chứng: `docs/bang-chung/2.4/` + `tools/thu_lap_gia.py` (Supabase giả nhớ trong bộ nhớ, 17 kiểm tra đều ĐẠT). sw.js cache v5.
 - Bước A: thu yêu cầu. Bước B: tạo `CLAUDE.md`, `docs/yeu-cau.md`, `.env.example`, `.gitignore` (thư mục `.claude/rules` bị chặn quyền ghi → quy tắc bảo mật nằm trong `CLAUDE.md`).
 - Bước C: 2 vòng phỏng vấn + câu hỏi về lượt Gemini; người dùng nói **"chốt"**.
@@ -39,9 +39,9 @@
 
 ## Bước tiếp theo
 **2.5 — CODE XONG, còn phần người dùng làm thủ công rồi nghiệm thu** (mình hướng dẫn từng bước, không đòi in khoá ra chat):
-1. Supabase > SQL Editor: chạy `sql/2.5-nhac-viec.sql` **phần 1** (cột `nhac_phut` + bảng `nhac_da_gui`).
+1. Supabase > SQL Editor: chạy `sql/2.5a-cot-nhac.sql` (cột `nhac_phut` + bảng `nhac_da_gui`).
 2. Supabase > Edge Functions > tạo function tên `nhac-viec`, dán nội dung `supabase/functions/nhac-viec/index.ts`, **tắt Verify JWT**; Secrets: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (lấy từ `C:\AISONNET\.env`), `CRON_KEY` (chuỗi ngẫu nhiên tự đặt).
-3. Chạy **phần 2** của file SQL (pg_cron mỗi phút), thay `<<DUONG_DAN>>` và `<<MA_NHAC>>` (= CRON_KEY) — KHÔNG commit bản đã điền.
+3. Chạy `sql/2.5b-hen-gio.sql` (pg_cron mỗi phút), thay `<<DUONG_DAN>>` và `<<MA_NHAC>>` (= CRON_KEY) — KHÔNG commit bản đã điền.
 4. Đẩy code lên GitHub (đã làm khi commit), đợi ~2 phút, tạo sự kiện thử "nhắc đúng giờ" vài phút nữa → chụp tin Telegram + giờ nhận (lệch ≤ ~1 phút) → ảnh vào `docs/bang-chung/2.5/`. Rồi tick 2.5, sang **2.6 Kho ý tưởng**.
 Ghi chú: sự kiện cả ngày nhắc tính từ 8:00 sáng; lỡ lần chạy được bù tối đa 10 phút; chống nhắc trùng bằng bảng `nhac_da_gui`.
 
@@ -50,3 +50,6 @@ Ghi chú: sự kiện cả ngày nhắc tính từ 8:00 sáng; lỡ lần chạy
 
 ## Lỗi đang gặp
 Chưa có.
+
+## Quy ước làm việc với người dùng
+Khi bảo người dùng mở file/trang nào, **luôn kèm link bấm được** (file trong kho: `https://raw.githubusercontent.com/ducthaiktcn02/harry-ai/main/<đường dẫn>`). Mỗi file SQL chỉ chứa việc dán nguyên được.
