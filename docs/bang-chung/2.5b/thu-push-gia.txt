@@ -1,0 +1,15 @@
+  ĐẠT  Gửi cả Telegram (1) lẫn push (2 thiết bị)
+  ĐẠT  Nội dung push có tiêu đề + tag chống trùng
+  ĐẠT  Đăng ký chết (410) bị xoá, đăng ký sống còn
+  ĐẠT  Có đăng ký chết vẫn gửi Telegram
+  ĐẠT  Push lỗi 500: Telegram vẫn gửi, đăng ký không bị xoá
+  ĐẠT  Thiếu secrets VAPID: Telegram vẫn gửi, báo lỗi rõ
+  ĐẠT  Telegram lỗi nhưng push tới nơi: tính đã nhắc, không nhắc lại
+  ĐẠT  Cả hai lỗi: xoá dấu để lần sau thử lại
+  ĐẠT  Telegram ném lỗi mạng: không sập, push vẫn đi
+  ĐẠT  Đã nhắc rồi (nhac_da_gui) thì không gửi lại cả Telegram lẫn push
+  ĐẠT  Không có khoá cron/đăng nhập -> 403, không gửi gì
+  ĐẠT  Gửi thử (chủ app): push tới mọi thiết bị, KHÔNG Telegram
+  ĐẠT  Gửi thử bởi người không phải chủ -> 403, không push
+  ĐẠT  OPTIONS (CORS) trả 200
+KẾT QUẢ: TẤT CẢ ĐẠT

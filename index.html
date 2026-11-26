@@ -233,6 +233,14 @@ main{flex:1;overflow:auto;position:relative;min-width:0}
       <section class="page" id="p-cai"><div class="pad">
         <h2>Cài đặt</h2>
         <div class="hop"><h3>Loại việc (tên + màu)</h3><div id="sua-loai"></div></div>
+        <div class="hop" id="hopTb"><h3>Thông báo trên điện thoại</h3>
+          <div id="tbTrang" style="font-size:14px;margin-bottom:6px"></div>
+          <div class="muted" id="tbHuong" style="margin-bottom:10px"></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn-xanh" id="tbBat">Bật thông báo</button>
+            <button class="btn-out" id="tbTat">Tắt</button>
+            <button class="btn-out" id="tbThu">Gửi thử</button>
+          </div></div>
         <div class="hop"><h3>Thùng rác</h3><button class="btn-out" id="btnRac">🗑 Mở thùng rác</button></div>
         <div class="hop"><h3>Tài khoản</h3>
           <div class="muted" id="email" style="margin-bottom:10px"></div>
@@ -902,6 +910,7 @@ $('btnRac').onclick = () => hienTrang('rac');
 
 /* ---------- Cài đặt loại việc ---------- */
 function veCai() {
+  veThongBao();
   $('sua-loai').innerHTML = CATS.map((c) => `<div class="dong-loai"><input type="color" value="${esc(c.mau)}" data-id="${esc(c.id)}" data-k="mau"><input type="text" value="${esc(c.ten)}" data-id="${esc(c.id)}" data-k="ten"></div>`).join('');
   $('sua-loai').querySelectorAll('input').forEach((i) => i.onchange = async () => {
     const v = i.dataset.k === 'ten' ? i.value.trim() : i.value;
@@ -911,6 +920,62 @@ function veCai() {
     await taiLoai(); veLoai(); veLich(); toast('Đã lưu loại việc');
   });
 }
+
+/* ---------- Thông báo đẩy (Web Push, 2.5b) ---------- */
+const laIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const laApp = () => (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+const urlB64 = (b) => { const p = '='.repeat((4 - b.length % 4) % 4), r = atob((b + p).replace(/-/g, '+').replace(/_/g, '/')); return Uint8Array.from([...r].map((c) => c.charCodeAt(0))); };
+async function layDangKy() {
+  try { const reg = await navigator.serviceWorker.ready; return await reg.pushManager.getSubscription(); } catch (_) { return null; }
+}
+async function veThongBao() {
+  let st, hd = '', bat = false, tat = false, thu = false;
+  if (laIOS && !laApp()) { st = '⚠️ Chưa dùng được'; hd = 'Trên iPhone, thông báo chỉ hoạt động khi mở app đã “Thêm vào màn hình chính” (Safari → Chia sẻ → Thêm vào MH chính, cần iOS 16.4 trở lên). Hãy mở app từ biểu tượng ngoài màn hình chính rồi quay lại đây.'; }
+  else if (!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)) { st = '⚠️ Thiết bị/trình duyệt này chưa hỗ trợ thông báo đẩy'; hd = 'Vẫn nhận nhắc việc qua Telegram bình thường.'; }
+  else if (Notification.permission === 'denied') { st = '🚫 Đã bị chặn'; hd = 'Bạn đã chặn thông báo. Vào Cài đặt của điện thoại → Thông báo → Harry AI (hoặc Cài đặt trình duyệt → Quyền của trang) để bật lại, rồi quay lại đây.'; }
+  else {
+    const sub = Notification.permission === 'granted' ? await layDangKy() : null;
+    if (sub) { st = '✅ Đã bật trên thiết bị này'; hd = 'Nhắc việc sẽ hiện thành thông báo (Telegram vẫn gửi song song làm dự phòng).'; tat = true; thu = true; }
+    else { st = '⚪ Chưa bật'; hd = 'Bấm “Bật thông báo”, rồi chọn “Cho phép” khi điện thoại hỏi.'; bat = true; }
+  }
+  $('tbTrang').textContent = st; $('tbHuong').textContent = hd;
+  $('tbBat').hidden = !bat; $('tbTat').hidden = !tat; $('tbThu').hidden = !thu;
+  $('hopTb').dataset.st = bat ? 'chua-bat' : tat ? 'da-bat' : st.includes('chặn') ? 'bi-chan' : 'chua-ho-tro';
+}
+$('tbBat').onclick = async () => {
+  try {
+    if (!C.VAPID_PUBLIC_KEY) return toast('Thiếu khoá công khai VAPID trong config.js');
+    const kq = await Notification.requestPermission();
+    if (kq !== 'granted') { await veThongBao(); return toast(kq === 'denied' ? 'Bạn đã từ chối quyền thông báo' : 'Chưa cấp quyền'); }
+    const reg = await navigator.serviceWorker.ready;
+    const sub = (await reg.pushManager.getSubscription()) || await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlB64(C.VAPID_PUBLIC_KEY) });
+    const j = sub.toJSON();
+    const r = await sb.from('push_dang_ky').upsert({ endpoint: j.endpoint, p256dh: j.keys.p256dh, auth: j.keys.auth, ua: navigator.userAgent.slice(0, 200) }, { onConflict: 'endpoint' });
+    if (r.error) { await sub.unsubscribe().catch(() => {}); toast('Lưu đăng ký lỗi: ' + r.error.message + ' (đã chạy sql/2.5d-push.sql chưa?)'); }
+    else toast('Đã bật thông báo. Bấm “Gửi thử” để kiểm tra.');
+  } catch (e) { toast('Không bật được: ' + (e.message || e)); }
+  veThongBao();
+};
+$('tbTat').onclick = async () => {
+  try {
+    const sub = await layDangKy();
+    if (sub) { await sb.from('push_dang_ky').delete().eq('endpoint', sub.endpoint); await sub.unsubscribe(); }
+    toast('Đã tắt thông báo trên thiết bị này');
+  } catch (e) { toast('Không tắt được: ' + (e.message || e)); }
+  veThongBao();
+};
+$('tbThu').onclick = async () => {
+  try {
+    const { data } = await sb.auth.getSession();
+    const tk = data && data.session && data.session.access_token;
+    if (!tk) return toast('Hãy đăng nhập lại');
+    const res = await fetch(C.SUPABASE_URL + '/functions/v1/nhac-viec', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + tk, apikey: C.SUPABASE_PUBLISHABLE_KEY }, body: JSON.stringify({ thu: true }) });
+    const j = await res.json().catch(() => ({}));
+    if (!res.ok) return toast('Gửi thử lỗi: ' + (j.loi || res.status) + (res.status === 403 || res.status === 404 ? ' (đã deploy lại function nhac-viec chưa?)' : ''));
+    if (j.gui > 0) toast('Đã gửi thử tới ' + j.gui + ' thiết bị — chờ vài giây');
+    else toast('Chưa gửi được: ' + ((j.loi && j.loi[0]) || 'không có thiết bị nào đăng ký'));
+  } catch (e) { toast('Gửi thử lỗi: ' + (e.message || e)); }
+};
 
 setInterval(() => { if (user && view !== 'month' && $('p-lich').classList.contains('on') && !$('ov').classList.contains('on')) { const el = $('lich'), t = el.scrollTop; veLich(); el.scrollTop = t; } }, 60000);
 capNhat();

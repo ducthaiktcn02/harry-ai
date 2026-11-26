@@ -1,0 +1,16 @@
+  ĐẠT  iPhone chưa Thêm vào MH chính: báo rõ lý do, không có nút bật
+  ĐẠT  không lỗi JS
+  ĐẠT  Trình duyệt không hỗ trợ: báo chưa hỗ trợ
+  ĐẠT  Đã chặn: hướng dẫn mở lại trong Cài đặt điện thoại
+  ĐẠT  App đã cài, chưa bật: chỉ có nút "Bật thông báo"
+  ĐẠT  Bấm bật: ghi 1 dòng push_dang_ky (endpoint, p256dh, auth)
+  ĐẠT  subscribe dùng userVisibleOnly + khoá công khai 65 byte
+  ĐẠT  Trạng thái chuyển "Đã bật", có nút Tắt + Gửi thử
+  ĐẠT  Gửi thử gọi function với token đăng nhập
+  ĐẠT  Có thông báo "Đã gửi thử"
+  ĐẠT  Bấm tắt: xoá dòng đăng ký + quay về "Chưa bật"
+  ĐẠT  không lỗi JS
+  ĐẠT  Từ chối quyền: không ghi DB, chuyển "Bị chặn"
+  ĐẠT  Lưu đăng ký lỗi: báo nhắc chạy SQL, hoàn tác đăng ký, không hiện "Đã bật"
+  ĐẠT  Máy tính đã có đăng ký: hiện "Đã bật"
+KẾT QUẢ: TẤT CẢ ĐẠT
