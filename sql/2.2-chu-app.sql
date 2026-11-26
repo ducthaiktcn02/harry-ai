@@ -21,3 +21,8 @@ create or replace function public.la_chu_app() returns boolean
 language sql stable security definer set search_path = public as $$
   select exists (select 1 from public.app_owner where user_id = auth.uid());
 $$;
+
+-- Cấp quyền cho người đã đăng nhập (RLS ở trên mới là lớp chặn người lạ).
+grant usage on schema public to authenticated;
+grant select, insert on public.app_owner to authenticated;
+grant execute on function public.la_chu_app() to authenticated;
