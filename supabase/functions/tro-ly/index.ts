@@ -6,7 +6,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const VN = 7 * 3600000; // Việt Nam UTC+7
-const MODEL = 'gemini-2.5-flash-lite';
+const MODEL = 'gemini-3.5-flash-lite';
 const TOI_DA = 500; // số ký tự tối đa của một câu
 const THU_VN = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
 
@@ -34,7 +34,7 @@ const SCHEMA = {
     uu_tien: { type: 'STRING', enum: ['cao', 'vua', 'thap'], nullable: true },
     nhan: { type: 'ARRAY', items: { type: 'STRING' }, nullable: true },
   },
-  required: ['loai'],
+  required: ['loai', 'tieu_de', 'ghi_chu', 'ngay', 'gio_bat_dau', 'gio_ket_thuc', 'thoi_luong_phut', 'ca_ngay', 'loai_viec', 'nhac_phut', 'uu_tien', 'nhan'],
 };
 
 function ngayVN(t: any) { return new Date(t + VN).toISOString().slice(0, 10); }
@@ -124,12 +124,13 @@ Deno.serve(async (req: any) => {
         body: JSON.stringify({
           systemInstruction: { parts: [{ text: lenhHeThong(Date.now(), loaiViec) }] },
           contents: [{ role: 'user', parts: [{ text: cau }] }],
-          generationConfig: { responseMimeType: 'application/json', responseSchema: SCHEMA, temperature: 0, maxOutputTokens: 600 },
+          generationConfig: { responseMimeType: 'application/json', responseSchema: SCHEMA, temperature: 0, maxOutputTokens: 1500 },
         }),
       });
     } catch (_) { return loi('Không kết nối được tới Gemini, thử lại sau nhé', 502); }
     if (res.status === 429) return loi('Trợ lý hết lượt dùng hôm nay (hoặc đang bị gọi dồn dập). Bạn thử lại sau, hoặc tự tạo bằng nút + nhé.', 429);
     if (res.status === 400 || res.status === 401 || res.status === 403) return loi('Khoá Gemini chưa đúng hoặc chưa được phép. Kiểm tra lại secret GEMINI_API_KEY.', 502);
+    if (res.status === 404) return loi('Model Gemini không còn dùng được (lỗi cấu hình), báo lại để sửa nhé.', 502);
     if (!res.ok) return loi('Gemini đang bận, thử lại sau ít phút nhé', 502);
     let g: any = null;
     try { g = await res.json(); } catch (_) { g = null; }
